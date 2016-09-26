@@ -1,0 +1,4560 @@
+
+Firmware.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000006  00800100  00001950  000019e4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00001950  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000256  00800106  00800106  000019ea  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000019ea  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000148  00000000  00000000  00001a1a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00002c30  00000000  00000000  00001b62  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000009d1  00000000  00000000  00004792  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000f24  00000000  00000000  00005163  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000002c4  00000000  00000000  00006088  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000074a  00000000  00000000  0000634c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000039cd  00000000  00000000  00006a96  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000440  00000000  00000000  0000a463  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+       0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+       4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+       8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+       c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      2c:	0c 94 eb 00 	jmp	0x1d6	; 0x1d6 <__vector_11>
+      30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      40:	0c 94 1f 0a 	jmp	0x143e	; 0x143e <__vector_16>
+      44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      48:	0c 94 33 0c 	jmp	0x1866	; 0x1866 <__vector_18>
+      4c:	0c 94 68 0c 	jmp	0x18d0	; 0x18d0 <__vector_19>
+      50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+      64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+      68:	11 24       	eor	r1, r1
+      6a:	1f be       	out	0x3f, r1	; 63
+      6c:	cf ef       	ldi	r28, 0xFF	; 255
+      6e:	d8 e0       	ldi	r29, 0x08	; 8
+      70:	de bf       	out	0x3e, r29	; 62
+      72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+      74:	11 e0       	ldi	r17, 0x01	; 1
+      76:	a0 e0       	ldi	r26, 0x00	; 0
+      78:	b1 e0       	ldi	r27, 0x01	; 1
+      7a:	e0 e5       	ldi	r30, 0x50	; 80
+      7c:	f9 e1       	ldi	r31, 0x19	; 25
+      7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+      80:	05 90       	lpm	r0, Z+
+      82:	0d 92       	st	X+, r0
+      84:	a6 30       	cpi	r26, 0x06	; 6
+      86:	b1 07       	cpc	r27, r17
+      88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+      8a:	23 e0       	ldi	r18, 0x03	; 3
+      8c:	a6 e0       	ldi	r26, 0x06	; 6
+      8e:	b1 e0       	ldi	r27, 0x01	; 1
+      90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+      92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+      94:	ac 35       	cpi	r26, 0x5C	; 92
+      96:	b2 07       	cpc	r27, r18
+      98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+      9a:	0e 94 53 00 	call	0xa6	; 0xa6 <main>
+      9e:	0c 94 a6 0c 	jmp	0x194c	; 0x194c <_exit>
+
+000000a2 <__bad_interrupt>:
+      a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <main>:
+int main(void)
+{
+	
+	/************************************************************************/
+	// Set Pin C2 as output for testing purposes.
+	DDRC   |= (1<<PORTC2);	// Set Port C2 as output.
+      a6:	3a 9a       	sbi	0x07, 2	; 7
+	//	TCCR1B |= (1<<CS10);				// Start timer at Fcpu/1.
+	//	TCCR1B |= (1<<CS11);				// Start timer at Fcpu/8.
+	//	TCCR1B |= ((1<<CS11) | (1<< CS10));	// Start timer at Fcpu/64.
+	//	TCCR1B |= (1<<CS12);				// Start timer at Fcpu/256.
+	//	TCCR1B |= ((1<<CS12) | (1<< CS10));	// Start timer at Fcpu/1024.
+	TCCR1B = 0b00001001;
+      a8:	89 e0       	ldi	r24, 0x09	; 9
+      aa:	80 93 81 00 	sts	0x0081, r24
+	
+	TIMSK1 = 0b00000010;	// TIMSK1 |= (1<<OCIE1A);	// Enable CTC interrupt.
+      ae:	82 e0       	ldi	r24, 0x02	; 2
+      b0:	80 93 6f 00 	sts	0x006F, r24
+		
+	// Counter value selection.
+	// OCR1A = Fclk / (clock_divider * required_interrupt_frequency).
+	OCR1A =	8000;	// Set CTC compare value to 1000 Hz at 16Mhz.
+      b4:	80 e4       	ldi	r24, 0x40	; 64
+      b6:	9f e1       	ldi	r25, 0x1F	; 31
+      b8:	90 93 89 00 	sts	0x0089, r25
+      bc:	80 93 88 00 	sts	0x0088, r24
+	// Set the SPI output pins as outputs in the Data Direction Register B, others are inputs.
+	//DDRB |= (1<<SPI_SCK);
+	//DDRB |= (1<<SPI_MOSI);
+	//DDRB |= (1<<SPI_CS_ADC);
+	//DDRB |= (1<<SPI_CS_GPIO);
+	DDRB = 0b00101110;
+      c0:	8e e2       	ldi	r24, 0x2E	; 46
+      c2:	84 b9       	out	0x04, r24	; 4
+
+	// Disable the chips.
+	SPI_PORT |= (1<<SPI_CS_ADC);
+      c4:	2a 9a       	sbi	0x05, 2	; 5
+	SPI_PORT |= (1<<SPI_CS_GPIO);
+      c6:	29 9a       	sbi	0x05, 1	; 5
+
+	// Enable the SPI module, set it as Bus Master and set the speed.
+	//SPCR  = (1<<SPE);		// Enable SPI.
+	//SPCR |= (1<<MSTR);	// Set SPI in Master Mode.
+	SPCR = 0b01010000;
+      c8:	80 e5       	ldi	r24, 0x50	; 80
+      ca:	8c bd       	out	0x2c, r24	; 44
+	
+	//SPSR |= (1<<SPI2X);	// Set SPI in double speed Mode (max speed Fosc/2).
+	SPSR = 0b00000001;
+      cc:	81 e0       	ldi	r24, 0x01	; 1
+      ce:	8d bd       	out	0x2d, r24	; 45
+ * post: The SPI GPIO expander pins are set as outputs and ready to switch.
+ * TODO: do something with the result value.
+ */
+__inline void spi_gpio_init() {
+	
+	spi_gpio_write(0x04,0x01);	// Set the configuration to Enabled.
+      d0:	61 e0       	ldi	r22, 0x01	; 1
+      d2:	84 e0       	ldi	r24, 0x04	; 4
+      d4:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+	
+	// Set virtual pins as output to reduce power.
+	spi_gpio_write(0x09,0x55);	// Set pin P4 - P7 as output.
+      d8:	65 e5       	ldi	r22, 0x55	; 85
+      da:	89 e0       	ldi	r24, 0x09	; 9
+      dc:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+	spi_gpio_write(0x0A,0x55);	// Set pin P8 - P11 as output.
+      e0:	65 e5       	ldi	r22, 0x55	; 85
+      e2:	8a e0       	ldi	r24, 0x0A	; 10
+      e4:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+	
+	// Set normal pins as output.
+	spi_gpio_write(0x0B, 0x55);	// Set pin P12 - P15 as output.	
+      e8:	65 e5       	ldi	r22, 0x55	; 85
+      ea:	8b e0       	ldi	r24, 0x0B	; 11
+      ec:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+	spi_gpio_write(0x0C, 0x55);	// Set pin P16 - P19 as output.
+      f0:	65 e5       	ldi	r22, 0x55	; 85
+      f2:	8c e0       	ldi	r24, 0x0C	; 12
+      f4:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+	spi_gpio_write(0x0D, 0x55);	// Set pin P20 - P23 as output.
+      f8:	65 e5       	ldi	r22, 0x55	; 85
+      fa:	8d e0       	ldi	r24, 0x0D	; 13
+      fc:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+	spi_gpio_write(0x0E, 0x55);	// Set pin P24 - P27 as output.
+     100:	65 e5       	ldi	r22, 0x55	; 85
+     102:	8e e0       	ldi	r24, 0x0E	; 14
+     104:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+	spi_gpio_write(0x0F, 0x55);	// Set pin P28 - P31 as output.
+     108:	65 e5       	ldi	r22, 0x55	; 85
+     10a:	8f e0       	ldi	r24, 0x0F	; 15
+     10c:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+	
+	timer1_init();		// Set up Timer 1.
+	spi_init();			// Set up SPI.
+	spi_gpio_init();	// Set up GPIO.
+	uart_init();		// Set up UART.
+     110:	0e 94 06 0c 	call	0x180c	; 0x180c <uart_init>
+	
+	transmitter_init();	// Set up the transmitter.
+     114:	0e 94 6b 0b 	call	0x16d6	; 0x16d6 <transmitter_init>
+	receiver_init();	// Set up the receiver.
+     118:	0e 94 fc 00 	call	0x1f8	; 0x1f8 <receiver_init>
+	
+	spi_gpio_test();	// Test GPIO.
+     11c:	0e 94 50 0a 	call	0x14a0	; 0x14a0 <spi_gpio_test>
+		
+	sei();	// Enable global interrupts.
+     120:	78 94       	sei
+	
+	//TODO: full self test.
+	
+	uart_write('O');	// Test UART.
+     122:	8f e4       	ldi	r24, 0x4F	; 79
+     124:	0e 94 c6 0b 	call	0x178c	; 0x178c <uart_write>
+	uart_write('K');
+     128:	8b e4       	ldi	r24, 0x4B	; 75
+     12a:	0e 94 c6 0b 	call	0x178c	; 0x178c <uart_write>
+	/************************************************************************/
+	
+	
+	receiver_measure();		// Do a medium measurement.
+     12e:	0e 94 01 01 	call	0x202	; 0x202 <receiver_measure>
+	receiver_reset();		// Reset the receiver.
+     132:	0e 94 13 0a 	call	0x1426	; 0x1426 <receiver_reset>
+	receiver_setenabled(1);	// Activate the receiver.
+     136:	81 e0       	ldi	r24, 0x01	; 1
+     138:	0e 94 1c 0a 	call	0x1438	; 0x1438 <receiver_setenabled>
+     13c:	08 c0       	rjmp	.+16     	; 0x14e <main+0xa8>
+			transmitter_timertick();	// Trigger the transmitter.				
+			transmitflag--;				// Remove one ticket from the flag.
+		}
+		
+		// Sample.
+		receiver_sample();
+     13e:	0e 94 86 02 	call	0x50c	; 0x50c <receiver_sample>
+		
+		// Process new data from the UART.
+		if(uart_char_waiting()) {
+     142:	0e 94 fc 0b 	call	0x17f8	; 0x17f8 <uart_char_waiting>
+     146:	81 11       	cpse	r24, r1
+     148:	13 c0       	rjmp	.+38     	; 0x170 <main+0xca>
+		}
+		
+
+		// Sanity checks.
+
+		if(transmitflag > 0) {
+     14a:	80 91 09 01 	lds	r24, 0x0109
+	
+	/************************************************************************/
+    while(1)
+    {
+		// Transmit data if the timer indicates so.
+		if(transmitflag) {
+     14e:	80 91 09 01 	lds	r24, 0x0109
+     152:	88 23       	and	r24, r24
+     154:	a1 f3       	breq	.-24     	; 0x13e <main+0x98>
+			transmitter_timertick();	// Trigger the transmitter.				
+     156:	0e 94 c0 0a 	call	0x1580	; 0x1580 <transmitter_timertick>
+			transmitflag--;				// Remove one ticket from the flag.
+     15a:	80 91 09 01 	lds	r24, 0x0109
+     15e:	81 50       	subi	r24, 0x01	; 1
+     160:	80 93 09 01 	sts	0x0109, r24
+		}
+		
+		// Sample.
+		receiver_sample();
+     164:	0e 94 86 02 	call	0x50c	; 0x50c <receiver_sample>
+		
+		// Process new data from the UART.
+		if(uart_char_waiting()) {
+     168:	0e 94 fc 0b 	call	0x17f8	; 0x17f8 <uart_char_waiting>
+     16c:	88 23       	and	r24, r24
+     16e:	69 f3       	breq	.-38     	; 0x14a <main+0xa4>
+//			transmitter_add(uart_read());	// Simply pass through data.
+			uartcontroller_process(uart_read());
+     170:	0e 94 aa 0b 	call	0x1754	; 0x1754 <uart_read>
+     174:	c8 2f       	mov	r28, r24
+	static uint8_t led8_1 = 0, led16_9 = 0;
+	
+	UARTSTATE nextstate = UARTSTATE_MENU;
+	
+	// UART MENU	
+	switch(menustate){
+     176:	90 91 08 01 	lds	r25, 0x0108
+     17a:	92 30       	cpi	r25, 0x02	; 2
+     17c:	f9 f0       	breq	.+62     	; 0x1bc <main+0x116>
+     17e:	60 f4       	brcc	.+24     	; 0x198 <main+0xf2>
+     180:	99 23       	and	r25, r25
+     182:	c1 f0       	breq	.+48     	; 0x1b4 <main+0x10e>
+     184:	91 30       	cpi	r25, 0x01	; 1
+     186:	c1 f4       	brne	.+48     	; 0x1b8 <main+0x112>
+				transmitter_setdirection(led8_1, led16_9, (byte & 0x0f));		// Set the transmission direction.
+				//transmitter_add(byte);				// Signal a new transmission.
+				nextstate = UARTSTATE_DATA;
+			break;
+		case UARTSTATE_DATA:
+				transmitter_add(byte);				// Add the byte to the transmitter queue.
+     188:	0e 94 7b 0b 	call	0x16f6	; 0x16f6 <transmitter_add>
+				if(byte == UART_CONTROL_FRAMELIMITER) {
+     18c:	91 e0       	ldi	r25, 0x01	; 1
+     18e:	c0 3c       	cpi	r28, 0xC0	; 192
+     190:	99 f0       	breq	.+38     	; 0x1b8 <main+0x112>
+				}
+			break;
+		default:
+			nextstate = UARTSTATE_MENU;				// Something went wrong, so ignore all incoming bytes and wait for a new transmission frame.		
+	}
+	menustate = nextstate;
+     192:	90 93 08 01 	sts	0x0108, r25
+     196:	d9 cf       	rjmp	.-78     	; 0x14a <main+0xa4>
+	static uint8_t led8_1 = 0, led16_9 = 0;
+	
+	UARTSTATE nextstate = UARTSTATE_MENU;
+	
+	// UART MENU	
+	switch(menustate){
+     198:	93 30       	cpi	r25, 0x03	; 3
+     19a:	c9 f0       	breq	.+50     	; 0x1ce <main+0x128>
+     19c:	94 30       	cpi	r25, 0x04	; 4
+     19e:	61 f4       	brne	.+24     	; 0x1b8 <main+0x112>
+		case UARTSTATE_LED2:
+				led16_9 = byte;
+				nextstate = UARTSTATE_LED3;
+				break;
+		case UARTSTATE_LED3:
+				transmitter_setdirection(led8_1, led16_9, (byte & 0x0f));		// Set the transmission direction.
+     1a0:	48 2f       	mov	r20, r24
+     1a2:	4f 70       	andi	r20, 0x0F	; 15
+     1a4:	60 91 06 01 	lds	r22, 0x0106
+     1a8:	80 91 07 01 	lds	r24, 0x0107
+     1ac:	0e 94 a3 0b 	call	0x1746	; 0x1746 <transmitter_setdirection>
+				//transmitter_add(byte);				// Signal a new transmission.
+				nextstate = UARTSTATE_DATA;
+     1b0:	91 e0       	ldi	r25, 0x01	; 1
+     1b2:	ef cf       	rjmp	.-34     	; 0x192 <main+0xec>
+	
+	// UART MENU	
+	switch(menustate){
+		case UARTSTATE_MENU:
+				// We have a new transmission.
+				if(byte == UART_CONTROL_FRAMELIMITER) {
+     1b4:	80 3c       	cpi	r24, 0xC0	; 192
+     1b6:	31 f0       	breq	.+12     	; 0x1c4 <main+0x11e>
+					transmitter_add(byte);
+					nextstate = UARTSTATE_LED1;		//..the next byte will contain the first part of the direction.
+				}
+				else {
+					nextstate = UARTSTATE_MENU;		// No new transmission, ignore.
+     1b8:	90 e0       	ldi	r25, 0x00	; 0
+     1ba:	eb cf       	rjmp	.-42     	; 0x192 <main+0xec>
+				}
+			break;
+		case UARTSTATE_LED1:
+				led8_1 = byte;
+     1bc:	80 93 07 01 	sts	0x0107, r24
+				nextstate = UARTSTATE_LED2;
+     1c0:	93 e0       	ldi	r25, 0x03	; 3
+     1c2:	e7 cf       	rjmp	.-50     	; 0x192 <main+0xec>
+	// UART MENU	
+	switch(menustate){
+		case UARTSTATE_MENU:
+				// We have a new transmission.
+				if(byte == UART_CONTROL_FRAMELIMITER) {
+					transmitter_add(byte);
+     1c4:	80 ec       	ldi	r24, 0xC0	; 192
+     1c6:	0e 94 7b 0b 	call	0x16f6	; 0x16f6 <transmitter_add>
+					nextstate = UARTSTATE_LED1;		//..the next byte will contain the first part of the direction.
+     1ca:	92 e0       	ldi	r25, 0x02	; 2
+     1cc:	e2 cf       	rjmp	.-60     	; 0x192 <main+0xec>
+		case UARTSTATE_LED1:
+				led8_1 = byte;
+				nextstate = UARTSTATE_LED2;
+			break;
+		case UARTSTATE_LED2:
+				led16_9 = byte;
+     1ce:	80 93 06 01 	sts	0x0106, r24
+				nextstate = UARTSTATE_LED3;
+     1d2:	94 e0       	ldi	r25, 0x04	; 4
+     1d4:	de cf       	rjmp	.-68     	; 0x192 <main+0xec>
+
+000001d6 <__vector_11>:
+/* INTERRUPT SERVICE ROUTINES                                           */
+/************************************************************************/
+/**
+ * ISR for compare interrupt of Timer 1 (16-bit timer).
+ */
+ISR(TIMER1_COMPA_vect) {
+     1d6:	1f 92       	push	r1
+     1d8:	0f 92       	push	r0
+     1da:	0f b6       	in	r0, 0x3f	; 63
+     1dc:	0f 92       	push	r0
+     1de:	11 24       	eor	r1, r1
+     1e0:	8f 93       	push	r24
+	transmitflag++;	
+     1e2:	80 91 09 01 	lds	r24, 0x0109
+     1e6:	8f 5f       	subi	r24, 0xFF	; 255
+     1e8:	80 93 09 01 	sts	0x0109, r24
+     1ec:	8f 91       	pop	r24
+     1ee:	0f 90       	pop	r0
+     1f0:	0f be       	out	0x3f, r0	; 63
+     1f2:	0f 90       	pop	r0
+     1f4:	1f 90       	pop	r1
+     1f6:	18 95       	reti
+
+000001f8 <receiver_init>:
+
+/*
+ * Calculate the low threshold.
+ */
+static inline void updatethresholdlow(uint8_t channel, uint16_t sample) {
+	sampleslow[channel][sampleindexlow[channel]] = sample;		// Add the sample to the circular buffer.
+     1f8:	81 e0       	ldi	r24, 0x01	; 1
+     1fa:	85 bd       	out	0x25, r24	; 37
+     1fc:	80 93 6e 00 	sts	0x006E, r24
+     200:	08 95       	ret
+
+00000202 <receiver_measure>:
+     202:	cf 92       	push	r12
+     204:	df 92       	push	r13
+     206:	ef 92       	push	r14
+     208:	ff 92       	push	r15
+     20a:	0f 93       	push	r16
+     20c:	1f 93       	push	r17
+     20e:	cf 93       	push	r28
+     210:	ca e0       	ldi	r28, 0x0A	; 10
+     212:	88 e0       	ldi	r24, 0x08	; 8
+     214:	0e 94 41 0a 	call	0x1482	; 0x1482 <spi_adc_read>
+     218:	6c 01       	movw	r12, r24
+     21a:	80 e1       	ldi	r24, 0x10	; 16
+	sampleindexlow[channel] = (sampleindexlow[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+     21c:	0e 94 41 0a 	call	0x1482	; 0x1482 <spi_adc_read>
+     220:	7c 01       	movw	r14, r24
+     222:	88 e1       	ldi	r24, 0x18	; 24
+     224:	0e 94 41 0a 	call	0x1482	; 0x1482 <spi_adc_read>
+	uint16_t mean = calculateMean(sampleslow[channel]);
+     228:	8c 01       	movw	r16, r24
+     22a:	80 e0       	ldi	r24, 0x00	; 0
+     22c:	0e 94 41 0a 	call	0x1482	; 0x1482 <spi_adc_read>
+     230:	20 91 2a 01 	lds	r18, 0x012A
+     234:	30 e0       	ldi	r19, 0x00	; 0
+     236:	f9 01       	movw	r30, r18
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+     238:	ee 0f       	add	r30, r30
+     23a:	ff 1f       	adc	r31, r31
+     23c:	e3 5b       	subi	r30, 0xB3	; 179
+     23e:	fe 4f       	sbci	r31, 0xFE	; 254
+     240:	d1 82       	std	Z+1, r13	; 0x01
+     242:	c0 82       	st	Z, r12
+     244:	2f 5f       	subi	r18, 0xFF	; 255
+     246:	3f 4f       	sbci	r19, 0xFF	; 255
+     248:	27 70       	andi	r18, 0x07	; 7
+     24a:	33 27       	eor	r19, r19
+     24c:	20 93 2a 01 	sts	0x012A, r18
+     250:	20 91 4f 01 	lds	r18, 0x014F
+     254:	30 91 50 01 	lds	r19, 0x0150
+     258:	40 91 4d 01 	lds	r20, 0x014D
+     25c:	50 91 4e 01 	lds	r21, 0x014E
+     260:	24 0f       	add	r18, r20
+     262:	35 1f       	adc	r19, r21
+     264:	40 91 51 01 	lds	r20, 0x0151
+     268:	50 91 52 01 	lds	r21, 0x0152
+     26c:	24 0f       	add	r18, r20
+     26e:	35 1f       	adc	r19, r21
+     270:	40 91 53 01 	lds	r20, 0x0153
+
+	return result >> 3;
+     274:	50 91 54 01 	lds	r21, 0x0154
+     278:	24 0f       	add	r18, r20
+     27a:	35 1f       	adc	r19, r21
+     27c:	40 91 55 01 	lds	r20, 0x0155
+	thresholdlow[channel] = mean + (mean >> 3); //+ THRESHOLDLOW_OFFSET;	// Set the new threshold.
+     280:	50 91 56 01 	lds	r21, 0x0156
+     284:	24 0f       	add	r18, r20
+     286:	35 1f       	adc	r19, r21
+     288:	40 91 57 01 	lds	r20, 0x0157
+     28c:	50 91 58 01 	lds	r21, 0x0158
+     290:	24 0f       	add	r18, r20
+     292:	35 1f       	adc	r19, r21
+     294:	40 91 59 01 	lds	r20, 0x0159
+     298:	50 91 5a 01 	lds	r21, 0x015A
+		else {
+			// We are still idle.
+			// Do a medium measurement.
+			// Calculate the low threshold.
+			updatethresholdlow(channel, sample);
+			thresholdhigh[channel] = (thresholdlow[channel]<<1); //+ THRESHOLDHIGH_OFFSET_INIT;
+     29c:	24 0f       	add	r18, r20
+     29e:	35 1f       	adc	r19, r21
+     2a0:	40 91 5b 01 	lds	r20, 0x015B
+			mediumbusy[channel] = 0;	// Set the medium state.
+     2a4:	50 91 5c 01 	lds	r21, 0x015C
+     2a8:	24 0f       	add	r18, r20
+     2aa:	35 1f       	adc	r19, r21
+			new_rxsignalstate = NODATA;	// Set the next state.
+     2ac:	36 95       	lsr	r19
+     2ae:	27 95       	ror	r18
+	sample = filter(channel, sample);	
+		
+	switch (rxsignalstate[channel]) {
+		case NODATA:
+if(channel == CHANNEL3){
+PORTC |= (1<<PORTC2);	// Switch on.
+     2b0:	36 95       	lsr	r19
+PORTC &= ~(1<<PORTC2);	// Switch off.
+     2b2:	27 95       	ror	r18
+     2b4:	36 95       	lsr	r19
+		}
+
+		break;
+		case HIGH:
+if(channel == CHANNEL3)
+PORTC |= (1<<PORTC2);	// Switch on.
+     2b6:	27 95       	ror	r18
+     2b8:	f9 01       	movw	r30, r18
+			new_rxsignalstate = HIGH;	// Stay in the current state.
+		}
+		break;
+		case LOW:
+if(channel == CHANNEL3)
+PORTC &= ~(1<<PORTC2);	// Switch off.
+     2ba:	f6 95       	lsr	r31
+     2bc:	e7 95       	ror	r30
+			uint16_t result = getTimeDifference(timestamp[channel], SYSTEMTIME);
+			if (result > TIMELIMIT_END_OF_ONE) {
+				receivedbyte[channel] |= (0 << receivedbitcounter[channel]);	// We have received a zero, write it.
+			}
+			else {
+				receivedbyte[channel] |= (1 << receivedbitcounter[channel]);	// We have received a one, write it.
+     2be:	f6 95       	lsr	r31
+     2c0:	e7 95       	ror	r30
+     2c2:	f6 95       	lsr	r31
+     2c4:	e7 95       	ror	r30
+     2c6:	e2 0f       	add	r30, r18
+     2c8:	f3 1f       	adc	r31, r19
+     2ca:	f0 93 3b 01 	sts	0x013B, r31
+     2ce:	e0 93 3a 01 	sts	0x013A, r30
+     2d2:	20 91 2b 01 	lds	r18, 0x012B
+     2d6:	30 e0       	ldi	r19, 0x00	; 0
+     2d8:	d9 01       	movw	r26, r18
+     2da:	aa 0f       	add	r26, r26
+     2dc:	bb 1f       	adc	r27, r27
+
+/*
+ * Calculate the low threshold.
+ */
+static inline void updatethresholdlow(uint8_t channel, uint16_t sample) {
+	sampleslow[channel][sampleindexlow[channel]] = sample;		// Add the sample to the circular buffer.
+     2de:	a3 5a       	subi	r26, 0xA3	; 163
+     2e0:	be 4f       	sbci	r27, 0xFE	; 254
+     2e2:	ed 92       	st	X+, r14
+     2e4:	fc 92       	st	X, r15
+     2e6:	2f 5f       	subi	r18, 0xFF	; 255
+     2e8:	3f 4f       	sbci	r19, 0xFF	; 255
+     2ea:	27 70       	andi	r18, 0x07	; 7
+     2ec:	33 27       	eor	r19, r19
+     2ee:	20 93 2b 01 	sts	0x012B, r18
+     2f2:	20 91 5f 01 	lds	r18, 0x015F
+     2f6:	30 91 60 01 	lds	r19, 0x0160
+     2fa:	40 91 5d 01 	lds	r20, 0x015D
+     2fe:	50 91 5e 01 	lds	r21, 0x015E
+     302:	24 0f       	add	r18, r20
+     304:	35 1f       	adc	r19, r21
+     306:	40 91 61 01 	lds	r20, 0x0161
+	sampleindexlow[channel] = (sampleindexlow[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+     30a:	50 91 62 01 	lds	r21, 0x0162
+     30e:	24 0f       	add	r18, r20
+     310:	35 1f       	adc	r19, r21
+	uint16_t mean = calculateMean(sampleslow[channel]);
+     312:	40 91 63 01 	lds	r20, 0x0163
+     316:	50 91 64 01 	lds	r21, 0x0164
+     31a:	24 0f       	add	r18, r20
+     31c:	35 1f       	adc	r19, r21
+     31e:	40 91 65 01 	lds	r20, 0x0165
+     322:	50 91 66 01 	lds	r21, 0x0166
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+     326:	24 0f       	add	r18, r20
+     328:	35 1f       	adc	r19, r21
+     32a:	40 91 67 01 	lds	r20, 0x0167
+     32e:	50 91 68 01 	lds	r21, 0x0168
+     332:	24 0f       	add	r18, r20
+     334:	35 1f       	adc	r19, r21
+     336:	40 91 69 01 	lds	r20, 0x0169
+     33a:	50 91 6a 01 	lds	r21, 0x016A
+     33e:	24 0f       	add	r18, r20
+     340:	35 1f       	adc	r19, r21
+     342:	40 91 6b 01 	lds	r20, 0x016B
+     346:	50 91 6c 01 	lds	r21, 0x016C
+     34a:	24 0f       	add	r18, r20
+     34c:	35 1f       	adc	r19, r21
+     34e:	36 95       	lsr	r19
+     350:	27 95       	ror	r18
+     352:	36 95       	lsr	r19
+     354:	27 95       	ror	r18
+     356:	36 95       	lsr	r19
+     358:	27 95       	ror	r18
+     35a:	b9 01       	movw	r22, r18
+     35c:	76 95       	lsr	r23
+     35e:	67 95       	ror	r22
+
+	return result >> 3;
+     360:	76 95       	lsr	r23
+     362:	67 95       	ror	r22
+     364:	76 95       	lsr	r23
+     366:	67 95       	ror	r22
+     368:	62 0f       	add	r22, r18
+     36a:	73 1f       	adc	r23, r19
+	thresholdlow[channel] = mean + (mean >> 3); //+ THRESHOLDLOW_OFFSET;	// Set the new threshold.
+     36c:	70 93 3d 01 	sts	0x013D, r23
+     370:	60 93 3c 01 	sts	0x013C, r22
+     374:	20 91 2c 01 	lds	r18, 0x012C
+     378:	30 e0       	ldi	r19, 0x00	; 0
+     37a:	d9 01       	movw	r26, r18
+     37c:	aa 0f       	add	r26, r26
+     37e:	bb 1f       	adc	r27, r27
+     380:	a3 59       	subi	r26, 0x93	; 147
+			}
+			else {
+				// No, not yet a time out.
+				// Calculate the low threshold.
+				updatethresholdlow(channel, sample);
+				new_rxsignalstate = LOW;	// Set the next state.
+     382:	be 4f       	sbci	r27, 0xFE	; 254
+     384:	0d 93       	st	X+, r16
+			}
+		}
+		else {
+			// We are in between two signal states (a sample on the edge), discard the sample.
+			// TODO: Do a measurement if this state happens multiple times.
+			new_rxsignalstate = LOW; // Stay in the current state.
+     386:	1c 93       	st	X, r17
+     388:	2f 5f       	subi	r18, 0xFF	; 255
+			}
+
+			// Do we have a complete byte?
+			if (!receivedbitcounter[channel]) {
+				// Yes, complete, send it over UART.
+				uart_write(channel | (mediumbusy[CHANNEL4] << 7) | (mediumbusy[CHANNEL3] << 6) | (mediumbusy[CHANNEL2] << 5) | (mediumbusy[CHANNEL1] << 4));				// Send the receiver address.
+     38a:	3f 4f       	sbci	r19, 0xFF	; 255
+     38c:	27 70       	andi	r18, 0x07	; 7
+     38e:	33 27       	eor	r19, r19
+     390:	20 93 2c 01 	sts	0x012C, r18
+     394:	20 91 6f 01 	lds	r18, 0x016F
+     398:	30 91 70 01 	lds	r19, 0x0170
+     39c:	40 91 6d 01 	lds	r20, 0x016D
+     3a0:	50 91 6e 01 	lds	r21, 0x016E
+     3a4:	24 0f       	add	r18, r20
+     3a6:	35 1f       	adc	r19, r21
+     3a8:	40 91 71 01 	lds	r20, 0x0171
+     3ac:	50 91 72 01 	lds	r21, 0x0172
+     3b0:	24 0f       	add	r18, r20
+     3b2:	35 1f       	adc	r19, r21
+     3b4:	40 91 73 01 	lds	r20, 0x0173
+     3b8:	50 91 74 01 	lds	r21, 0x0174
+     3bc:	24 0f       	add	r18, r20
+     3be:	35 1f       	adc	r19, r21
+     3c0:	40 91 75 01 	lds	r20, 0x0175
+     3c4:	50 91 76 01 	lds	r21, 0x0176
+     3c8:	24 0f       	add	r18, r20
+				uart_write(receivedbyte[channel]);	// Send the data.
+     3ca:	35 1f       	adc	r19, r21
+     3cc:	40 91 77 01 	lds	r20, 0x0177
+     3d0:	50 91 78 01 	lds	r21, 0x0178
+     3d4:	24 0f       	add	r18, r20
+				
+				// Reset the bitcounter.
+				receivedbyte[channel] = 0;		// Reset the data variable.
+     3d6:	35 1f       	adc	r19, r21
+     3d8:	40 91 79 01 	lds	r20, 0x0179
+				receivedbitcounter[channel] = 7;	// Reset the bit counter.
+     3dc:	50 91 7a 01 	lds	r21, 0x017A
+     3e0:	24 0f       	add	r18, r20
+     3e2:	35 1f       	adc	r19, r21
+     3e4:	40 91 7b 01 	lds	r20, 0x017B
+
+/*
+ * Calculate the high threshold.
+ */
+static inline void updatethresholdhigh(uint8_t channel, uint16_t sample) {
+	sampleshigh[channel][sampleindexhigh[channel]] = sample;		// Add the sample to the circular buffer.
+     3e8:	50 91 7c 01 	lds	r21, 0x017C
+     3ec:	24 0f       	add	r18, r20
+     3ee:	35 1f       	adc	r19, r21
+     3f0:	36 95       	lsr	r19
+     3f2:	27 95       	ror	r18
+     3f4:	36 95       	lsr	r19
+     3f6:	27 95       	ror	r18
+     3f8:	36 95       	lsr	r19
+     3fa:	27 95       	ror	r18
+     3fc:	a9 01       	movw	r20, r18
+     3fe:	56 95       	lsr	r21
+     400:	47 95       	ror	r20
+     402:	56 95       	lsr	r21
+     404:	47 95       	ror	r20
+     406:	56 95       	lsr	r21
+     408:	47 95       	ror	r20
+     40a:	42 0f       	add	r20, r18
+     40c:	53 1f       	adc	r21, r19
+	sampleindexhigh[channel] = (sampleindexhigh[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+     40e:	50 93 3f 01 	sts	0x013F, r21
+     412:	40 93 3e 01 	sts	0x013E, r20
+	uint16_t mean = calculateMean(sampleshigh[channel]);
+     416:	20 91 2d 01 	lds	r18, 0x012D
+     41a:	30 e0       	ldi	r19, 0x00	; 0
+     41c:	d9 01       	movw	r26, r18
+     41e:	aa 0f       	add	r26, r26
+     420:	bb 1f       	adc	r27, r27
+     422:	a3 58       	subi	r26, 0x83	; 131
+     424:	be 4f       	sbci	r27, 0xFE	; 254
+     426:	8d 93       	st	X+, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+     428:	9c 93       	st	X, r25
+     42a:	c9 01       	movw	r24, r18
+     42c:	01 96       	adiw	r24, 0x01	; 1
+     42e:	87 70       	andi	r24, 0x07	; 7
+     430:	99 27       	eor	r25, r25
+     432:	80 93 2d 01 	sts	0x012D, r24
+     436:	80 91 7f 01 	lds	r24, 0x017F
+     43a:	90 91 80 01 	lds	r25, 0x0180
+     43e:	20 91 7d 01 	lds	r18, 0x017D
+     442:	30 91 7e 01 	lds	r19, 0x017E
+     446:	82 0f       	add	r24, r18
+     448:	93 1f       	adc	r25, r19
+     44a:	20 91 81 01 	lds	r18, 0x0181
+     44e:	30 91 82 01 	lds	r19, 0x0182
+     452:	82 0f       	add	r24, r18
+     454:	93 1f       	adc	r25, r19
+     456:	20 91 83 01 	lds	r18, 0x0183
+     45a:	30 91 84 01 	lds	r19, 0x0184
+     45e:	82 0f       	add	r24, r18
+     460:	93 1f       	adc	r25, r19
+     462:	20 91 85 01 	lds	r18, 0x0185
+
+	return result >> 3;
+     466:	30 91 86 01 	lds	r19, 0x0186
+     46a:	82 0f       	add	r24, r18
+     46c:	93 1f       	adc	r25, r19
+     46e:	20 91 87 01 	lds	r18, 0x0187
+	thresholdhigh[channel] = ((mean + thresholdlow[channel])>>1) - THRESHOLDHIGH_OFFSET;	// Set the new threshold.
+     472:	30 91 88 01 	lds	r19, 0x0188
+     476:	82 0f       	add	r24, r18
+     478:	93 1f       	adc	r25, r19
+     47a:	20 91 89 01 	lds	r18, 0x0189
+     47e:	30 91 8a 01 	lds	r19, 0x018A
+		}
+		else if (sample > thresholdhigh[channel]) {
+			// We are still high.
+			// Calculate the high threshold.
+			updatethresholdhigh(channel, sample);
+			new_rxsignalstate = HIGH;	// Set the next state.
+     482:	82 0f       	add	r24, r18
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+     484:	93 1f       	adc	r25, r19
+     486:	20 91 8b 01 	lds	r18, 0x018B
+     48a:	30 91 8c 01 	lds	r19, 0x018C
+     48e:	82 0f       	add	r24, r18
+     490:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+     492:	96 95       	lsr	r25
+     494:	87 95       	ror	r24
+     496:	96 95       	lsr	r25
+     498:	87 95       	ror	r24
+     49a:	96 95       	lsr	r25
+     49c:	87 95       	ror	r24
+ */
+static inline void updatethresholdlow(uint8_t channel, uint16_t sample) {
+	sampleslow[channel][sampleindexlow[channel]] = sample;		// Add the sample to the circular buffer.
+	sampleindexlow[channel] = (sampleindexlow[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+	uint16_t mean = calculateMean(sampleslow[channel]);
+	thresholdlow[channel] = mean + (mean >> 3); //+ THRESHOLDLOW_OFFSET;	// Set the new threshold.
+     49e:	9c 01       	movw	r18, r24
+     4a0:	36 95       	lsr	r19
+     4a2:	27 95       	ror	r18
+     4a4:	36 95       	lsr	r19
+     4a6:	27 95       	ror	r18
+     4a8:	36 95       	lsr	r19
+     4aa:	27 95       	ror	r18
+     4ac:	28 0f       	add	r18, r24
+     4ae:	39 1f       	adc	r19, r25
+     4b0:	30 93 41 01 	sts	0x0141, r19
+     4b4:	20 93 40 01 	sts	0x0140, r18
+     4b8:	c1 50       	subi	r28, 0x01	; 1
+ * Do a channel measurement.
+ */
+void receiver_measure() {
+	
+	// Repeat the measurement.
+	for(uint8_t i=0; i<10; i++) {
+     4ba:	09 f0       	breq	.+2      	; 0x4be <receiver_measure+0x2bc>
+     4bc:	aa ce       	rjmp	.-684    	; 0x212 <receiver_measure+0x10>
+		// TODO: determine the noise deviation and use it to set the threshold offsets.
+		// TODO: make sure the medium is idle.
+	}
+	
+	// Set thresholdhigh to an initial value.
+	thresholdhigh[CHANNEL1] = (thresholdlow[CHANNEL1]<<1) + THRESHOLDHIGH_OFFSET_INIT;
+     4be:	ee 0f       	add	r30, r30
+     4c0:	ff 1f       	adc	r31, r31
+     4c2:	3a 96       	adiw	r30, 0x0a	; 10
+     4c4:	f0 93 33 01 	sts	0x0133, r31
+     4c8:	e0 93 32 01 	sts	0x0132, r30
+	thresholdhigh[CHANNEL2] = (thresholdlow[CHANNEL2]<<1) + THRESHOLDHIGH_OFFSET_INIT;
+     4cc:	66 0f       	add	r22, r22
+     4ce:	77 1f       	adc	r23, r23
+     4d0:	66 5f       	subi	r22, 0xF6	; 246
+     4d2:	7f 4f       	sbci	r23, 0xFF	; 255
+     4d4:	70 93 35 01 	sts	0x0135, r23
+     4d8:	60 93 34 01 	sts	0x0134, r22
+	thresholdhigh[CHANNEL3] = (thresholdlow[CHANNEL3]<<1) + THRESHOLDHIGH_OFFSET_INIT;
+     4dc:	44 0f       	add	r20, r20
+     4de:	55 1f       	adc	r21, r21
+     4e0:	46 5f       	subi	r20, 0xF6	; 246
+     4e2:	5f 4f       	sbci	r21, 0xFF	; 255
+     4e4:	50 93 37 01 	sts	0x0137, r21
+     4e8:	40 93 36 01 	sts	0x0136, r20
+	thresholdhigh[CHANNEL4] = (thresholdlow[CHANNEL4]<<1) + THRESHOLDHIGH_OFFSET_INIT;
+     4ec:	22 0f       	add	r18, r18
+     4ee:	33 1f       	adc	r19, r19
+     4f0:	26 5f       	subi	r18, 0xF6	; 246
+     4f2:	3f 4f       	sbci	r19, 0xFF	; 255
+     4f4:	30 93 39 01 	sts	0x0139, r19
+     4f8:	20 93 38 01 	sts	0x0138, r18
+}
+     4fc:	cf 91       	pop	r28
+     4fe:	1f 91       	pop	r17
+     500:	0f 91       	pop	r16
+     502:	ff 90       	pop	r15
+     504:	ef 90       	pop	r14
+     506:	df 90       	pop	r13
+     508:	cf 90       	pop	r12
+     50a:	08 95       	ret
+
+0000050c <receiver_sample>:
+
+void receiver_sample(void) {
+	if(receiverenabled){
+     50c:	80 91 46 01 	lds	r24, 0x0146
+     510:	81 11       	cpse	r24, r1
+     512:	01 c0       	rjmp	.+2      	; 0x516 <receiver_sample+0xa>
+     514:	08 95       	ret
+		process_sample(spi_adc_read(ADC_CHANNEL2), CHANNEL1);
+     516:	88 e0       	ldi	r24, 0x08	; 8
+     518:	0e 94 41 0a 	call	0x1482	; 0x1482 <spi_adc_read>
+	
+	// We use a median filter to smooth unexpected pulses.
+	// This is actually a sorting filter.
+	// For example a spike:
+	// [1000 3000 1000] => sorting => [1000 1000 3000] => take the middle value => 1000
+	if(zminustwo[channel] > zminusone[channel]) {
+     51c:	20 91 0a 01 	lds	r18, 0x010A
+     520:	30 91 0b 01 	lds	r19, 0x010B
+     524:	40 91 12 01 	lds	r20, 0x0112
+     528:	50 91 13 01 	lds	r21, 0x0113
+     52c:	42 17       	cp	r20, r18
+     52e:	53 07       	cpc	r21, r19
+     530:	b8 f5       	brcc	.+110    	; 0x5a0 <receiver_sample+0x94>
+		if(zminustwo[channel] > sample) {
+     532:	82 17       	cp	r24, r18
+     534:	93 07       	cpc	r25, r19
+     536:	20 f4       	brcc	.+8      	; 0x540 <receiver_sample+0x34>
+     538:	9c 01       	movw	r18, r24
+     53a:	84 17       	cp	r24, r20
+     53c:	95 07       	cpc	r25, r21
+     53e:	b8 f1       	brcs	.+110    	; 0x5ae <receiver_sample+0xa2>
+			}
+		}
+	}
+	
+	// Update the delay variables.
+	zminustwo[channel] = zminusone[channel];
+     540:	50 93 0b 01 	sts	0x010B, r21
+     544:	40 93 0a 01 	sts	0x010A, r20
+	zminusone[channel] = sample;
+     548:	90 93 13 01 	sts	0x0113, r25
+     54c:	80 93 12 01 	sts	0x0112, r24
+	SIGNALSTATE_t new_rxsignalstate = NODATA;
+	
+	// Run a smoothing filter over the data.	
+	sample = filter(channel, sample);	
+		
+	switch (rxsignalstate[channel]) {
+     550:	40 91 42 01 	lds	r20, 0x0142
+     554:	41 30       	cpi	r20, 0x01	; 1
+     556:	09 f4       	brne	.+2      	; 0x55a <receiver_sample+0x4e>
+     558:	c7 c1       	rjmp	.+910    	; 0x8e8 <receiver_sample+0x3dc>
+     55a:	08 f4       	brcc	.+2      	; 0x55e <receiver_sample+0x52>
+     55c:	ab c1       	rjmp	.+854    	; 0x8b4 <receiver_sample+0x3a8>
+     55e:	42 30       	cpi	r20, 0x02	; 2
+     560:	41 f5       	brne	.+80     	; 0x5b2 <receiver_sample+0xa6>
+		break;
+		case HIGH:
+if(channel == CHANNEL3)
+PORTC |= (1<<PORTC2);	// Switch on.
+		// Check if we have a falling edge.
+		if (sample < thresholdlow[channel]) {
+     562:	40 91 3a 01 	lds	r20, 0x013A
+     566:	50 91 3b 01 	lds	r21, 0x013B
+     56a:	24 17       	cp	r18, r20
+     56c:	35 07       	cpc	r19, r21
+     56e:	08 f0       	brcs	.+2      	; 0x572 <receiver_sample+0x66>
+     570:	9c c2       	rjmp	.+1336   	; 0xaaa <__stack+0x1ab>
+			uint16_t timedif = getTimeDifference(timestamp[channel], SYSTEMTIME);
+     572:	80 91 47 01 	lds	r24, 0x0147
+     576:	90 91 48 01 	lds	r25, 0x0148
+
+	if (timestamp > currenttime) {
+		// Timer has wrapped around.
+		return (65535 - (timestamp - currenttime) + 1);
+	}
+	return (currenttime - timestamp);
+     57a:	4b 97       	sbiw	r24, 0x1b	; 27
+			if ((timedif > TIMELIMIT_MINIMAL_HIGH_TIME) && (timedif < TIMELIMIT_MAXIMAL_HIGH_TIME)) {
+     57c:	20 91 22 01 	lds	r18, 0x0122
+     580:	30 91 23 01 	lds	r19, 0x0123
+     584:	82 1b       	sub	r24, r18
+     586:	93 0b       	sbc	r25, r19
+     588:	41 97       	sbiw	r24, 0x11	; 17
+     58a:	98 f4       	brcc	.+38     	; 0x5b2 <receiver_sample+0xa6>
+				// We have a falling edge.
+				timestamp[channel] = SYSTEMTIME;		// Register the time.
+     58c:	80 91 47 01 	lds	r24, 0x0147
+     590:	90 91 48 01 	lds	r25, 0x0148
+     594:	90 93 23 01 	sts	0x0123, r25
+     598:	80 93 22 01 	sts	0x0122, r24
+				new_rxsignalstate = LOW;	// Set the next state.
+     59c:	81 e0       	ldi	r24, 0x01	; 1
+     59e:	0a c0       	rjmp	.+20     	; 0x5b4 <receiver_sample+0xa8>
+			}
+		} else {
+			result = zminustwo[channel];
+		}
+	} else {
+		if(zminustwo[channel]>sample) {
+     5a0:	82 17       	cp	r24, r18
+     5a2:	93 07       	cpc	r25, r19
+     5a4:	68 f2       	brcs	.-102    	; 0x540 <receiver_sample+0x34>
+     5a6:	9c 01       	movw	r18, r24
+     5a8:	48 17       	cp	r20, r24
+     5aa:	59 07       	cpc	r21, r25
+     5ac:	48 f6       	brcc	.-110    	; 0x540 <receiver_sample+0x34>
+     5ae:	9a 01       	movw	r18, r20
+     5b0:	c7 cf       	rjmp	.-114    	; 0x540 <receiver_sample+0x34>
+				timestamp[channel] = SYSTEMTIME;		// Register the time.
+				new_rxsignalstate = LOW;	// Set the next state.
+			}
+			else {
+				// The high symbol is too long, so it is invalid.
+				new_rxsignalstate = NODATA;
+     5b2:	80 e0       	ldi	r24, 0x00	; 0
+			new_rxsignalstate = LOW; // Stay in the current state.
+		}
+		break;
+	}
+
+	rxsignalstate[channel] = new_rxsignalstate;
+     5b4:	80 93 42 01 	sts	0x0142, r24
+}
+
+void receiver_sample(void) {
+	if(receiverenabled){
+		process_sample(spi_adc_read(ADC_CHANNEL2), CHANNEL1);
+		process_sample(spi_adc_read(ADC_CHANNEL3), CHANNEL2);
+     5b8:	80 e1       	ldi	r24, 0x10	; 16
+     5ba:	0e 94 41 0a 	call	0x1482	; 0x1482 <spi_adc_read>
+	
+	// We use a median filter to smooth unexpected pulses.
+	// This is actually a sorting filter.
+	// For example a spike:
+	// [1000 3000 1000] => sorting => [1000 1000 3000] => take the middle value => 1000
+	if(zminustwo[channel] > zminusone[channel]) {
+     5be:	20 91 0c 01 	lds	r18, 0x010C
+     5c2:	30 91 0d 01 	lds	r19, 0x010D
+     5c6:	40 91 14 01 	lds	r20, 0x0114
+     5ca:	50 91 15 01 	lds	r21, 0x0115
+     5ce:	42 17       	cp	r20, r18
+     5d0:	53 07       	cpc	r21, r19
+     5d2:	b8 f5       	brcc	.+110    	; 0x642 <receiver_sample+0x136>
+		if(zminustwo[channel] > sample) {
+     5d4:	82 17       	cp	r24, r18
+     5d6:	93 07       	cpc	r25, r19
+     5d8:	20 f4       	brcc	.+8      	; 0x5e2 <receiver_sample+0xd6>
+     5da:	9c 01       	movw	r18, r24
+     5dc:	84 17       	cp	r24, r20
+     5de:	95 07       	cpc	r25, r21
+     5e0:	b8 f1       	brcs	.+110    	; 0x650 <receiver_sample+0x144>
+			}
+		}
+	}
+	
+	// Update the delay variables.
+	zminustwo[channel] = zminusone[channel];
+     5e2:	50 93 0d 01 	sts	0x010D, r21
+     5e6:	40 93 0c 01 	sts	0x010C, r20
+	zminusone[channel] = sample;
+     5ea:	90 93 15 01 	sts	0x0115, r25
+     5ee:	80 93 14 01 	sts	0x0114, r24
+	SIGNALSTATE_t new_rxsignalstate = NODATA;
+	
+	// Run a smoothing filter over the data.	
+	sample = filter(channel, sample);	
+		
+	switch (rxsignalstate[channel]) {
+     5f2:	40 91 43 01 	lds	r20, 0x0143
+     5f6:	41 30       	cpi	r20, 0x01	; 1
+     5f8:	09 f4       	brne	.+2      	; 0x5fc <receiver_sample+0xf0>
+     5fa:	b9 c1       	rjmp	.+882    	; 0x96e <__stack+0x6f>
+     5fc:	08 f4       	brcc	.+2      	; 0x600 <receiver_sample+0xf4>
+     5fe:	9d c1       	rjmp	.+826    	; 0x93a <__stack+0x3b>
+     600:	42 30       	cpi	r20, 0x02	; 2
+     602:	41 f5       	brne	.+80     	; 0x654 <receiver_sample+0x148>
+		break;
+		case HIGH:
+if(channel == CHANNEL3)
+PORTC |= (1<<PORTC2);	// Switch on.
+		// Check if we have a falling edge.
+		if (sample < thresholdlow[channel]) {
+     604:	40 91 3c 01 	lds	r20, 0x013C
+     608:	50 91 3d 01 	lds	r21, 0x013D
+     60c:	24 17       	cp	r18, r20
+     60e:	35 07       	cpc	r19, r21
+     610:	08 f0       	brcs	.+2      	; 0x614 <receiver_sample+0x108>
+     612:	21 c2       	rjmp	.+1090   	; 0xa56 <__stack+0x157>
+			uint16_t timedif = getTimeDifference(timestamp[channel], SYSTEMTIME);
+     614:	80 91 47 01 	lds	r24, 0x0147
+     618:	90 91 48 01 	lds	r25, 0x0148
+     61c:	4b 97       	sbiw	r24, 0x1b	; 27
+			if ((timedif > TIMELIMIT_MINIMAL_HIGH_TIME) && (timedif < TIMELIMIT_MAXIMAL_HIGH_TIME)) {
+     61e:	20 91 24 01 	lds	r18, 0x0124
+     622:	30 91 25 01 	lds	r19, 0x0125
+     626:	82 1b       	sub	r24, r18
+     628:	93 0b       	sbc	r25, r19
+     62a:	41 97       	sbiw	r24, 0x11	; 17
+     62c:	98 f4       	brcc	.+38     	; 0x654 <receiver_sample+0x148>
+				// We have a falling edge.
+				timestamp[channel] = SYSTEMTIME;		// Register the time.
+     62e:	80 91 47 01 	lds	r24, 0x0147
+     632:	90 91 48 01 	lds	r25, 0x0148
+     636:	90 93 25 01 	sts	0x0125, r25
+     63a:	80 93 24 01 	sts	0x0124, r24
+				new_rxsignalstate = LOW;	// Set the next state.
+     63e:	81 e0       	ldi	r24, 0x01	; 1
+     640:	0a c0       	rjmp	.+20     	; 0x656 <receiver_sample+0x14a>
+			}
+		} else {
+			result = zminustwo[channel];
+		}
+	} else {
+		if(zminustwo[channel]>sample) {
+     642:	82 17       	cp	r24, r18
+     644:	93 07       	cpc	r25, r19
+     646:	68 f2       	brcs	.-102    	; 0x5e2 <receiver_sample+0xd6>
+     648:	9c 01       	movw	r18, r24
+     64a:	48 17       	cp	r20, r24
+     64c:	59 07       	cpc	r21, r25
+     64e:	48 f6       	brcc	.-110    	; 0x5e2 <receiver_sample+0xd6>
+     650:	9a 01       	movw	r18, r20
+     652:	c7 cf       	rjmp	.-114    	; 0x5e2 <receiver_sample+0xd6>
+				timestamp[channel] = SYSTEMTIME;		// Register the time.
+				new_rxsignalstate = LOW;	// Set the next state.
+			}
+			else {
+				// The high symbol is too long, so it is invalid.
+				new_rxsignalstate = NODATA;
+     654:	80 e0       	ldi	r24, 0x00	; 0
+			new_rxsignalstate = LOW; // Stay in the current state.
+		}
+		break;
+	}
+
+	rxsignalstate[channel] = new_rxsignalstate;
+     656:	80 93 43 01 	sts	0x0143, r24
+
+void receiver_sample(void) {
+	if(receiverenabled){
+		process_sample(spi_adc_read(ADC_CHANNEL2), CHANNEL1);
+		process_sample(spi_adc_read(ADC_CHANNEL3), CHANNEL2);
+		process_sample(spi_adc_read(ADC_CHANNEL4), CHANNEL3);
+     65a:	88 e1       	ldi	r24, 0x18	; 24
+     65c:	0e 94 41 0a 	call	0x1482	; 0x1482 <spi_adc_read>
+	
+	// We use a median filter to smooth unexpected pulses.
+	// This is actually a sorting filter.
+	// For example a spike:
+	// [1000 3000 1000] => sorting => [1000 1000 3000] => take the middle value => 1000
+	if(zminustwo[channel] > zminusone[channel]) {
+     660:	20 91 0e 01 	lds	r18, 0x010E
+     664:	30 91 0f 01 	lds	r19, 0x010F
+     668:	40 91 16 01 	lds	r20, 0x0116
+     66c:	50 91 17 01 	lds	r21, 0x0117
+     670:	42 17       	cp	r20, r18
+     672:	53 07       	cpc	r21, r19
+     674:	c0 f5       	brcc	.+112    	; 0x6e6 <receiver_sample+0x1da>
+		if(zminustwo[channel] > sample) {
+     676:	82 17       	cp	r24, r18
+     678:	93 07       	cpc	r25, r19
+     67a:	20 f4       	brcc	.+8      	; 0x684 <receiver_sample+0x178>
+     67c:	9c 01       	movw	r18, r24
+     67e:	84 17       	cp	r24, r20
+     680:	95 07       	cpc	r25, r21
+     682:	c0 f1       	brcs	.+112    	; 0x6f4 <receiver_sample+0x1e8>
+			}
+		}
+	}
+	
+	// Update the delay variables.
+	zminustwo[channel] = zminusone[channel];
+     684:	50 93 0f 01 	sts	0x010F, r21
+     688:	40 93 0e 01 	sts	0x010E, r20
+	zminusone[channel] = sample;
+     68c:	90 93 17 01 	sts	0x0117, r25
+     690:	80 93 16 01 	sts	0x0116, r24
+	SIGNALSTATE_t new_rxsignalstate = NODATA;
+	
+	// Run a smoothing filter over the data.	
+	sample = filter(channel, sample);	
+		
+	switch (rxsignalstate[channel]) {
+     694:	40 91 44 01 	lds	r20, 0x0144
+     698:	41 30       	cpi	r20, 0x01	; 1
+     69a:	09 f4       	brne	.+2      	; 0x69e <receiver_sample+0x192>
+     69c:	9e c0       	rjmp	.+316    	; 0x7da <receiver_sample+0x2ce>
+     69e:	08 f4       	brcc	.+2      	; 0x6a2 <receiver_sample+0x196>
+     6a0:	80 c0       	rjmp	.+256    	; 0x7a2 <receiver_sample+0x296>
+     6a2:	42 30       	cpi	r20, 0x02	; 2
+     6a4:	49 f5       	brne	.+82     	; 0x6f8 <receiver_sample+0x1ec>
+		}
+
+		break;
+		case HIGH:
+if(channel == CHANNEL3)
+PORTC |= (1<<PORTC2);	// Switch on.
+     6a6:	42 9a       	sbi	0x08, 2	; 8
+		// Check if we have a falling edge.
+		if (sample < thresholdlow[channel]) {
+     6a8:	40 91 3e 01 	lds	r20, 0x013E
+     6ac:	50 91 3f 01 	lds	r21, 0x013F
+     6b0:	24 17       	cp	r18, r20
+     6b2:	35 07       	cpc	r19, r21
+     6b4:	08 f0       	brcs	.+2      	; 0x6b8 <receiver_sample+0x1ac>
+     6b6:	ef c1       	rjmp	.+990    	; 0xa96 <__stack+0x197>
+			uint16_t timedif = getTimeDifference(timestamp[channel], SYSTEMTIME);
+     6b8:	80 91 47 01 	lds	r24, 0x0147
+     6bc:	90 91 48 01 	lds	r25, 0x0148
+     6c0:	4b 97       	sbiw	r24, 0x1b	; 27
+			if ((timedif > TIMELIMIT_MINIMAL_HIGH_TIME) && (timedif < TIMELIMIT_MAXIMAL_HIGH_TIME)) {
+     6c2:	20 91 26 01 	lds	r18, 0x0126
+     6c6:	30 91 27 01 	lds	r19, 0x0127
+     6ca:	82 1b       	sub	r24, r18
+     6cc:	93 0b       	sbc	r25, r19
+     6ce:	41 97       	sbiw	r24, 0x11	; 17
+     6d0:	98 f4       	brcc	.+38     	; 0x6f8 <receiver_sample+0x1ec>
+				// We have a falling edge.
+				timestamp[channel] = SYSTEMTIME;		// Register the time.
+     6d2:	80 91 47 01 	lds	r24, 0x0147
+     6d6:	90 91 48 01 	lds	r25, 0x0148
+     6da:	90 93 27 01 	sts	0x0127, r25
+     6de:	80 93 26 01 	sts	0x0126, r24
+				new_rxsignalstate = LOW;	// Set the next state.
+     6e2:	81 e0       	ldi	r24, 0x01	; 1
+     6e4:	0a c0       	rjmp	.+20     	; 0x6fa <receiver_sample+0x1ee>
+			}
+		} else {
+			result = zminustwo[channel];
+		}
+	} else {
+		if(zminustwo[channel]>sample) {
+     6e6:	82 17       	cp	r24, r18
+     6e8:	93 07       	cpc	r25, r19
+     6ea:	60 f2       	brcs	.-104    	; 0x684 <receiver_sample+0x178>
+     6ec:	9c 01       	movw	r18, r24
+     6ee:	48 17       	cp	r20, r24
+     6f0:	59 07       	cpc	r21, r25
+     6f2:	40 f6       	brcc	.-112    	; 0x684 <receiver_sample+0x178>
+     6f4:	9a 01       	movw	r18, r20
+     6f6:	c6 cf       	rjmp	.-116    	; 0x684 <receiver_sample+0x178>
+				timestamp[channel] = SYSTEMTIME;		// Register the time.
+				new_rxsignalstate = LOW;	// Set the next state.
+			}
+			else {
+				// The high symbol is too long, so it is invalid.
+				new_rxsignalstate = NODATA;
+     6f8:	80 e0       	ldi	r24, 0x00	; 0
+			new_rxsignalstate = LOW; // Stay in the current state.
+		}
+		break;
+	}
+
+	rxsignalstate[channel] = new_rxsignalstate;
+     6fa:	80 93 44 01 	sts	0x0144, r24
+void receiver_sample(void) {
+	if(receiverenabled){
+		process_sample(spi_adc_read(ADC_CHANNEL2), CHANNEL1);
+		process_sample(spi_adc_read(ADC_CHANNEL3), CHANNEL2);
+		process_sample(spi_adc_read(ADC_CHANNEL4), CHANNEL3);
+		process_sample(spi_adc_read(ADC_CHANNEL1), CHANNEL4);
+     6fe:	80 e0       	ldi	r24, 0x00	; 0
+     700:	0e 94 41 0a 	call	0x1482	; 0x1482 <spi_adc_read>
+	
+	// We use a median filter to smooth unexpected pulses.
+	// This is actually a sorting filter.
+	// For example a spike:
+	// [1000 3000 1000] => sorting => [1000 1000 3000] => take the middle value => 1000
+	if(zminustwo[channel] > zminusone[channel]) {
+     704:	20 91 10 01 	lds	r18, 0x0110
+     708:	30 91 11 01 	lds	r19, 0x0111
+     70c:	40 91 18 01 	lds	r20, 0x0118
+     710:	50 91 19 01 	lds	r21, 0x0119
+     714:	42 17       	cp	r20, r18
+     716:	53 07       	cpc	r21, r19
+     718:	b8 f5       	brcc	.+110    	; 0x788 <receiver_sample+0x27c>
+		if(zminustwo[channel] > sample) {
+     71a:	82 17       	cp	r24, r18
+     71c:	93 07       	cpc	r25, r19
+     71e:	20 f4       	brcc	.+8      	; 0x728 <receiver_sample+0x21c>
+     720:	9c 01       	movw	r18, r24
+     722:	84 17       	cp	r24, r20
+     724:	95 07       	cpc	r25, r21
+     726:	b8 f1       	brcs	.+110    	; 0x796 <receiver_sample+0x28a>
+			}
+		}
+	}
+	
+	// Update the delay variables.
+	zminustwo[channel] = zminusone[channel];
+     728:	50 93 11 01 	sts	0x0111, r21
+     72c:	40 93 10 01 	sts	0x0110, r20
+	zminusone[channel] = sample;
+     730:	90 93 19 01 	sts	0x0119, r25
+     734:	80 93 18 01 	sts	0x0118, r24
+	SIGNALSTATE_t new_rxsignalstate = NODATA;
+	
+	// Run a smoothing filter over the data.	
+	sample = filter(channel, sample);	
+		
+	switch (rxsignalstate[channel]) {
+     738:	40 91 45 01 	lds	r20, 0x0145
+     73c:	41 30       	cpi	r20, 0x01	; 1
+     73e:	09 f4       	brne	.+2      	; 0x742 <receiver_sample+0x236>
+     740:	90 c0       	rjmp	.+288    	; 0x862 <receiver_sample+0x356>
+     742:	08 f4       	brcc	.+2      	; 0x746 <receiver_sample+0x23a>
+     744:	74 c0       	rjmp	.+232    	; 0x82e <receiver_sample+0x322>
+     746:	42 30       	cpi	r20, 0x02	; 2
+     748:	41 f5       	brne	.+80     	; 0x79a <receiver_sample+0x28e>
+		break;
+		case HIGH:
+if(channel == CHANNEL3)
+PORTC |= (1<<PORTC2);	// Switch on.
+		// Check if we have a falling edge.
+		if (sample < thresholdlow[channel]) {
+     74a:	40 91 40 01 	lds	r20, 0x0140
+     74e:	50 91 41 01 	lds	r21, 0x0141
+     752:	24 17       	cp	r18, r20
+     754:	35 07       	cpc	r19, r21
+     756:	08 f0       	brcs	.+2      	; 0x75a <receiver_sample+0x24e>
+     758:	5e c1       	rjmp	.+700    	; 0xa16 <__stack+0x117>
+			uint16_t timedif = getTimeDifference(timestamp[channel], SYSTEMTIME);
+     75a:	80 91 47 01 	lds	r24, 0x0147
+     75e:	90 91 48 01 	lds	r25, 0x0148
+     762:	4b 97       	sbiw	r24, 0x1b	; 27
+			if ((timedif > TIMELIMIT_MINIMAL_HIGH_TIME) && (timedif < TIMELIMIT_MAXIMAL_HIGH_TIME)) {
+     764:	20 91 28 01 	lds	r18, 0x0128
+     768:	30 91 29 01 	lds	r19, 0x0129
+     76c:	82 1b       	sub	r24, r18
+     76e:	93 0b       	sbc	r25, r19
+     770:	41 97       	sbiw	r24, 0x11	; 17
+     772:	98 f4       	brcc	.+38     	; 0x79a <receiver_sample+0x28e>
+				// We have a falling edge.
+				timestamp[channel] = SYSTEMTIME;		// Register the time.
+     774:	80 91 47 01 	lds	r24, 0x0147
+     778:	90 91 48 01 	lds	r25, 0x0148
+     77c:	90 93 29 01 	sts	0x0129, r25
+     780:	80 93 28 01 	sts	0x0128, r24
+				new_rxsignalstate = LOW;	// Set the next state.
+     784:	81 e0       	ldi	r24, 0x01	; 1
+     786:	0a c0       	rjmp	.+20     	; 0x79c <receiver_sample+0x290>
+			}
+		} else {
+			result = zminustwo[channel];
+		}
+	} else {
+		if(zminustwo[channel]>sample) {
+     788:	82 17       	cp	r24, r18
+     78a:	93 07       	cpc	r25, r19
+     78c:	68 f2       	brcs	.-102    	; 0x728 <receiver_sample+0x21c>
+     78e:	9c 01       	movw	r18, r24
+     790:	48 17       	cp	r20, r24
+     792:	59 07       	cpc	r21, r25
+     794:	48 f6       	brcc	.-110    	; 0x728 <receiver_sample+0x21c>
+     796:	9a 01       	movw	r18, r20
+     798:	c7 cf       	rjmp	.-114    	; 0x728 <receiver_sample+0x21c>
+				timestamp[channel] = SYSTEMTIME;		// Register the time.
+				new_rxsignalstate = LOW;	// Set the next state.
+			}
+			else {
+				// The high symbol is too long, so it is invalid.
+				new_rxsignalstate = NODATA;
+     79a:	80 e0       	ldi	r24, 0x00	; 0
+			new_rxsignalstate = LOW; // Stay in the current state.
+		}
+		break;
+	}
+
+	rxsignalstate[channel] = new_rxsignalstate;
+     79c:	80 93 45 01 	sts	0x0145, r24
+     7a0:	08 95       	ret
+	sample = filter(channel, sample);	
+		
+	switch (rxsignalstate[channel]) {
+		case NODATA:
+if(channel == CHANNEL3){
+PORTC |= (1<<PORTC2);	// Switch on.
+     7a2:	42 9a       	sbi	0x08, 2	; 8
+PORTC &= ~(1<<PORTC2);	// Switch off.
+     7a4:	42 98       	cbi	0x08, 2	; 8
+}
+		// Check if we have a rising edge.
+		if (sample > thresholdhigh[channel]) {
+     7a6:	80 91 36 01 	lds	r24, 0x0136
+     7aa:	90 91 37 01 	lds	r25, 0x0137
+     7ae:	82 17       	cp	r24, r18
+     7b0:	93 07       	cpc	r25, r19
+     7b2:	08 f0       	brcs	.+2      	; 0x7b6 <receiver_sample+0x2aa>
+     7b4:	92 c2       	rjmp	.+1316   	; 0xcda <__stack+0x3db>
+			// We have a rising edge.
+			receivedbyte[channel] = 0;		// Reset the data variable.
+     7b6:	10 92 20 01 	sts	0x0120, r1
+			receivedbitcounter[channel] = 7;	// Reset the bit counter.
+     7ba:	87 e0       	ldi	r24, 0x07	; 7
+     7bc:	80 93 02 01 	sts	0x0102, r24
+			timestamp[channel] = SYSTEMTIME;
+     7c0:	80 91 47 01 	lds	r24, 0x0147
+     7c4:	90 91 48 01 	lds	r25, 0x0148
+     7c8:	90 93 27 01 	sts	0x0127, r25
+     7cc:	80 93 26 01 	sts	0x0126, r24
+			mediumbusy[channel] = 1;	// Set the medium state.
+     7d0:	81 e0       	ldi	r24, 0x01	; 1
+     7d2:	80 93 1c 01 	sts	0x011C, r24
+			new_rxsignalstate = HIGH;	// Set the next state.
+     7d6:	82 e0       	ldi	r24, 0x02	; 2
+     7d8:	90 cf       	rjmp	.-224    	; 0x6fa <receiver_sample+0x1ee>
+			new_rxsignalstate = HIGH;	// Stay in the current state.
+		}
+		break;
+		case LOW:
+if(channel == CHANNEL3)
+PORTC &= ~(1<<PORTC2);	// Switch off.
+     7da:	42 98       	cbi	0x08, 2	; 8
+		// Check if we have a rising edge.
+		if (sample > thresholdlow[channel]) {
+     7dc:	80 91 3e 01 	lds	r24, 0x013E
+     7e0:	90 91 3f 01 	lds	r25, 0x013F
+     7e4:	82 17       	cp	r24, r18
+     7e6:	93 07       	cpc	r25, r19
+     7e8:	08 f0       	brcs	.+2      	; 0x7ec <receiver_sample+0x2e0>
+     7ea:	1f c1       	rjmp	.+574    	; 0xa2a <__stack+0x12b>
+			// Yes, we have an edge.
+			mediumbusy[channel] = 1;	// Set the medium state.
+     7ec:	40 93 1c 01 	sts	0x011C, r20
+			// Does the time in the interval represent a one or a zero?
+			uint16_t result = getTimeDifference(timestamp[channel], SYSTEMTIME);
+     7f0:	80 91 47 01 	lds	r24, 0x0147
+     7f4:	90 91 48 01 	lds	r25, 0x0148
+     7f8:	20 91 26 01 	lds	r18, 0x0126
+     7fc:	30 91 27 01 	lds	r19, 0x0127
+     800:	82 1b       	sub	r24, r18
+     802:	93 0b       	sbc	r25, r19
+			if (result > TIMELIMIT_END_OF_ONE) {
+     804:	86 97       	sbiw	r24, 0x26	; 38
+     806:	08 f4       	brcc	.+2      	; 0x80a <receiver_sample+0x2fe>
+     808:	f2 c2       	rjmp	.+1508   	; 0xdee <__stack+0x4ef>
+     80a:	80 91 02 01 	lds	r24, 0x0102
+			else {
+				receivedbyte[channel] |= (1 << receivedbitcounter[channel]);	// We have received a one, write it.
+			}
+
+			// Do we have a complete byte?
+			if (!receivedbitcounter[channel]) {
+     80e:	88 23       	and	r24, r24
+     810:	09 f4       	brne	.+2      	; 0x814 <receiver_sample+0x308>
+     812:	26 c3       	rjmp	.+1612   	; 0xe60 <__stack+0x561>
+				// Reset the bitcounter.
+				receivedbyte[channel] = 0;		// Reset the data variable.
+				receivedbitcounter[channel] = 7;	// Reset the bit counter.
+			}
+			else {
+				receivedbitcounter[channel]--;		// No, Shift to the next bit.
+     814:	81 50       	subi	r24, 0x01	; 1
+     816:	80 93 02 01 	sts	0x0102, r24
+			}
+			timestamp[channel] = SYSTEMTIME;		// Log the time.
+     81a:	80 91 47 01 	lds	r24, 0x0147
+     81e:	90 91 48 01 	lds	r25, 0x0148
+     822:	90 93 27 01 	sts	0x0127, r25
+     826:	80 93 26 01 	sts	0x0126, r24
+			new_rxsignalstate = HIGH;	// Set the next state.
+     82a:	82 e0       	ldi	r24, 0x02	; 2
+     82c:	66 cf       	rjmp	.-308    	; 0x6fa <receiver_sample+0x1ee>
+if(channel == CHANNEL3){
+PORTC |= (1<<PORTC2);	// Switch on.
+PORTC &= ~(1<<PORTC2);	// Switch off.
+}
+		// Check if we have a rising edge.
+		if (sample > thresholdhigh[channel]) {
+     82e:	80 91 38 01 	lds	r24, 0x0138
+     832:	90 91 39 01 	lds	r25, 0x0139
+     836:	82 17       	cp	r24, r18
+     838:	93 07       	cpc	r25, r19
+     83a:	08 f0       	brcs	.+2      	; 0x83e <receiver_sample+0x332>
+     83c:	40 c1       	rjmp	.+640    	; 0xabe <__stack+0x1bf>
+			// We have a rising edge.
+			receivedbyte[channel] = 0;		// Reset the data variable.
+     83e:	10 92 21 01 	sts	0x0121, r1
+			receivedbitcounter[channel] = 7;	// Reset the bit counter.
+     842:	87 e0       	ldi	r24, 0x07	; 7
+     844:	80 93 03 01 	sts	0x0103, r24
+			timestamp[channel] = SYSTEMTIME;
+     848:	80 91 47 01 	lds	r24, 0x0147
+     84c:	90 91 48 01 	lds	r25, 0x0148
+     850:	90 93 29 01 	sts	0x0129, r25
+     854:	80 93 28 01 	sts	0x0128, r24
+			mediumbusy[channel] = 1;	// Set the medium state.
+     858:	81 e0       	ldi	r24, 0x01	; 1
+     85a:	80 93 1d 01 	sts	0x011D, r24
+			new_rxsignalstate = HIGH;	// Set the next state.
+     85e:	82 e0       	ldi	r24, 0x02	; 2
+     860:	9d cf       	rjmp	.-198    	; 0x79c <receiver_sample+0x290>
+		break;
+		case LOW:
+if(channel == CHANNEL3)
+PORTC &= ~(1<<PORTC2);	// Switch off.
+		// Check if we have a rising edge.
+		if (sample > thresholdlow[channel]) {
+     862:	80 91 40 01 	lds	r24, 0x0140
+     866:	90 91 41 01 	lds	r25, 0x0141
+     86a:	82 17       	cp	r24, r18
+     86c:	93 07       	cpc	r25, r19
+     86e:	08 f0       	brcs	.+2      	; 0x872 <receiver_sample+0x366>
+     870:	fc c0       	rjmp	.+504    	; 0xa6a <__stack+0x16b>
+			// Yes, we have an edge.
+			mediumbusy[channel] = 1;	// Set the medium state.
+     872:	40 93 1d 01 	sts	0x011D, r20
+			// Does the time in the interval represent a one or a zero?
+			uint16_t result = getTimeDifference(timestamp[channel], SYSTEMTIME);
+     876:	80 91 47 01 	lds	r24, 0x0147
+     87a:	90 91 48 01 	lds	r25, 0x0148
+     87e:	20 91 28 01 	lds	r18, 0x0128
+     882:	30 91 29 01 	lds	r19, 0x0129
+     886:	82 1b       	sub	r24, r18
+     888:	93 0b       	sbc	r25, r19
+			if (result > TIMELIMIT_END_OF_ONE) {
+     88a:	86 97       	sbiw	r24, 0x26	; 38
+     88c:	08 f4       	brcc	.+2      	; 0x890 <receiver_sample+0x384>
+     88e:	9f c2       	rjmp	.+1342   	; 0xdce <__stack+0x4cf>
+     890:	80 91 03 01 	lds	r24, 0x0103
+			else {
+				receivedbyte[channel] |= (1 << receivedbitcounter[channel]);	// We have received a one, write it.
+			}
+
+			// Do we have a complete byte?
+			if (!receivedbitcounter[channel]) {
+     894:	88 23       	and	r24, r24
+     896:	09 f4       	brne	.+2      	; 0x89a <receiver_sample+0x38e>
+     898:	c2 c2       	rjmp	.+1412   	; 0xe1e <__stack+0x51f>
+				// Reset the bitcounter.
+				receivedbyte[channel] = 0;		// Reset the data variable.
+				receivedbitcounter[channel] = 7;	// Reset the bit counter.
+			}
+			else {
+				receivedbitcounter[channel]--;		// No, Shift to the next bit.
+     89a:	81 50       	subi	r24, 0x01	; 1
+     89c:	80 93 03 01 	sts	0x0103, r24
+			}
+			timestamp[channel] = SYSTEMTIME;		// Log the time.
+     8a0:	80 91 47 01 	lds	r24, 0x0147
+     8a4:	90 91 48 01 	lds	r25, 0x0148
+     8a8:	90 93 29 01 	sts	0x0129, r25
+     8ac:	80 93 28 01 	sts	0x0128, r24
+			new_rxsignalstate = HIGH;	// Set the next state.
+     8b0:	82 e0       	ldi	r24, 0x02	; 2
+     8b2:	74 cf       	rjmp	.-280    	; 0x79c <receiver_sample+0x290>
+if(channel == CHANNEL3){
+PORTC |= (1<<PORTC2);	// Switch on.
+PORTC &= ~(1<<PORTC2);	// Switch off.
+}
+		// Check if we have a rising edge.
+		if (sample > thresholdhigh[channel]) {
+     8b4:	80 91 32 01 	lds	r24, 0x0132
+     8b8:	90 91 33 01 	lds	r25, 0x0133
+     8bc:	82 17       	cp	r24, r18
+     8be:	93 07       	cpc	r25, r19
+     8c0:	08 f0       	brcs	.+2      	; 0x8c4 <receiver_sample+0x3b8>
+     8c2:	b1 c1       	rjmp	.+866    	; 0xc26 <__stack+0x327>
+			// We have a rising edge.
+			receivedbyte[channel] = 0;		// Reset the data variable.
+     8c4:	10 92 1e 01 	sts	0x011E, r1
+			receivedbitcounter[channel] = 7;	// Reset the bit counter.
+     8c8:	87 e0       	ldi	r24, 0x07	; 7
+     8ca:	80 93 00 01 	sts	0x0100, r24
+			timestamp[channel] = SYSTEMTIME;
+     8ce:	80 91 47 01 	lds	r24, 0x0147
+     8d2:	90 91 48 01 	lds	r25, 0x0148
+     8d6:	90 93 23 01 	sts	0x0123, r25
+     8da:	80 93 22 01 	sts	0x0122, r24
+			mediumbusy[channel] = 1;	// Set the medium state.
+     8de:	81 e0       	ldi	r24, 0x01	; 1
+     8e0:	80 93 1a 01 	sts	0x011A, r24
+			new_rxsignalstate = HIGH;	// Set the next state.
+     8e4:	82 e0       	ldi	r24, 0x02	; 2
+     8e6:	66 ce       	rjmp	.-820    	; 0x5b4 <receiver_sample+0xa8>
+		break;
+		case LOW:
+if(channel == CHANNEL3)
+PORTC &= ~(1<<PORTC2);	// Switch off.
+		// Check if we have a rising edge.
+		if (sample > thresholdlow[channel]) {
+     8e8:	80 91 3a 01 	lds	r24, 0x013A
+     8ec:	90 91 3b 01 	lds	r25, 0x013B
+     8f0:	82 17       	cp	r24, r18
+     8f2:	93 07       	cpc	r25, r19
+     8f4:	08 f0       	brcs	.+2      	; 0x8f8 <receiver_sample+0x3ec>
+     8f6:	79 c0       	rjmp	.+242    	; 0x9ea <__stack+0xeb>
+			// Yes, we have an edge.
+			mediumbusy[channel] = 1;	// Set the medium state.
+     8f8:	40 93 1a 01 	sts	0x011A, r20
+			// Does the time in the interval represent a one or a zero?
+			uint16_t result = getTimeDifference(timestamp[channel], SYSTEMTIME);
+     8fc:	80 91 47 01 	lds	r24, 0x0147
+     900:	90 91 48 01 	lds	r25, 0x0148
+     904:	20 91 22 01 	lds	r18, 0x0122
+     908:	30 91 23 01 	lds	r19, 0x0123
+     90c:	82 1b       	sub	r24, r18
+     90e:	93 0b       	sbc	r25, r19
+			if (result > TIMELIMIT_END_OF_ONE) {
+     910:	86 97       	sbiw	r24, 0x26	; 38
+     912:	08 f4       	brcc	.+2      	; 0x916 <__stack+0x17>
+     914:	4c c2       	rjmp	.+1176   	; 0xdae <__stack+0x4af>
+     916:	80 91 00 01 	lds	r24, 0x0100
+			else {
+				receivedbyte[channel] |= (1 << receivedbitcounter[channel]);	// We have received a one, write it.
+			}
+
+			// Do we have a complete byte?
+			if (!receivedbitcounter[channel]) {
+     91a:	88 23       	and	r24, r24
+     91c:	09 f4       	brne	.+2      	; 0x920 <__stack+0x21>
+     91e:	1a c4       	rjmp	.+2100   	; 0x1154 <__stack+0x855>
+				// Reset the bitcounter.
+				receivedbyte[channel] = 0;		// Reset the data variable.
+				receivedbitcounter[channel] = 7;	// Reset the bit counter.
+			}
+			else {
+				receivedbitcounter[channel]--;		// No, Shift to the next bit.
+     920:	81 50       	subi	r24, 0x01	; 1
+     922:	80 93 00 01 	sts	0x0100, r24
+			}
+			timestamp[channel] = SYSTEMTIME;		// Log the time.
+     926:	80 91 47 01 	lds	r24, 0x0147
+     92a:	90 91 48 01 	lds	r25, 0x0148
+     92e:	90 93 23 01 	sts	0x0123, r25
+     932:	80 93 22 01 	sts	0x0122, r24
+			new_rxsignalstate = HIGH;	// Set the next state.
+     936:	82 e0       	ldi	r24, 0x02	; 2
+     938:	3d ce       	rjmp	.-902    	; 0x5b4 <receiver_sample+0xa8>
+if(channel == CHANNEL3){
+PORTC |= (1<<PORTC2);	// Switch on.
+PORTC &= ~(1<<PORTC2);	// Switch off.
+}
+		// Check if we have a rising edge.
+		if (sample > thresholdhigh[channel]) {
+     93a:	80 91 34 01 	lds	r24, 0x0134
+     93e:	90 91 35 01 	lds	r25, 0x0135
+     942:	82 17       	cp	r24, r18
+     944:	93 07       	cpc	r25, r19
+     946:	08 f0       	brcs	.+2      	; 0x94a <__stack+0x4b>
+     948:	14 c1       	rjmp	.+552    	; 0xb72 <__stack+0x273>
+			// We have a rising edge.
+			receivedbyte[channel] = 0;		// Reset the data variable.
+     94a:	10 92 1f 01 	sts	0x011F, r1
+			receivedbitcounter[channel] = 7;	// Reset the bit counter.
+     94e:	87 e0       	ldi	r24, 0x07	; 7
+     950:	80 93 01 01 	sts	0x0101, r24
+			timestamp[channel] = SYSTEMTIME;
+     954:	80 91 47 01 	lds	r24, 0x0147
+     958:	90 91 48 01 	lds	r25, 0x0148
+     95c:	90 93 25 01 	sts	0x0125, r25
+     960:	80 93 24 01 	sts	0x0124, r24
+			mediumbusy[channel] = 1;	// Set the medium state.
+     964:	81 e0       	ldi	r24, 0x01	; 1
+     966:	80 93 1b 01 	sts	0x011B, r24
+			new_rxsignalstate = HIGH;	// Set the next state.
+     96a:	82 e0       	ldi	r24, 0x02	; 2
+     96c:	74 ce       	rjmp	.-792    	; 0x656 <receiver_sample+0x14a>
+		break;
+		case LOW:
+if(channel == CHANNEL3)
+PORTC &= ~(1<<PORTC2);	// Switch off.
+		// Check if we have a rising edge.
+		if (sample > thresholdlow[channel]) {
+     96e:	80 91 3c 01 	lds	r24, 0x013C
+     972:	90 91 3d 01 	lds	r25, 0x013D
+     976:	82 17       	cp	r24, r18
+     978:	93 07       	cpc	r25, r19
+     97a:	08 f5       	brcc	.+66     	; 0x9be <__stack+0xbf>
+			// Yes, we have an edge.
+			mediumbusy[channel] = 1;	// Set the medium state.
+     97c:	40 93 1b 01 	sts	0x011B, r20
+			// Does the time in the interval represent a one or a zero?
+			uint16_t result = getTimeDifference(timestamp[channel], SYSTEMTIME);
+     980:	80 91 47 01 	lds	r24, 0x0147
+     984:	90 91 48 01 	lds	r25, 0x0148
+     988:	20 91 24 01 	lds	r18, 0x0124
+     98c:	30 91 25 01 	lds	r19, 0x0125
+     990:	82 1b       	sub	r24, r18
+     992:	93 0b       	sbc	r25, r19
+			if (result > TIMELIMIT_END_OF_ONE) {
+     994:	86 97       	sbiw	r24, 0x26	; 38
+     996:	08 f4       	brcc	.+2      	; 0x99a <__stack+0x9b>
+     998:	fa c1       	rjmp	.+1012   	; 0xd8e <__stack+0x48f>
+     99a:	80 91 01 01 	lds	r24, 0x0101
+			else {
+				receivedbyte[channel] |= (1 << receivedbitcounter[channel]);	// We have received a one, write it.
+			}
+
+			// Do we have a complete byte?
+			if (!receivedbitcounter[channel]) {
+     99e:	88 23       	and	r24, r24
+     9a0:	09 f4       	brne	.+2      	; 0x9a4 <__stack+0xa5>
+     9a2:	b7 c3       	rjmp	.+1902   	; 0x1112 <__stack+0x813>
+				// Reset the bitcounter.
+				receivedbyte[channel] = 0;		// Reset the data variable.
+				receivedbitcounter[channel] = 7;	// Reset the bit counter.
+			}
+			else {
+				receivedbitcounter[channel]--;		// No, Shift to the next bit.
+     9a4:	81 50       	subi	r24, 0x01	; 1
+     9a6:	80 93 01 01 	sts	0x0101, r24
+			}
+			timestamp[channel] = SYSTEMTIME;		// Log the time.
+     9aa:	80 91 47 01 	lds	r24, 0x0147
+     9ae:	90 91 48 01 	lds	r25, 0x0148
+     9b2:	90 93 25 01 	sts	0x0125, r25
+     9b6:	80 93 24 01 	sts	0x0124, r24
+			new_rxsignalstate = HIGH;	// Set the next state.
+     9ba:	82 e0       	ldi	r24, 0x02	; 2
+     9bc:	4c ce       	rjmp	.-872    	; 0x656 <receiver_sample+0x14a>
+		}
+		else if (sample < thresholdlow[channel]) {
+     9be:	28 17       	cp	r18, r24
+     9c0:	39 07       	cpc	r19, r25
+     9c2:	08 f0       	brcs	.+2      	; 0x9c6 <__stack+0xc7>
+     9c4:	24 c2       	rjmp	.+1096   	; 0xe0e <__stack+0x50f>
+			// We do not have a signal edge, so we are still in low signal state.
+
+			// Check if the time has elapsed.
+			if (getTimeDifference(timestamp[channel],SYSTEMTIME) > TIMELIMIT_END_OF_SIGNAL) {
+     9c6:	80 91 47 01 	lds	r24, 0x0147
+     9ca:	90 91 48 01 	lds	r25, 0x0148
+     9ce:	40 91 24 01 	lds	r20, 0x0124
+     9d2:	50 91 25 01 	lds	r21, 0x0125
+     9d6:	84 1b       	sub	r24, r20
+     9d8:	95 0b       	sbc	r25, r21
+     9da:	8f 35       	cpi	r24, 0x5F	; 95
+     9dc:	91 05       	cpc	r25, r1
+     9de:	08 f4       	brcc	.+2      	; 0x9e2 <__stack+0xe3>
+     9e0:	7e c4       	rjmp	.+2300   	; 0x12de <__stack+0x9df>
+				// The signal stays idle, so we have no data.
+				// Incomplete data we received is discarded because we should always receive complete 8 bit bytes.
+				mediumbusy[channel] = 0;	// Set the medium state.
+     9e2:	10 92 1b 01 	sts	0x011B, r1
+				new_rxsignalstate = NODATA;	// Set the next state.
+     9e6:	80 e0       	ldi	r24, 0x00	; 0
+     9e8:	36 ce       	rjmp	.-916    	; 0x656 <receiver_sample+0x14a>
+				receivedbitcounter[channel]--;		// No, Shift to the next bit.
+			}
+			timestamp[channel] = SYSTEMTIME;		// Log the time.
+			new_rxsignalstate = HIGH;	// Set the next state.
+		}
+		else if (sample < thresholdlow[channel]) {
+     9ea:	28 17       	cp	r18, r24
+     9ec:	39 07       	cpc	r19, r25
+     9ee:	08 f0       	brcs	.+2      	; 0x9f2 <__stack+0xf3>
+     9f0:	12 c2       	rjmp	.+1060   	; 0xe16 <__stack+0x517>
+			// We do not have a signal edge, so we are still in low signal state.
+
+			// Check if the time has elapsed.
+			if (getTimeDifference(timestamp[channel],SYSTEMTIME) > TIMELIMIT_END_OF_SIGNAL) {
+     9f2:	80 91 47 01 	lds	r24, 0x0147
+     9f6:	90 91 48 01 	lds	r25, 0x0148
+     9fa:	40 91 22 01 	lds	r20, 0x0122
+     9fe:	50 91 23 01 	lds	r21, 0x0123
+     a02:	84 1b       	sub	r24, r20
+     a04:	95 0b       	sbc	r25, r21
+     a06:	8f 35       	cpi	r24, 0x5F	; 95
+     a08:	91 05       	cpc	r25, r1
+     a0a:	08 f4       	brcc	.+2      	; 0xa0e <__stack+0x10f>
+     a0c:	c4 c3       	rjmp	.+1928   	; 0x1196 <__stack+0x897>
+				// The signal stays idle, so we have no data.
+				// Incomplete data we received is discarded because we should always receive complete 8 bit bytes.
+				mediumbusy[channel] = 0;	// Set the medium state.
+     a0e:	10 92 1a 01 	sts	0x011A, r1
+				new_rxsignalstate = NODATA;	// Set the next state.
+     a12:	80 e0       	ldi	r24, 0x00	; 0
+     a14:	cf cd       	rjmp	.-1122   	; 0x5b4 <receiver_sample+0xa8>
+			else {
+				// The high symbol is too long, so it is invalid.
+				new_rxsignalstate = NODATA;
+			}
+		}
+		else if (sample > thresholdhigh[channel]) {
+     a16:	80 91 38 01 	lds	r24, 0x0138
+     a1a:	90 91 39 01 	lds	r25, 0x0139
+     a1e:	82 17       	cp	r24, r18
+     a20:	93 07       	cpc	r25, r19
+     a22:	08 f4       	brcc	.+2      	; 0xa26 <__stack+0x127>
+     a24:	da c2       	rjmp	.+1460   	; 0xfda <__stack+0x6db>
+			new_rxsignalstate = HIGH;	// Set the next state.
+		}
+		else {
+			// We are in between two signal states (a sample on the edge), discard the sample.
+			// TODO: Do a measurement if this state happens multiple times.
+			new_rxsignalstate = HIGH;	// Stay in the current state.
+     a26:	82 e0       	ldi	r24, 0x02	; 2
+     a28:	b9 ce       	rjmp	.-654    	; 0x79c <receiver_sample+0x290>
+				receivedbitcounter[channel]--;		// No, Shift to the next bit.
+			}
+			timestamp[channel] = SYSTEMTIME;		// Log the time.
+			new_rxsignalstate = HIGH;	// Set the next state.
+		}
+		else if (sample < thresholdlow[channel]) {
+     a2a:	28 17       	cp	r18, r24
+     a2c:	39 07       	cpc	r19, r25
+     a2e:	08 f0       	brcs	.+2      	; 0xa32 <__stack+0x133>
+     a30:	f4 c1       	rjmp	.+1000   	; 0xe1a <__stack+0x51b>
+			// We do not have a signal edge, so we are still in low signal state.
+
+			// Check if the time has elapsed.
+			if (getTimeDifference(timestamp[channel],SYSTEMTIME) > TIMELIMIT_END_OF_SIGNAL) {
+     a32:	80 91 47 01 	lds	r24, 0x0147
+     a36:	90 91 48 01 	lds	r25, 0x0148
+     a3a:	40 91 26 01 	lds	r20, 0x0126
+     a3e:	50 91 27 01 	lds	r21, 0x0127
+     a42:	84 1b       	sub	r24, r20
+     a44:	95 0b       	sbc	r25, r21
+     a46:	8f 35       	cpi	r24, 0x5F	; 95
+     a48:	91 05       	cpc	r25, r1
+     a4a:	08 f4       	brcc	.+2      	; 0xa4e <__stack+0x14f>
+     a4c:	f6 c3       	rjmp	.+2028   	; 0x123a <__stack+0x93b>
+				// The signal stays idle, so we have no data.
+				// Incomplete data we received is discarded because we should always receive complete 8 bit bytes.
+				mediumbusy[channel] = 0;	// Set the medium state.
+     a4e:	10 92 1c 01 	sts	0x011C, r1
+				new_rxsignalstate = NODATA;	// Set the next state.
+     a52:	80 e0       	ldi	r24, 0x00	; 0
+     a54:	52 ce       	rjmp	.-860    	; 0x6fa <receiver_sample+0x1ee>
+			else {
+				// The high symbol is too long, so it is invalid.
+				new_rxsignalstate = NODATA;
+			}
+		}
+		else if (sample > thresholdhigh[channel]) {
+     a56:	80 91 34 01 	lds	r24, 0x0134
+     a5a:	90 91 35 01 	lds	r25, 0x0135
+     a5e:	82 17       	cp	r24, r18
+     a60:	93 07       	cpc	r25, r19
+     a62:	08 f4       	brcc	.+2      	; 0xa66 <__stack+0x167>
+     a64:	08 c3       	rjmp	.+1552   	; 0x1076 <__stack+0x777>
+			new_rxsignalstate = HIGH;	// Set the next state.
+		}
+		else {
+			// We are in between two signal states (a sample on the edge), discard the sample.
+			// TODO: Do a measurement if this state happens multiple times.
+			new_rxsignalstate = HIGH;	// Stay in the current state.
+     a66:	82 e0       	ldi	r24, 0x02	; 2
+     a68:	f6 cd       	rjmp	.-1044   	; 0x656 <receiver_sample+0x14a>
+				receivedbitcounter[channel]--;		// No, Shift to the next bit.
+			}
+			timestamp[channel] = SYSTEMTIME;		// Log the time.
+			new_rxsignalstate = HIGH;	// Set the next state.
+		}
+		else if (sample < thresholdlow[channel]) {
+     a6a:	28 17       	cp	r18, r24
+     a6c:	39 07       	cpc	r19, r25
+     a6e:	08 f0       	brcs	.+2      	; 0xa72 <__stack+0x173>
+     a70:	d0 c1       	rjmp	.+928    	; 0xe12 <__stack+0x513>
+			// We do not have a signal edge, so we are still in low signal state.
+
+			// Check if the time has elapsed.
+			if (getTimeDifference(timestamp[channel],SYSTEMTIME) > TIMELIMIT_END_OF_SIGNAL) {
+     a72:	80 91 47 01 	lds	r24, 0x0147
+     a76:	90 91 48 01 	lds	r25, 0x0148
+     a7a:	40 91 28 01 	lds	r20, 0x0128
+     a7e:	50 91 29 01 	lds	r21, 0x0129
+     a82:	84 1b       	sub	r24, r20
+     a84:	95 0b       	sbc	r25, r21
+     a86:	8f 35       	cpi	r24, 0x5F	; 95
+     a88:	91 05       	cpc	r25, r1
+     a8a:	08 f4       	brcc	.+2      	; 0xa8e <__stack+0x18f>
+     a8c:	7a c4       	rjmp	.+2292   	; 0x1382 <__stack+0xa83>
+				// The signal stays idle, so we have no data.
+				// Incomplete data we received is discarded because we should always receive complete 8 bit bytes.
+				mediumbusy[channel] = 0;	// Set the medium state.
+     a8e:	10 92 1d 01 	sts	0x011D, r1
+				new_rxsignalstate = NODATA;	// Set the next state.
+     a92:	80 e0       	ldi	r24, 0x00	; 0
+     a94:	83 ce       	rjmp	.-762    	; 0x79c <receiver_sample+0x290>
+			else {
+				// The high symbol is too long, so it is invalid.
+				new_rxsignalstate = NODATA;
+			}
+		}
+		else if (sample > thresholdhigh[channel]) {
+     a96:	80 91 36 01 	lds	r24, 0x0136
+     a9a:	90 91 37 01 	lds	r25, 0x0137
+     a9e:	82 17       	cp	r24, r18
+     aa0:	93 07       	cpc	r25, r19
+     aa2:	08 f4       	brcc	.+2      	; 0xaa6 <__stack+0x1a7>
+     aa4:	fe c1       	rjmp	.+1020   	; 0xea2 <__stack+0x5a3>
+			new_rxsignalstate = HIGH;	// Set the next state.
+		}
+		else {
+			// We are in between two signal states (a sample on the edge), discard the sample.
+			// TODO: Do a measurement if this state happens multiple times.
+			new_rxsignalstate = HIGH;	// Stay in the current state.
+     aa6:	82 e0       	ldi	r24, 0x02	; 2
+     aa8:	28 ce       	rjmp	.-944    	; 0x6fa <receiver_sample+0x1ee>
+			else {
+				// The high symbol is too long, so it is invalid.
+				new_rxsignalstate = NODATA;
+			}
+		}
+		else if (sample > thresholdhigh[channel]) {
+     aaa:	80 91 32 01 	lds	r24, 0x0132
+     aae:	90 91 33 01 	lds	r25, 0x0133
+     ab2:	82 17       	cp	r24, r18
+     ab4:	93 07       	cpc	r25, r19
+     ab6:	08 f4       	brcc	.+2      	; 0xaba <__stack+0x1bb>
+     ab8:	42 c2       	rjmp	.+1156   	; 0xf3e <__stack+0x63f>
+			new_rxsignalstate = HIGH;	// Set the next state.
+		}
+		else {
+			// We are in between two signal states (a sample on the edge), discard the sample.
+			// TODO: Do a measurement if this state happens multiple times.
+			new_rxsignalstate = HIGH;	// Stay in the current state.
+     aba:	82 e0       	ldi	r24, 0x02	; 2
+     abc:	7b cd       	rjmp	.-1290   	; 0x5b4 <receiver_sample+0xa8>
+
+/*
+ * Calculate the low threshold.
+ */
+static inline void updatethresholdlow(uint8_t channel, uint16_t sample) {
+	sampleslow[channel][sampleindexlow[channel]] = sample;		// Add the sample to the circular buffer.
+     abe:	80 91 2d 01 	lds	r24, 0x012D
+     ac2:	90 e0       	ldi	r25, 0x00	; 0
+     ac4:	fc 01       	movw	r30, r24
+     ac6:	ee 0f       	add	r30, r30
+     ac8:	ff 1f       	adc	r31, r31
+     aca:	e3 58       	subi	r30, 0x83	; 131
+     acc:	fe 4f       	sbci	r31, 0xFE	; 254
+     ace:	31 83       	std	Z+1, r19	; 0x01
+     ad0:	20 83       	st	Z, r18
+	sampleindexlow[channel] = (sampleindexlow[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+     ad2:	01 96       	adiw	r24, 0x01	; 1
+     ad4:	87 70       	andi	r24, 0x07	; 7
+     ad6:	99 27       	eor	r25, r25
+     ad8:	80 93 2d 01 	sts	0x012D, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+     adc:	80 91 7f 01 	lds	r24, 0x017F
+     ae0:	90 91 80 01 	lds	r25, 0x0180
+     ae4:	20 91 7d 01 	lds	r18, 0x017D
+     ae8:	30 91 7e 01 	lds	r19, 0x017E
+     aec:	82 0f       	add	r24, r18
+     aee:	93 1f       	adc	r25, r19
+     af0:	20 91 81 01 	lds	r18, 0x0181
+     af4:	30 91 82 01 	lds	r19, 0x0182
+     af8:	82 0f       	add	r24, r18
+     afa:	93 1f       	adc	r25, r19
+     afc:	20 91 83 01 	lds	r18, 0x0183
+     b00:	30 91 84 01 	lds	r19, 0x0184
+     b04:	82 0f       	add	r24, r18
+     b06:	93 1f       	adc	r25, r19
+     b08:	20 91 85 01 	lds	r18, 0x0185
+     b0c:	30 91 86 01 	lds	r19, 0x0186
+     b10:	82 0f       	add	r24, r18
+     b12:	93 1f       	adc	r25, r19
+     b14:	20 91 87 01 	lds	r18, 0x0187
+     b18:	30 91 88 01 	lds	r19, 0x0188
+     b1c:	82 0f       	add	r24, r18
+     b1e:	93 1f       	adc	r25, r19
+     b20:	20 91 89 01 	lds	r18, 0x0189
+     b24:	30 91 8a 01 	lds	r19, 0x018A
+     b28:	82 0f       	add	r24, r18
+     b2a:	93 1f       	adc	r25, r19
+     b2c:	20 91 8b 01 	lds	r18, 0x018B
+     b30:	30 91 8c 01 	lds	r19, 0x018C
+     b34:	82 0f       	add	r24, r18
+     b36:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+     b38:	96 95       	lsr	r25
+     b3a:	87 95       	ror	r24
+     b3c:	96 95       	lsr	r25
+     b3e:	87 95       	ror	r24
+     b40:	96 95       	lsr	r25
+     b42:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleslow[channel]);
+	thresholdlow[channel] = mean + (mean >> 3); //+ THRESHOLDLOW_OFFSET;	// Set the new threshold.
+     b44:	9c 01       	movw	r18, r24
+     b46:	36 95       	lsr	r19
+     b48:	27 95       	ror	r18
+     b4a:	36 95       	lsr	r19
+     b4c:	27 95       	ror	r18
+     b4e:	36 95       	lsr	r19
+     b50:	27 95       	ror	r18
+     b52:	28 0f       	add	r18, r24
+     b54:	39 1f       	adc	r19, r25
+     b56:	30 93 41 01 	sts	0x0141, r19
+     b5a:	20 93 40 01 	sts	0x0140, r18
+		else {
+			// We are still idle.
+			// Do a medium measurement.
+			// Calculate the low threshold.
+			updatethresholdlow(channel, sample);
+			thresholdhigh[channel] = (thresholdlow[channel]<<1); //+ THRESHOLDHIGH_OFFSET_INIT;
+     b5e:	22 0f       	add	r18, r18
+     b60:	33 1f       	adc	r19, r19
+     b62:	30 93 39 01 	sts	0x0139, r19
+     b66:	20 93 38 01 	sts	0x0138, r18
+			mediumbusy[channel] = 0;	// Set the medium state.
+     b6a:	10 92 1d 01 	sts	0x011D, r1
+			new_rxsignalstate = NODATA;	// Set the next state.
+     b6e:	80 e0       	ldi	r24, 0x00	; 0
+     b70:	15 ce       	rjmp	.-982    	; 0x79c <receiver_sample+0x290>
+
+/*
+ * Calculate the low threshold.
+ */
+static inline void updatethresholdlow(uint8_t channel, uint16_t sample) {
+	sampleslow[channel][sampleindexlow[channel]] = sample;		// Add the sample to the circular buffer.
+     b72:	80 91 2b 01 	lds	r24, 0x012B
+     b76:	90 e0       	ldi	r25, 0x00	; 0
+     b78:	fc 01       	movw	r30, r24
+     b7a:	ee 0f       	add	r30, r30
+     b7c:	ff 1f       	adc	r31, r31
+     b7e:	e3 5a       	subi	r30, 0xA3	; 163
+     b80:	fe 4f       	sbci	r31, 0xFE	; 254
+     b82:	31 83       	std	Z+1, r19	; 0x01
+     b84:	20 83       	st	Z, r18
+	sampleindexlow[channel] = (sampleindexlow[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+     b86:	01 96       	adiw	r24, 0x01	; 1
+     b88:	87 70       	andi	r24, 0x07	; 7
+     b8a:	99 27       	eor	r25, r25
+     b8c:	80 93 2b 01 	sts	0x012B, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+     b90:	80 91 5d 01 	lds	r24, 0x015D
+     b94:	90 91 5e 01 	lds	r25, 0x015E
+     b98:	20 91 5f 01 	lds	r18, 0x015F
+     b9c:	30 91 60 01 	lds	r19, 0x0160
+     ba0:	82 0f       	add	r24, r18
+     ba2:	93 1f       	adc	r25, r19
+     ba4:	20 91 61 01 	lds	r18, 0x0161
+     ba8:	30 91 62 01 	lds	r19, 0x0162
+     bac:	82 0f       	add	r24, r18
+     bae:	93 1f       	adc	r25, r19
+     bb0:	20 91 63 01 	lds	r18, 0x0163
+     bb4:	30 91 64 01 	lds	r19, 0x0164
+     bb8:	82 0f       	add	r24, r18
+     bba:	93 1f       	adc	r25, r19
+     bbc:	20 91 65 01 	lds	r18, 0x0165
+     bc0:	30 91 66 01 	lds	r19, 0x0166
+     bc4:	82 0f       	add	r24, r18
+     bc6:	93 1f       	adc	r25, r19
+     bc8:	20 91 67 01 	lds	r18, 0x0167
+     bcc:	30 91 68 01 	lds	r19, 0x0168
+     bd0:	82 0f       	add	r24, r18
+     bd2:	93 1f       	adc	r25, r19
+     bd4:	20 91 69 01 	lds	r18, 0x0169
+     bd8:	30 91 6a 01 	lds	r19, 0x016A
+     bdc:	82 0f       	add	r24, r18
+     bde:	93 1f       	adc	r25, r19
+     be0:	20 91 6b 01 	lds	r18, 0x016B
+     be4:	30 91 6c 01 	lds	r19, 0x016C
+     be8:	82 0f       	add	r24, r18
+     bea:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+     bec:	96 95       	lsr	r25
+     bee:	87 95       	ror	r24
+     bf0:	96 95       	lsr	r25
+     bf2:	87 95       	ror	r24
+     bf4:	96 95       	lsr	r25
+     bf6:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleslow[channel]);
+	thresholdlow[channel] = mean + (mean >> 3); //+ THRESHOLDLOW_OFFSET;	// Set the new threshold.
+     bf8:	9c 01       	movw	r18, r24
+     bfa:	36 95       	lsr	r19
+     bfc:	27 95       	ror	r18
+     bfe:	36 95       	lsr	r19
+     c00:	27 95       	ror	r18
+     c02:	36 95       	lsr	r19
+     c04:	27 95       	ror	r18
+     c06:	28 0f       	add	r18, r24
+     c08:	39 1f       	adc	r19, r25
+     c0a:	30 93 3d 01 	sts	0x013D, r19
+     c0e:	20 93 3c 01 	sts	0x013C, r18
+		else {
+			// We are still idle.
+			// Do a medium measurement.
+			// Calculate the low threshold.
+			updatethresholdlow(channel, sample);
+			thresholdhigh[channel] = (thresholdlow[channel]<<1); //+ THRESHOLDHIGH_OFFSET_INIT;
+     c12:	22 0f       	add	r18, r18
+     c14:	33 1f       	adc	r19, r19
+     c16:	30 93 35 01 	sts	0x0135, r19
+     c1a:	20 93 34 01 	sts	0x0134, r18
+			mediumbusy[channel] = 0;	// Set the medium state.
+     c1e:	10 92 1b 01 	sts	0x011B, r1
+			new_rxsignalstate = NODATA;	// Set the next state.
+     c22:	80 e0       	ldi	r24, 0x00	; 0
+     c24:	18 cd       	rjmp	.-1488   	; 0x656 <receiver_sample+0x14a>
+
+/*
+ * Calculate the low threshold.
+ */
+static inline void updatethresholdlow(uint8_t channel, uint16_t sample) {
+	sampleslow[channel][sampleindexlow[channel]] = sample;		// Add the sample to the circular buffer.
+     c26:	80 91 2a 01 	lds	r24, 0x012A
+     c2a:	90 e0       	ldi	r25, 0x00	; 0
+     c2c:	fc 01       	movw	r30, r24
+     c2e:	ee 0f       	add	r30, r30
+     c30:	ff 1f       	adc	r31, r31
+     c32:	e3 5b       	subi	r30, 0xB3	; 179
+     c34:	fe 4f       	sbci	r31, 0xFE	; 254
+     c36:	31 83       	std	Z+1, r19	; 0x01
+     c38:	20 83       	st	Z, r18
+	sampleindexlow[channel] = (sampleindexlow[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+     c3a:	01 96       	adiw	r24, 0x01	; 1
+     c3c:	87 70       	andi	r24, 0x07	; 7
+     c3e:	99 27       	eor	r25, r25
+     c40:	80 93 2a 01 	sts	0x012A, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+     c44:	80 91 4d 01 	lds	r24, 0x014D
+     c48:	90 91 4e 01 	lds	r25, 0x014E
+     c4c:	20 91 4f 01 	lds	r18, 0x014F
+     c50:	30 91 50 01 	lds	r19, 0x0150
+     c54:	82 0f       	add	r24, r18
+     c56:	93 1f       	adc	r25, r19
+     c58:	20 91 51 01 	lds	r18, 0x0151
+     c5c:	30 91 52 01 	lds	r19, 0x0152
+     c60:	82 0f       	add	r24, r18
+     c62:	93 1f       	adc	r25, r19
+     c64:	20 91 53 01 	lds	r18, 0x0153
+     c68:	30 91 54 01 	lds	r19, 0x0154
+     c6c:	82 0f       	add	r24, r18
+     c6e:	93 1f       	adc	r25, r19
+     c70:	20 91 55 01 	lds	r18, 0x0155
+     c74:	30 91 56 01 	lds	r19, 0x0156
+     c78:	82 0f       	add	r24, r18
+     c7a:	93 1f       	adc	r25, r19
+     c7c:	20 91 57 01 	lds	r18, 0x0157
+     c80:	30 91 58 01 	lds	r19, 0x0158
+     c84:	82 0f       	add	r24, r18
+     c86:	93 1f       	adc	r25, r19
+     c88:	20 91 59 01 	lds	r18, 0x0159
+     c8c:	30 91 5a 01 	lds	r19, 0x015A
+     c90:	82 0f       	add	r24, r18
+     c92:	93 1f       	adc	r25, r19
+     c94:	20 91 5b 01 	lds	r18, 0x015B
+     c98:	30 91 5c 01 	lds	r19, 0x015C
+     c9c:	82 0f       	add	r24, r18
+     c9e:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+     ca0:	96 95       	lsr	r25
+     ca2:	87 95       	ror	r24
+     ca4:	96 95       	lsr	r25
+     ca6:	87 95       	ror	r24
+     ca8:	96 95       	lsr	r25
+     caa:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleslow[channel]);
+	thresholdlow[channel] = mean + (mean >> 3); //+ THRESHOLDLOW_OFFSET;	// Set the new threshold.
+     cac:	9c 01       	movw	r18, r24
+     cae:	36 95       	lsr	r19
+     cb0:	27 95       	ror	r18
+     cb2:	36 95       	lsr	r19
+     cb4:	27 95       	ror	r18
+     cb6:	36 95       	lsr	r19
+     cb8:	27 95       	ror	r18
+     cba:	28 0f       	add	r18, r24
+     cbc:	39 1f       	adc	r19, r25
+     cbe:	30 93 3b 01 	sts	0x013B, r19
+     cc2:	20 93 3a 01 	sts	0x013A, r18
+		else {
+			// We are still idle.
+			// Do a medium measurement.
+			// Calculate the low threshold.
+			updatethresholdlow(channel, sample);
+			thresholdhigh[channel] = (thresholdlow[channel]<<1); //+ THRESHOLDHIGH_OFFSET_INIT;
+     cc6:	22 0f       	add	r18, r18
+     cc8:	33 1f       	adc	r19, r19
+     cca:	30 93 33 01 	sts	0x0133, r19
+     cce:	20 93 32 01 	sts	0x0132, r18
+			mediumbusy[channel] = 0;	// Set the medium state.
+     cd2:	10 92 1a 01 	sts	0x011A, r1
+			new_rxsignalstate = NODATA;	// Set the next state.
+     cd6:	80 e0       	ldi	r24, 0x00	; 0
+     cd8:	6d cc       	rjmp	.-1830   	; 0x5b4 <receiver_sample+0xa8>
+
+/*
+ * Calculate the low threshold.
+ */
+static inline void updatethresholdlow(uint8_t channel, uint16_t sample) {
+	sampleslow[channel][sampleindexlow[channel]] = sample;		// Add the sample to the circular buffer.
+     cda:	80 91 2c 01 	lds	r24, 0x012C
+     cde:	90 e0       	ldi	r25, 0x00	; 0
+     ce0:	fc 01       	movw	r30, r24
+     ce2:	ee 0f       	add	r30, r30
+     ce4:	ff 1f       	adc	r31, r31
+     ce6:	e3 59       	subi	r30, 0x93	; 147
+     ce8:	fe 4f       	sbci	r31, 0xFE	; 254
+     cea:	31 83       	std	Z+1, r19	; 0x01
+     cec:	20 83       	st	Z, r18
+	sampleindexlow[channel] = (sampleindexlow[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+     cee:	01 96       	adiw	r24, 0x01	; 1
+     cf0:	87 70       	andi	r24, 0x07	; 7
+     cf2:	99 27       	eor	r25, r25
+     cf4:	80 93 2c 01 	sts	0x012C, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+     cf8:	80 91 6d 01 	lds	r24, 0x016D
+     cfc:	90 91 6e 01 	lds	r25, 0x016E
+     d00:	20 91 6f 01 	lds	r18, 0x016F
+     d04:	30 91 70 01 	lds	r19, 0x0170
+     d08:	82 0f       	add	r24, r18
+     d0a:	93 1f       	adc	r25, r19
+     d0c:	20 91 71 01 	lds	r18, 0x0171
+     d10:	30 91 72 01 	lds	r19, 0x0172
+     d14:	82 0f       	add	r24, r18
+     d16:	93 1f       	adc	r25, r19
+     d18:	20 91 73 01 	lds	r18, 0x0173
+     d1c:	30 91 74 01 	lds	r19, 0x0174
+     d20:	82 0f       	add	r24, r18
+     d22:	93 1f       	adc	r25, r19
+     d24:	20 91 75 01 	lds	r18, 0x0175
+     d28:	30 91 76 01 	lds	r19, 0x0176
+     d2c:	82 0f       	add	r24, r18
+     d2e:	93 1f       	adc	r25, r19
+     d30:	20 91 77 01 	lds	r18, 0x0177
+     d34:	30 91 78 01 	lds	r19, 0x0178
+     d38:	82 0f       	add	r24, r18
+     d3a:	93 1f       	adc	r25, r19
+     d3c:	20 91 79 01 	lds	r18, 0x0179
+     d40:	30 91 7a 01 	lds	r19, 0x017A
+     d44:	82 0f       	add	r24, r18
+     d46:	93 1f       	adc	r25, r19
+     d48:	20 91 7b 01 	lds	r18, 0x017B
+     d4c:	30 91 7c 01 	lds	r19, 0x017C
+     d50:	82 0f       	add	r24, r18
+     d52:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+     d54:	96 95       	lsr	r25
+     d56:	87 95       	ror	r24
+     d58:	96 95       	lsr	r25
+     d5a:	87 95       	ror	r24
+     d5c:	96 95       	lsr	r25
+     d5e:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleslow[channel]);
+	thresholdlow[channel] = mean + (mean >> 3); //+ THRESHOLDLOW_OFFSET;	// Set the new threshold.
+     d60:	9c 01       	movw	r18, r24
+     d62:	36 95       	lsr	r19
+     d64:	27 95       	ror	r18
+     d66:	36 95       	lsr	r19
+     d68:	27 95       	ror	r18
+     d6a:	36 95       	lsr	r19
+     d6c:	27 95       	ror	r18
+     d6e:	28 0f       	add	r18, r24
+     d70:	39 1f       	adc	r19, r25
+     d72:	30 93 3f 01 	sts	0x013F, r19
+     d76:	20 93 3e 01 	sts	0x013E, r18
+		else {
+			// We are still idle.
+			// Do a medium measurement.
+			// Calculate the low threshold.
+			updatethresholdlow(channel, sample);
+			thresholdhigh[channel] = (thresholdlow[channel]<<1); //+ THRESHOLDHIGH_OFFSET_INIT;
+     d7a:	22 0f       	add	r18, r18
+     d7c:	33 1f       	adc	r19, r19
+     d7e:	30 93 37 01 	sts	0x0137, r19
+     d82:	20 93 36 01 	sts	0x0136, r18
+			mediumbusy[channel] = 0;	// Set the medium state.
+     d86:	10 92 1c 01 	sts	0x011C, r1
+			new_rxsignalstate = NODATA;	// Set the next state.
+     d8a:	80 e0       	ldi	r24, 0x00	; 0
+     d8c:	b6 cc       	rjmp	.-1684   	; 0x6fa <receiver_sample+0x1ee>
+			uint16_t result = getTimeDifference(timestamp[channel], SYSTEMTIME);
+			if (result > TIMELIMIT_END_OF_ONE) {
+				receivedbyte[channel] |= (0 << receivedbitcounter[channel]);	// We have received a zero, write it.
+			}
+			else {
+				receivedbyte[channel] |= (1 << receivedbitcounter[channel]);	// We have received a one, write it.
+     d8e:	20 91 01 01 	lds	r18, 0x0101
+     d92:	81 e0       	ldi	r24, 0x01	; 1
+     d94:	90 e0       	ldi	r25, 0x00	; 0
+     d96:	02 2e       	mov	r0, r18
+     d98:	01 c0       	rjmp	.+2      	; 0xd9c <__stack+0x49d>
+     d9a:	88 0f       	add	r24, r24
+     d9c:	0a 94       	dec	r0
+     d9e:	ea f7       	brpl	.-6      	; 0xd9a <__stack+0x49b>
+     da0:	90 91 1f 01 	lds	r25, 0x011F
+     da4:	98 2b       	or	r25, r24
+     da6:	90 93 1f 01 	sts	0x011F, r25
+     daa:	82 2f       	mov	r24, r18
+     dac:	f8 cd       	rjmp	.-1040   	; 0x99e <__stack+0x9f>
+     dae:	20 91 00 01 	lds	r18, 0x0100
+     db2:	81 e0       	ldi	r24, 0x01	; 1
+     db4:	90 e0       	ldi	r25, 0x00	; 0
+     db6:	02 2e       	mov	r0, r18
+     db8:	01 c0       	rjmp	.+2      	; 0xdbc <__stack+0x4bd>
+     dba:	88 0f       	add	r24, r24
+     dbc:	0a 94       	dec	r0
+     dbe:	ea f7       	brpl	.-6      	; 0xdba <__stack+0x4bb>
+     dc0:	90 91 1e 01 	lds	r25, 0x011E
+     dc4:	98 2b       	or	r25, r24
+     dc6:	90 93 1e 01 	sts	0x011E, r25
+     dca:	82 2f       	mov	r24, r18
+     dcc:	a6 cd       	rjmp	.-1204   	; 0x91a <__stack+0x1b>
+     dce:	20 91 03 01 	lds	r18, 0x0103
+     dd2:	81 e0       	ldi	r24, 0x01	; 1
+     dd4:	90 e0       	ldi	r25, 0x00	; 0
+     dd6:	02 2e       	mov	r0, r18
+     dd8:	01 c0       	rjmp	.+2      	; 0xddc <__stack+0x4dd>
+     dda:	88 0f       	add	r24, r24
+     ddc:	0a 94       	dec	r0
+     dde:	ea f7       	brpl	.-6      	; 0xdda <__stack+0x4db>
+     de0:	90 91 21 01 	lds	r25, 0x0121
+     de4:	98 2b       	or	r25, r24
+     de6:	90 93 21 01 	sts	0x0121, r25
+     dea:	82 2f       	mov	r24, r18
+     dec:	53 cd       	rjmp	.-1370   	; 0x894 <receiver_sample+0x388>
+     dee:	20 91 02 01 	lds	r18, 0x0102
+     df2:	81 e0       	ldi	r24, 0x01	; 1
+     df4:	90 e0       	ldi	r25, 0x00	; 0
+     df6:	02 2e       	mov	r0, r18
+     df8:	01 c0       	rjmp	.+2      	; 0xdfc <__stack+0x4fd>
+     dfa:	88 0f       	add	r24, r24
+     dfc:	0a 94       	dec	r0
+     dfe:	ea f7       	brpl	.-6      	; 0xdfa <__stack+0x4fb>
+     e00:	90 91 20 01 	lds	r25, 0x0120
+     e04:	98 2b       	or	r25, r24
+     e06:	90 93 20 01 	sts	0x0120, r25
+     e0a:	82 2f       	mov	r24, r18
+     e0c:	00 cd       	rjmp	.-1536   	; 0x80e <receiver_sample+0x302>
+			}
+		}
+		else {
+			// We are in between two signal states (a sample on the edge), discard the sample.
+			// TODO: Do a measurement if this state happens multiple times.
+			new_rxsignalstate = LOW; // Stay in the current state.
+     e0e:	81 e0       	ldi	r24, 0x01	; 1
+     e10:	22 cc       	rjmp	.-1980   	; 0x656 <receiver_sample+0x14a>
+     e12:	81 e0       	ldi	r24, 0x01	; 1
+     e14:	c3 cc       	rjmp	.-1658   	; 0x79c <receiver_sample+0x290>
+     e16:	81 e0       	ldi	r24, 0x01	; 1
+     e18:	cd cb       	rjmp	.-2150   	; 0x5b4 <receiver_sample+0xa8>
+     e1a:	81 e0       	ldi	r24, 0x01	; 1
+     e1c:	6e cc       	rjmp	.-1828   	; 0x6fa <receiver_sample+0x1ee>
+			}
+
+			// Do we have a complete byte?
+			if (!receivedbitcounter[channel]) {
+				// Yes, complete, send it over UART.
+				uart_write(channel | (mediumbusy[CHANNEL4] << 7) | (mediumbusy[CHANNEL3] << 6) | (mediumbusy[CHANNEL2] << 5) | (mediumbusy[CHANNEL1] << 4));				// Send the receiver address.
+     e1e:	20 91 1c 01 	lds	r18, 0x011C
+     e22:	40 e4       	ldi	r20, 0x40	; 64
+     e24:	24 9f       	mul	r18, r20
+     e26:	90 01       	movw	r18, r0
+     e28:	11 24       	eor	r1, r1
+     e2a:	80 91 1b 01 	lds	r24, 0x011B
+     e2e:	40 e2       	ldi	r20, 0x20	; 32
+     e30:	84 9f       	mul	r24, r20
+     e32:	c0 01       	movw	r24, r0
+     e34:	11 24       	eor	r1, r1
+     e36:	28 2b       	or	r18, r24
+     e38:	23 68       	ori	r18, 0x83	; 131
+     e3a:	80 91 1a 01 	lds	r24, 0x011A
+     e3e:	30 e1       	ldi	r19, 0x10	; 16
+     e40:	83 9f       	mul	r24, r19
+     e42:	c0 01       	movw	r24, r0
+     e44:	11 24       	eor	r1, r1
+     e46:	82 2b       	or	r24, r18
+     e48:	0e 94 c6 0b 	call	0x178c	; 0x178c <uart_write>
+				uart_write(receivedbyte[channel]);	// Send the data.
+     e4c:	80 91 21 01 	lds	r24, 0x0121
+     e50:	0e 94 c6 0b 	call	0x178c	; 0x178c <uart_write>
+				
+				// Reset the bitcounter.
+				receivedbyte[channel] = 0;		// Reset the data variable.
+     e54:	10 92 21 01 	sts	0x0121, r1
+				receivedbitcounter[channel] = 7;	// Reset the bit counter.
+     e58:	87 e0       	ldi	r24, 0x07	; 7
+     e5a:	80 93 03 01 	sts	0x0103, r24
+     e5e:	20 cd       	rjmp	.-1472   	; 0x8a0 <receiver_sample+0x394>
+			}
+
+			// Do we have a complete byte?
+			if (!receivedbitcounter[channel]) {
+				// Yes, complete, send it over UART.
+				uart_write(channel | (mediumbusy[CHANNEL4] << 7) | (mediumbusy[CHANNEL3] << 6) | (mediumbusy[CHANNEL2] << 5) | (mediumbusy[CHANNEL1] << 4));				// Send the receiver address.
+     e60:	20 91 1d 01 	lds	r18, 0x011D
+     e64:	40 e8       	ldi	r20, 0x80	; 128
+     e66:	24 9f       	mul	r18, r20
+     e68:	90 01       	movw	r18, r0
+     e6a:	11 24       	eor	r1, r1
+     e6c:	80 91 1b 01 	lds	r24, 0x011B
+     e70:	40 e2       	ldi	r20, 0x20	; 32
+     e72:	84 9f       	mul	r24, r20
+     e74:	c0 01       	movw	r24, r0
+     e76:	11 24       	eor	r1, r1
+     e78:	28 2b       	or	r18, r24
+     e7a:	22 64       	ori	r18, 0x42	; 66
+     e7c:	80 91 1a 01 	lds	r24, 0x011A
+     e80:	30 e1       	ldi	r19, 0x10	; 16
+     e82:	83 9f       	mul	r24, r19
+     e84:	c0 01       	movw	r24, r0
+     e86:	11 24       	eor	r1, r1
+     e88:	82 2b       	or	r24, r18
+     e8a:	0e 94 c6 0b 	call	0x178c	; 0x178c <uart_write>
+				uart_write(receivedbyte[channel]);	// Send the data.
+     e8e:	80 91 20 01 	lds	r24, 0x0120
+     e92:	0e 94 c6 0b 	call	0x178c	; 0x178c <uart_write>
+				
+				// Reset the bitcounter.
+				receivedbyte[channel] = 0;		// Reset the data variable.
+     e96:	10 92 20 01 	sts	0x0120, r1
+				receivedbitcounter[channel] = 7;	// Reset the bit counter.
+     e9a:	87 e0       	ldi	r24, 0x07	; 7
+     e9c:	80 93 02 01 	sts	0x0102, r24
+     ea0:	bc cc       	rjmp	.-1672   	; 0x81a <receiver_sample+0x30e>
+
+/*
+ * Calculate the high threshold.
+ */
+static inline void updatethresholdhigh(uint8_t channel, uint16_t sample) {
+	sampleshigh[channel][sampleindexhigh[channel]] = sample;		// Add the sample to the circular buffer.
+     ea2:	80 91 30 01 	lds	r24, 0x0130
+     ea6:	90 e0       	ldi	r25, 0x00	; 0
+     ea8:	fc 01       	movw	r30, r24
+     eaa:	ee 0f       	add	r30, r30
+     eac:	ff 1f       	adc	r31, r31
+     eae:	e3 55       	subi	r30, 0x53	; 83
+     eb0:	fe 4f       	sbci	r31, 0xFE	; 254
+     eb2:	31 83       	std	Z+1, r19	; 0x01
+     eb4:	20 83       	st	Z, r18
+	sampleindexhigh[channel] = (sampleindexhigh[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+     eb6:	01 96       	adiw	r24, 0x01	; 1
+     eb8:	87 70       	andi	r24, 0x07	; 7
+     eba:	99 27       	eor	r25, r25
+     ebc:	80 93 30 01 	sts	0x0130, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+     ec0:	80 91 ad 01 	lds	r24, 0x01AD
+     ec4:	90 91 ae 01 	lds	r25, 0x01AE
+     ec8:	20 91 af 01 	lds	r18, 0x01AF
+     ecc:	30 91 b0 01 	lds	r19, 0x01B0
+     ed0:	82 0f       	add	r24, r18
+     ed2:	93 1f       	adc	r25, r19
+     ed4:	20 91 b1 01 	lds	r18, 0x01B1
+     ed8:	30 91 b2 01 	lds	r19, 0x01B2
+     edc:	82 0f       	add	r24, r18
+     ede:	93 1f       	adc	r25, r19
+     ee0:	20 91 b3 01 	lds	r18, 0x01B3
+     ee4:	30 91 b4 01 	lds	r19, 0x01B4
+     ee8:	82 0f       	add	r24, r18
+     eea:	93 1f       	adc	r25, r19
+     eec:	20 91 b5 01 	lds	r18, 0x01B5
+     ef0:	30 91 b6 01 	lds	r19, 0x01B6
+     ef4:	82 0f       	add	r24, r18
+     ef6:	93 1f       	adc	r25, r19
+     ef8:	20 91 b7 01 	lds	r18, 0x01B7
+     efc:	30 91 b8 01 	lds	r19, 0x01B8
+     f00:	82 0f       	add	r24, r18
+     f02:	93 1f       	adc	r25, r19
+     f04:	20 91 b9 01 	lds	r18, 0x01B9
+     f08:	30 91 ba 01 	lds	r19, 0x01BA
+     f0c:	82 0f       	add	r24, r18
+     f0e:	93 1f       	adc	r25, r19
+     f10:	20 91 bb 01 	lds	r18, 0x01BB
+     f14:	30 91 bc 01 	lds	r19, 0x01BC
+     f18:	82 0f       	add	r24, r18
+     f1a:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+     f1c:	96 95       	lsr	r25
+     f1e:	87 95       	ror	r24
+     f20:	96 95       	lsr	r25
+     f22:	87 95       	ror	r24
+     f24:	96 95       	lsr	r25
+     f26:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleshigh[channel]);
+	thresholdhigh[channel] = ((mean + thresholdlow[channel])>>1) - THRESHOLDHIGH_OFFSET;	// Set the new threshold.
+     f28:	84 0f       	add	r24, r20
+     f2a:	95 1f       	adc	r25, r21
+     f2c:	96 95       	lsr	r25
+     f2e:	87 95       	ror	r24
+     f30:	0a 97       	sbiw	r24, 0x0a	; 10
+     f32:	90 93 37 01 	sts	0x0137, r25
+     f36:	80 93 36 01 	sts	0x0136, r24
+		}
+		else if (sample > thresholdhigh[channel]) {
+			// We are still high.
+			// Calculate the high threshold.
+			updatethresholdhigh(channel, sample);
+			new_rxsignalstate = HIGH;	// Set the next state.
+     f3a:	82 e0       	ldi	r24, 0x02	; 2
+     f3c:	de cb       	rjmp	.-2116   	; 0x6fa <receiver_sample+0x1ee>
+
+/*
+ * Calculate the high threshold.
+ */
+static inline void updatethresholdhigh(uint8_t channel, uint16_t sample) {
+	sampleshigh[channel][sampleindexhigh[channel]] = sample;		// Add the sample to the circular buffer.
+     f3e:	80 91 2e 01 	lds	r24, 0x012E
+     f42:	90 e0       	ldi	r25, 0x00	; 0
+     f44:	fc 01       	movw	r30, r24
+     f46:	ee 0f       	add	r30, r30
+     f48:	ff 1f       	adc	r31, r31
+     f4a:	e3 57       	subi	r30, 0x73	; 115
+     f4c:	fe 4f       	sbci	r31, 0xFE	; 254
+     f4e:	31 83       	std	Z+1, r19	; 0x01
+     f50:	20 83       	st	Z, r18
+	sampleindexhigh[channel] = (sampleindexhigh[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+     f52:	01 96       	adiw	r24, 0x01	; 1
+     f54:	87 70       	andi	r24, 0x07	; 7
+     f56:	99 27       	eor	r25, r25
+     f58:	80 93 2e 01 	sts	0x012E, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+     f5c:	80 91 8d 01 	lds	r24, 0x018D
+     f60:	90 91 8e 01 	lds	r25, 0x018E
+     f64:	20 91 8f 01 	lds	r18, 0x018F
+     f68:	30 91 90 01 	lds	r19, 0x0190
+     f6c:	82 0f       	add	r24, r18
+     f6e:	93 1f       	adc	r25, r19
+     f70:	20 91 91 01 	lds	r18, 0x0191
+     f74:	30 91 92 01 	lds	r19, 0x0192
+     f78:	82 0f       	add	r24, r18
+     f7a:	93 1f       	adc	r25, r19
+     f7c:	20 91 93 01 	lds	r18, 0x0193
+     f80:	30 91 94 01 	lds	r19, 0x0194
+     f84:	82 0f       	add	r24, r18
+     f86:	93 1f       	adc	r25, r19
+     f88:	20 91 95 01 	lds	r18, 0x0195
+     f8c:	30 91 96 01 	lds	r19, 0x0196
+     f90:	82 0f       	add	r24, r18
+     f92:	93 1f       	adc	r25, r19
+     f94:	20 91 97 01 	lds	r18, 0x0197
+     f98:	30 91 98 01 	lds	r19, 0x0198
+     f9c:	82 0f       	add	r24, r18
+     f9e:	93 1f       	adc	r25, r19
+     fa0:	20 91 99 01 	lds	r18, 0x0199
+     fa4:	30 91 9a 01 	lds	r19, 0x019A
+     fa8:	82 0f       	add	r24, r18
+     faa:	93 1f       	adc	r25, r19
+     fac:	20 91 9b 01 	lds	r18, 0x019B
+     fb0:	30 91 9c 01 	lds	r19, 0x019C
+     fb4:	82 0f       	add	r24, r18
+     fb6:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+     fb8:	96 95       	lsr	r25
+     fba:	87 95       	ror	r24
+     fbc:	96 95       	lsr	r25
+     fbe:	87 95       	ror	r24
+     fc0:	96 95       	lsr	r25
+     fc2:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleshigh[channel]);
+	thresholdhigh[channel] = ((mean + thresholdlow[channel])>>1) - THRESHOLDHIGH_OFFSET;	// Set the new threshold.
+     fc4:	84 0f       	add	r24, r20
+     fc6:	95 1f       	adc	r25, r21
+     fc8:	96 95       	lsr	r25
+     fca:	87 95       	ror	r24
+     fcc:	0a 97       	sbiw	r24, 0x0a	; 10
+     fce:	90 93 33 01 	sts	0x0133, r25
+     fd2:	80 93 32 01 	sts	0x0132, r24
+		}
+		else if (sample > thresholdhigh[channel]) {
+			// We are still high.
+			// Calculate the high threshold.
+			updatethresholdhigh(channel, sample);
+			new_rxsignalstate = HIGH;	// Set the next state.
+     fd6:	82 e0       	ldi	r24, 0x02	; 2
+     fd8:	ed ca       	rjmp	.-2598   	; 0x5b4 <receiver_sample+0xa8>
+
+/*
+ * Calculate the high threshold.
+ */
+static inline void updatethresholdhigh(uint8_t channel, uint16_t sample) {
+	sampleshigh[channel][sampleindexhigh[channel]] = sample;		// Add the sample to the circular buffer.
+     fda:	80 91 31 01 	lds	r24, 0x0131
+     fde:	90 e0       	ldi	r25, 0x00	; 0
+     fe0:	fc 01       	movw	r30, r24
+     fe2:	ee 0f       	add	r30, r30
+     fe4:	ff 1f       	adc	r31, r31
+     fe6:	e3 54       	subi	r30, 0x43	; 67
+     fe8:	fe 4f       	sbci	r31, 0xFE	; 254
+     fea:	31 83       	std	Z+1, r19	; 0x01
+     fec:	20 83       	st	Z, r18
+	sampleindexhigh[channel] = (sampleindexhigh[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+     fee:	01 96       	adiw	r24, 0x01	; 1
+     ff0:	87 70       	andi	r24, 0x07	; 7
+     ff2:	99 27       	eor	r25, r25
+     ff4:	80 93 31 01 	sts	0x0131, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+     ff8:	80 91 bf 01 	lds	r24, 0x01BF
+     ffc:	90 91 c0 01 	lds	r25, 0x01C0
+    1000:	20 91 bd 01 	lds	r18, 0x01BD
+    1004:	30 91 be 01 	lds	r19, 0x01BE
+    1008:	82 0f       	add	r24, r18
+    100a:	93 1f       	adc	r25, r19
+    100c:	20 91 c1 01 	lds	r18, 0x01C1
+    1010:	30 91 c2 01 	lds	r19, 0x01C2
+    1014:	82 0f       	add	r24, r18
+    1016:	93 1f       	adc	r25, r19
+    1018:	20 91 c3 01 	lds	r18, 0x01C3
+    101c:	30 91 c4 01 	lds	r19, 0x01C4
+    1020:	82 0f       	add	r24, r18
+    1022:	93 1f       	adc	r25, r19
+    1024:	20 91 c5 01 	lds	r18, 0x01C5
+    1028:	30 91 c6 01 	lds	r19, 0x01C6
+    102c:	82 0f       	add	r24, r18
+    102e:	93 1f       	adc	r25, r19
+    1030:	20 91 c7 01 	lds	r18, 0x01C7
+    1034:	30 91 c8 01 	lds	r19, 0x01C8
+    1038:	82 0f       	add	r24, r18
+    103a:	93 1f       	adc	r25, r19
+    103c:	20 91 c9 01 	lds	r18, 0x01C9
+    1040:	30 91 ca 01 	lds	r19, 0x01CA
+    1044:	82 0f       	add	r24, r18
+    1046:	93 1f       	adc	r25, r19
+    1048:	20 91 cb 01 	lds	r18, 0x01CB
+    104c:	30 91 cc 01 	lds	r19, 0x01CC
+    1050:	82 0f       	add	r24, r18
+    1052:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+    1054:	96 95       	lsr	r25
+    1056:	87 95       	ror	r24
+    1058:	96 95       	lsr	r25
+    105a:	87 95       	ror	r24
+    105c:	96 95       	lsr	r25
+    105e:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleshigh[channel]);
+	thresholdhigh[channel] = ((mean + thresholdlow[channel])>>1) - THRESHOLDHIGH_OFFSET;	// Set the new threshold.
+    1060:	84 0f       	add	r24, r20
+    1062:	95 1f       	adc	r25, r21
+    1064:	96 95       	lsr	r25
+    1066:	87 95       	ror	r24
+    1068:	0a 97       	sbiw	r24, 0x0a	; 10
+    106a:	90 93 39 01 	sts	0x0139, r25
+    106e:	80 93 38 01 	sts	0x0138, r24
+		}
+		else if (sample > thresholdhigh[channel]) {
+			// We are still high.
+			// Calculate the high threshold.
+			updatethresholdhigh(channel, sample);
+			new_rxsignalstate = HIGH;	// Set the next state.
+    1072:	82 e0       	ldi	r24, 0x02	; 2
+    1074:	93 cb       	rjmp	.-2266   	; 0x79c <receiver_sample+0x290>
+
+/*
+ * Calculate the high threshold.
+ */
+static inline void updatethresholdhigh(uint8_t channel, uint16_t sample) {
+	sampleshigh[channel][sampleindexhigh[channel]] = sample;		// Add the sample to the circular buffer.
+    1076:	80 91 2f 01 	lds	r24, 0x012F
+    107a:	90 e0       	ldi	r25, 0x00	; 0
+    107c:	fc 01       	movw	r30, r24
+    107e:	ee 0f       	add	r30, r30
+    1080:	ff 1f       	adc	r31, r31
+    1082:	e3 56       	subi	r30, 0x63	; 99
+    1084:	fe 4f       	sbci	r31, 0xFE	; 254
+    1086:	31 83       	std	Z+1, r19	; 0x01
+    1088:	20 83       	st	Z, r18
+	sampleindexhigh[channel] = (sampleindexhigh[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+    108a:	01 96       	adiw	r24, 0x01	; 1
+    108c:	87 70       	andi	r24, 0x07	; 7
+    108e:	99 27       	eor	r25, r25
+    1090:	80 93 2f 01 	sts	0x012F, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+    1094:	80 91 9d 01 	lds	r24, 0x019D
+    1098:	90 91 9e 01 	lds	r25, 0x019E
+    109c:	20 91 9f 01 	lds	r18, 0x019F
+    10a0:	30 91 a0 01 	lds	r19, 0x01A0
+    10a4:	82 0f       	add	r24, r18
+    10a6:	93 1f       	adc	r25, r19
+    10a8:	20 91 a1 01 	lds	r18, 0x01A1
+    10ac:	30 91 a2 01 	lds	r19, 0x01A2
+    10b0:	82 0f       	add	r24, r18
+    10b2:	93 1f       	adc	r25, r19
+    10b4:	20 91 a3 01 	lds	r18, 0x01A3
+    10b8:	30 91 a4 01 	lds	r19, 0x01A4
+    10bc:	82 0f       	add	r24, r18
+    10be:	93 1f       	adc	r25, r19
+    10c0:	20 91 a5 01 	lds	r18, 0x01A5
+    10c4:	30 91 a6 01 	lds	r19, 0x01A6
+    10c8:	82 0f       	add	r24, r18
+    10ca:	93 1f       	adc	r25, r19
+    10cc:	20 91 a7 01 	lds	r18, 0x01A7
+    10d0:	30 91 a8 01 	lds	r19, 0x01A8
+    10d4:	82 0f       	add	r24, r18
+    10d6:	93 1f       	adc	r25, r19
+    10d8:	20 91 a9 01 	lds	r18, 0x01A9
+    10dc:	30 91 aa 01 	lds	r19, 0x01AA
+    10e0:	82 0f       	add	r24, r18
+    10e2:	93 1f       	adc	r25, r19
+    10e4:	20 91 ab 01 	lds	r18, 0x01AB
+    10e8:	30 91 ac 01 	lds	r19, 0x01AC
+    10ec:	82 0f       	add	r24, r18
+    10ee:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+    10f0:	96 95       	lsr	r25
+    10f2:	87 95       	ror	r24
+    10f4:	96 95       	lsr	r25
+    10f6:	87 95       	ror	r24
+    10f8:	96 95       	lsr	r25
+    10fa:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleshigh[channel]);
+	thresholdhigh[channel] = ((mean + thresholdlow[channel])>>1) - THRESHOLDHIGH_OFFSET;	// Set the new threshold.
+    10fc:	84 0f       	add	r24, r20
+    10fe:	95 1f       	adc	r25, r21
+    1100:	96 95       	lsr	r25
+    1102:	87 95       	ror	r24
+    1104:	0a 97       	sbiw	r24, 0x0a	; 10
+    1106:	90 93 35 01 	sts	0x0135, r25
+    110a:	80 93 34 01 	sts	0x0134, r24
+		}
+		else if (sample > thresholdhigh[channel]) {
+			// We are still high.
+			// Calculate the high threshold.
+			updatethresholdhigh(channel, sample);
+			new_rxsignalstate = HIGH;	// Set the next state.
+    110e:	82 e0       	ldi	r24, 0x02	; 2
+    1110:	a2 ca       	rjmp	.-2748   	; 0x656 <receiver_sample+0x14a>
+			}
+
+			// Do we have a complete byte?
+			if (!receivedbitcounter[channel]) {
+				// Yes, complete, send it over UART.
+				uart_write(channel | (mediumbusy[CHANNEL4] << 7) | (mediumbusy[CHANNEL3] << 6) | (mediumbusy[CHANNEL2] << 5) | (mediumbusy[CHANNEL1] << 4));				// Send the receiver address.
+    1112:	20 91 1d 01 	lds	r18, 0x011D
+    1116:	40 e8       	ldi	r20, 0x80	; 128
+    1118:	24 9f       	mul	r18, r20
+    111a:	90 01       	movw	r18, r0
+    111c:	11 24       	eor	r1, r1
+    111e:	80 91 1c 01 	lds	r24, 0x011C
+    1122:	40 e4       	ldi	r20, 0x40	; 64
+    1124:	84 9f       	mul	r24, r20
+    1126:	c0 01       	movw	r24, r0
+    1128:	11 24       	eor	r1, r1
+    112a:	28 2b       	or	r18, r24
+    112c:	21 62       	ori	r18, 0x21	; 33
+    112e:	80 91 1a 01 	lds	r24, 0x011A
+    1132:	30 e1       	ldi	r19, 0x10	; 16
+    1134:	83 9f       	mul	r24, r19
+    1136:	c0 01       	movw	r24, r0
+    1138:	11 24       	eor	r1, r1
+    113a:	82 2b       	or	r24, r18
+    113c:	0e 94 c6 0b 	call	0x178c	; 0x178c <uart_write>
+				uart_write(receivedbyte[channel]);	// Send the data.
+    1140:	80 91 1f 01 	lds	r24, 0x011F
+    1144:	0e 94 c6 0b 	call	0x178c	; 0x178c <uart_write>
+				
+				// Reset the bitcounter.
+				receivedbyte[channel] = 0;		// Reset the data variable.
+    1148:	10 92 1f 01 	sts	0x011F, r1
+				receivedbitcounter[channel] = 7;	// Reset the bit counter.
+    114c:	87 e0       	ldi	r24, 0x07	; 7
+    114e:	80 93 01 01 	sts	0x0101, r24
+    1152:	2b cc       	rjmp	.-1962   	; 0x9aa <__stack+0xab>
+			}
+
+			// Do we have a complete byte?
+			if (!receivedbitcounter[channel]) {
+				// Yes, complete, send it over UART.
+				uart_write(channel | (mediumbusy[CHANNEL4] << 7) | (mediumbusy[CHANNEL3] << 6) | (mediumbusy[CHANNEL2] << 5) | (mediumbusy[CHANNEL1] << 4));				// Send the receiver address.
+    1154:	20 91 1d 01 	lds	r18, 0x011D
+    1158:	40 e8       	ldi	r20, 0x80	; 128
+    115a:	24 9f       	mul	r18, r20
+    115c:	90 01       	movw	r18, r0
+    115e:	11 24       	eor	r1, r1
+    1160:	80 91 1c 01 	lds	r24, 0x011C
+    1164:	40 e4       	ldi	r20, 0x40	; 64
+    1166:	84 9f       	mul	r24, r20
+    1168:	c0 01       	movw	r24, r0
+    116a:	11 24       	eor	r1, r1
+    116c:	28 2b       	or	r18, r24
+    116e:	20 61       	ori	r18, 0x10	; 16
+    1170:	80 91 1b 01 	lds	r24, 0x011B
+    1174:	30 e2       	ldi	r19, 0x20	; 32
+    1176:	83 9f       	mul	r24, r19
+    1178:	c0 01       	movw	r24, r0
+    117a:	11 24       	eor	r1, r1
+    117c:	82 2b       	or	r24, r18
+    117e:	0e 94 c6 0b 	call	0x178c	; 0x178c <uart_write>
+				uart_write(receivedbyte[channel]);	// Send the data.
+    1182:	80 91 1e 01 	lds	r24, 0x011E
+    1186:	0e 94 c6 0b 	call	0x178c	; 0x178c <uart_write>
+				
+				// Reset the bitcounter.
+				receivedbyte[channel] = 0;		// Reset the data variable.
+    118a:	10 92 1e 01 	sts	0x011E, r1
+				receivedbitcounter[channel] = 7;	// Reset the bit counter.
+    118e:	87 e0       	ldi	r24, 0x07	; 7
+    1190:	80 93 00 01 	sts	0x0100, r24
+    1194:	c8 cb       	rjmp	.-2160   	; 0x926 <__stack+0x27>
+
+/*
+ * Calculate the low threshold.
+ */
+static inline void updatethresholdlow(uint8_t channel, uint16_t sample) {
+	sampleslow[channel][sampleindexlow[channel]] = sample;		// Add the sample to the circular buffer.
+    1196:	80 91 2a 01 	lds	r24, 0x012A
+    119a:	90 e0       	ldi	r25, 0x00	; 0
+    119c:	fc 01       	movw	r30, r24
+    119e:	ee 0f       	add	r30, r30
+    11a0:	ff 1f       	adc	r31, r31
+    11a2:	e3 5b       	subi	r30, 0xB3	; 179
+    11a4:	fe 4f       	sbci	r31, 0xFE	; 254
+    11a6:	31 83       	std	Z+1, r19	; 0x01
+    11a8:	20 83       	st	Z, r18
+	sampleindexlow[channel] = (sampleindexlow[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+    11aa:	01 96       	adiw	r24, 0x01	; 1
+    11ac:	87 70       	andi	r24, 0x07	; 7
+    11ae:	99 27       	eor	r25, r25
+    11b0:	80 93 2a 01 	sts	0x012A, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+    11b4:	80 91 4d 01 	lds	r24, 0x014D
+    11b8:	90 91 4e 01 	lds	r25, 0x014E
+    11bc:	20 91 4f 01 	lds	r18, 0x014F
+    11c0:	30 91 50 01 	lds	r19, 0x0150
+    11c4:	82 0f       	add	r24, r18
+    11c6:	93 1f       	adc	r25, r19
+    11c8:	20 91 51 01 	lds	r18, 0x0151
+    11cc:	30 91 52 01 	lds	r19, 0x0152
+    11d0:	82 0f       	add	r24, r18
+    11d2:	93 1f       	adc	r25, r19
+    11d4:	20 91 53 01 	lds	r18, 0x0153
+    11d8:	30 91 54 01 	lds	r19, 0x0154
+    11dc:	82 0f       	add	r24, r18
+    11de:	93 1f       	adc	r25, r19
+    11e0:	20 91 55 01 	lds	r18, 0x0155
+    11e4:	30 91 56 01 	lds	r19, 0x0156
+    11e8:	82 0f       	add	r24, r18
+    11ea:	93 1f       	adc	r25, r19
+    11ec:	20 91 57 01 	lds	r18, 0x0157
+    11f0:	30 91 58 01 	lds	r19, 0x0158
+    11f4:	82 0f       	add	r24, r18
+    11f6:	93 1f       	adc	r25, r19
+    11f8:	20 91 59 01 	lds	r18, 0x0159
+    11fc:	30 91 5a 01 	lds	r19, 0x015A
+    1200:	82 0f       	add	r24, r18
+    1202:	93 1f       	adc	r25, r19
+    1204:	20 91 5b 01 	lds	r18, 0x015B
+    1208:	30 91 5c 01 	lds	r19, 0x015C
+    120c:	82 0f       	add	r24, r18
+    120e:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+    1210:	96 95       	lsr	r25
+    1212:	87 95       	ror	r24
+    1214:	96 95       	lsr	r25
+    1216:	87 95       	ror	r24
+    1218:	96 95       	lsr	r25
+    121a:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleslow[channel]);
+	thresholdlow[channel] = mean + (mean >> 3); //+ THRESHOLDLOW_OFFSET;	// Set the new threshold.
+    121c:	9c 01       	movw	r18, r24
+    121e:	36 95       	lsr	r19
+    1220:	27 95       	ror	r18
+    1222:	36 95       	lsr	r19
+    1224:	27 95       	ror	r18
+    1226:	36 95       	lsr	r19
+    1228:	27 95       	ror	r18
+    122a:	28 0f       	add	r18, r24
+    122c:	39 1f       	adc	r19, r25
+    122e:	30 93 3b 01 	sts	0x013B, r19
+    1232:	20 93 3a 01 	sts	0x013A, r18
+			}
+			else {
+				// No, not yet a time out.
+				// Calculate the low threshold.
+				updatethresholdlow(channel, sample);
+				new_rxsignalstate = LOW;	// Set the next state.
+    1236:	81 e0       	ldi	r24, 0x01	; 1
+    1238:	bd c9       	rjmp	.-3206   	; 0x5b4 <receiver_sample+0xa8>
+
+/*
+ * Calculate the low threshold.
+ */
+static inline void updatethresholdlow(uint8_t channel, uint16_t sample) {
+	sampleslow[channel][sampleindexlow[channel]] = sample;		// Add the sample to the circular buffer.
+    123a:	80 91 2c 01 	lds	r24, 0x012C
+    123e:	90 e0       	ldi	r25, 0x00	; 0
+    1240:	fc 01       	movw	r30, r24
+    1242:	ee 0f       	add	r30, r30
+    1244:	ff 1f       	adc	r31, r31
+    1246:	e3 59       	subi	r30, 0x93	; 147
+    1248:	fe 4f       	sbci	r31, 0xFE	; 254
+    124a:	31 83       	std	Z+1, r19	; 0x01
+    124c:	20 83       	st	Z, r18
+	sampleindexlow[channel] = (sampleindexlow[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+    124e:	01 96       	adiw	r24, 0x01	; 1
+    1250:	87 70       	andi	r24, 0x07	; 7
+    1252:	99 27       	eor	r25, r25
+    1254:	80 93 2c 01 	sts	0x012C, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+    1258:	80 91 6d 01 	lds	r24, 0x016D
+    125c:	90 91 6e 01 	lds	r25, 0x016E
+    1260:	20 91 6f 01 	lds	r18, 0x016F
+    1264:	30 91 70 01 	lds	r19, 0x0170
+    1268:	82 0f       	add	r24, r18
+    126a:	93 1f       	adc	r25, r19
+    126c:	20 91 71 01 	lds	r18, 0x0171
+    1270:	30 91 72 01 	lds	r19, 0x0172
+    1274:	82 0f       	add	r24, r18
+    1276:	93 1f       	adc	r25, r19
+    1278:	20 91 73 01 	lds	r18, 0x0173
+    127c:	30 91 74 01 	lds	r19, 0x0174
+    1280:	82 0f       	add	r24, r18
+    1282:	93 1f       	adc	r25, r19
+    1284:	20 91 75 01 	lds	r18, 0x0175
+    1288:	30 91 76 01 	lds	r19, 0x0176
+    128c:	82 0f       	add	r24, r18
+    128e:	93 1f       	adc	r25, r19
+    1290:	20 91 77 01 	lds	r18, 0x0177
+    1294:	30 91 78 01 	lds	r19, 0x0178
+    1298:	82 0f       	add	r24, r18
+    129a:	93 1f       	adc	r25, r19
+    129c:	20 91 79 01 	lds	r18, 0x0179
+    12a0:	30 91 7a 01 	lds	r19, 0x017A
+    12a4:	82 0f       	add	r24, r18
+    12a6:	93 1f       	adc	r25, r19
+    12a8:	20 91 7b 01 	lds	r18, 0x017B
+    12ac:	30 91 7c 01 	lds	r19, 0x017C
+    12b0:	82 0f       	add	r24, r18
+    12b2:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+    12b4:	96 95       	lsr	r25
+    12b6:	87 95       	ror	r24
+    12b8:	96 95       	lsr	r25
+    12ba:	87 95       	ror	r24
+    12bc:	96 95       	lsr	r25
+    12be:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleslow[channel]);
+	thresholdlow[channel] = mean + (mean >> 3); //+ THRESHOLDLOW_OFFSET;	// Set the new threshold.
+    12c0:	9c 01       	movw	r18, r24
+    12c2:	36 95       	lsr	r19
+    12c4:	27 95       	ror	r18
+    12c6:	36 95       	lsr	r19
+    12c8:	27 95       	ror	r18
+    12ca:	36 95       	lsr	r19
+    12cc:	27 95       	ror	r18
+    12ce:	28 0f       	add	r18, r24
+    12d0:	39 1f       	adc	r19, r25
+    12d2:	30 93 3f 01 	sts	0x013F, r19
+    12d6:	20 93 3e 01 	sts	0x013E, r18
+			}
+			else {
+				// No, not yet a time out.
+				// Calculate the low threshold.
+				updatethresholdlow(channel, sample);
+				new_rxsignalstate = LOW;	// Set the next state.
+    12da:	81 e0       	ldi	r24, 0x01	; 1
+    12dc:	0e ca       	rjmp	.-3044   	; 0x6fa <receiver_sample+0x1ee>
+
+/*
+ * Calculate the low threshold.
+ */
+static inline void updatethresholdlow(uint8_t channel, uint16_t sample) {
+	sampleslow[channel][sampleindexlow[channel]] = sample;		// Add the sample to the circular buffer.
+    12de:	80 91 2b 01 	lds	r24, 0x012B
+    12e2:	90 e0       	ldi	r25, 0x00	; 0
+    12e4:	fc 01       	movw	r30, r24
+    12e6:	ee 0f       	add	r30, r30
+    12e8:	ff 1f       	adc	r31, r31
+    12ea:	e3 5a       	subi	r30, 0xA3	; 163
+    12ec:	fe 4f       	sbci	r31, 0xFE	; 254
+    12ee:	31 83       	std	Z+1, r19	; 0x01
+    12f0:	20 83       	st	Z, r18
+	sampleindexlow[channel] = (sampleindexlow[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+    12f2:	01 96       	adiw	r24, 0x01	; 1
+    12f4:	87 70       	andi	r24, 0x07	; 7
+    12f6:	99 27       	eor	r25, r25
+    12f8:	80 93 2b 01 	sts	0x012B, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+    12fc:	80 91 5d 01 	lds	r24, 0x015D
+    1300:	90 91 5e 01 	lds	r25, 0x015E
+    1304:	20 91 5f 01 	lds	r18, 0x015F
+    1308:	30 91 60 01 	lds	r19, 0x0160
+    130c:	82 0f       	add	r24, r18
+    130e:	93 1f       	adc	r25, r19
+    1310:	20 91 61 01 	lds	r18, 0x0161
+    1314:	30 91 62 01 	lds	r19, 0x0162
+    1318:	82 0f       	add	r24, r18
+    131a:	93 1f       	adc	r25, r19
+    131c:	20 91 63 01 	lds	r18, 0x0163
+    1320:	30 91 64 01 	lds	r19, 0x0164
+    1324:	82 0f       	add	r24, r18
+    1326:	93 1f       	adc	r25, r19
+    1328:	20 91 65 01 	lds	r18, 0x0165
+    132c:	30 91 66 01 	lds	r19, 0x0166
+    1330:	82 0f       	add	r24, r18
+    1332:	93 1f       	adc	r25, r19
+    1334:	20 91 67 01 	lds	r18, 0x0167
+    1338:	30 91 68 01 	lds	r19, 0x0168
+    133c:	82 0f       	add	r24, r18
+    133e:	93 1f       	adc	r25, r19
+    1340:	20 91 69 01 	lds	r18, 0x0169
+    1344:	30 91 6a 01 	lds	r19, 0x016A
+    1348:	82 0f       	add	r24, r18
+    134a:	93 1f       	adc	r25, r19
+    134c:	20 91 6b 01 	lds	r18, 0x016B
+    1350:	30 91 6c 01 	lds	r19, 0x016C
+    1354:	82 0f       	add	r24, r18
+    1356:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+    1358:	96 95       	lsr	r25
+    135a:	87 95       	ror	r24
+    135c:	96 95       	lsr	r25
+    135e:	87 95       	ror	r24
+    1360:	96 95       	lsr	r25
+    1362:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleslow[channel]);
+	thresholdlow[channel] = mean + (mean >> 3); //+ THRESHOLDLOW_OFFSET;	// Set the new threshold.
+    1364:	9c 01       	movw	r18, r24
+    1366:	36 95       	lsr	r19
+    1368:	27 95       	ror	r18
+    136a:	36 95       	lsr	r19
+    136c:	27 95       	ror	r18
+    136e:	36 95       	lsr	r19
+    1370:	27 95       	ror	r18
+    1372:	28 0f       	add	r18, r24
+    1374:	39 1f       	adc	r19, r25
+    1376:	30 93 3d 01 	sts	0x013D, r19
+    137a:	20 93 3c 01 	sts	0x013C, r18
+			}
+			else {
+				// No, not yet a time out.
+				// Calculate the low threshold.
+				updatethresholdlow(channel, sample);
+				new_rxsignalstate = LOW;	// Set the next state.
+    137e:	81 e0       	ldi	r24, 0x01	; 1
+    1380:	6a c9       	rjmp	.-3372   	; 0x656 <receiver_sample+0x14a>
+
+/*
+ * Calculate the low threshold.
+ */
+static inline void updatethresholdlow(uint8_t channel, uint16_t sample) {
+	sampleslow[channel][sampleindexlow[channel]] = sample;		// Add the sample to the circular buffer.
+    1382:	80 91 2d 01 	lds	r24, 0x012D
+    1386:	90 e0       	ldi	r25, 0x00	; 0
+    1388:	fc 01       	movw	r30, r24
+    138a:	ee 0f       	add	r30, r30
+    138c:	ff 1f       	adc	r31, r31
+    138e:	e3 58       	subi	r30, 0x83	; 131
+    1390:	fe 4f       	sbci	r31, 0xFE	; 254
+    1392:	31 83       	std	Z+1, r19	; 0x01
+    1394:	20 83       	st	Z, r18
+	sampleindexlow[channel] = (sampleindexlow[channel] + 1) % 8;	// Update the buffer index in a circular fashion.
+    1396:	01 96       	adiw	r24, 0x01	; 1
+    1398:	87 70       	andi	r24, 0x07	; 7
+    139a:	99 27       	eor	r25, r25
+    139c:	80 93 2d 01 	sts	0x012D, r24
+
+static inline uint16_t calculateMean(uint16_t * buffer) {
+	uint16_t result = 0;
+
+	for (uint8_t i = 0; i<8; i++)
+	result += buffer[i];
+    13a0:	80 91 7f 01 	lds	r24, 0x017F
+    13a4:	90 91 80 01 	lds	r25, 0x0180
+    13a8:	20 91 7d 01 	lds	r18, 0x017D
+    13ac:	30 91 7e 01 	lds	r19, 0x017E
+    13b0:	82 0f       	add	r24, r18
+    13b2:	93 1f       	adc	r25, r19
+    13b4:	20 91 81 01 	lds	r18, 0x0181
+    13b8:	30 91 82 01 	lds	r19, 0x0182
+    13bc:	82 0f       	add	r24, r18
+    13be:	93 1f       	adc	r25, r19
+    13c0:	20 91 83 01 	lds	r18, 0x0183
+    13c4:	30 91 84 01 	lds	r19, 0x0184
+    13c8:	82 0f       	add	r24, r18
+    13ca:	93 1f       	adc	r25, r19
+    13cc:	20 91 85 01 	lds	r18, 0x0185
+    13d0:	30 91 86 01 	lds	r19, 0x0186
+    13d4:	82 0f       	add	r24, r18
+    13d6:	93 1f       	adc	r25, r19
+    13d8:	20 91 87 01 	lds	r18, 0x0187
+    13dc:	30 91 88 01 	lds	r19, 0x0188
+    13e0:	82 0f       	add	r24, r18
+    13e2:	93 1f       	adc	r25, r19
+    13e4:	20 91 89 01 	lds	r18, 0x0189
+    13e8:	30 91 8a 01 	lds	r19, 0x018A
+    13ec:	82 0f       	add	r24, r18
+    13ee:	93 1f       	adc	r25, r19
+    13f0:	20 91 8b 01 	lds	r18, 0x018B
+    13f4:	30 91 8c 01 	lds	r19, 0x018C
+    13f8:	82 0f       	add	r24, r18
+    13fa:	93 1f       	adc	r25, r19
+
+	return result >> 3;
+    13fc:	96 95       	lsr	r25
+    13fe:	87 95       	ror	r24
+    1400:	96 95       	lsr	r25
+    1402:	87 95       	ror	r24
+    1404:	96 95       	lsr	r25
+    1406:	87 95       	ror	r24
+	uint16_t mean = calculateMean(sampleslow[channel]);
+	thresholdlow[channel] = mean + (mean >> 3); //+ THRESHOLDLOW_OFFSET;	// Set the new threshold.
+    1408:	9c 01       	movw	r18, r24
+    140a:	36 95       	lsr	r19
+    140c:	27 95       	ror	r18
+    140e:	36 95       	lsr	r19
+    1410:	27 95       	ror	r18
+    1412:	36 95       	lsr	r19
+    1414:	27 95       	ror	r18
+    1416:	28 0f       	add	r18, r24
+    1418:	39 1f       	adc	r19, r25
+    141a:	30 93 41 01 	sts	0x0141, r19
+    141e:	20 93 40 01 	sts	0x0140, r18
+			}
+			else {
+				// No, not yet a time out.
+				// Calculate the low threshold.
+				updatethresholdlow(channel, sample);
+				new_rxsignalstate = LOW;	// Set the next state.
+    1422:	81 e0       	ldi	r24, 0x01	; 1
+    1424:	bb c9       	rjmp	.-3210   	; 0x79c <receiver_sample+0x290>
+
+00001426 <receiver_reset>:
+
+	rxsignalstate[channel] = new_rxsignalstate;
+}
+
+void receiver_reset(void) {
+	rxsignalstate[CHANNEL1] = NODATA;
+    1426:	10 92 42 01 	sts	0x0142, r1
+	rxsignalstate[CHANNEL2] = NODATA;
+    142a:	10 92 43 01 	sts	0x0143, r1
+	rxsignalstate[CHANNEL3] = NODATA;
+    142e:	10 92 44 01 	sts	0x0144, r1
+	rxsignalstate[CHANNEL4] = NODATA;
+    1432:	10 92 45 01 	sts	0x0145, r1
+    1436:	08 95       	ret
+
+00001438 <receiver_setenabled>:
+}
+
+void receiver_setenabled(uint8_t enabled) {
+	receiverenabled = enabled;
+    1438:	80 93 46 01 	sts	0x0146, r24
+    143c:	08 95       	ret
+
+0000143e <__vector_16>:
+
+
+/**
+ * ISR for overflow interrupt of Timer 0 (8-bit timer).
+ */
+ISR(TIMER0_OVF_vect) {
+    143e:	1f 92       	push	r1
+    1440:	0f 92       	push	r0
+    1442:	0f b6       	in	r0, 0x3f	; 63
+    1444:	0f 92       	push	r0
+    1446:	11 24       	eor	r1, r1
+    1448:	8f 93       	push	r24
+    144a:	9f 93       	push	r25
+	SYSTEMTIME++;	// Update the system counter.
+    144c:	80 91 47 01 	lds	r24, 0x0147
+    1450:	90 91 48 01 	lds	r25, 0x0148
+    1454:	01 96       	adiw	r24, 0x01	; 1
+    1456:	90 93 48 01 	sts	0x0148, r25
+    145a:	80 93 47 01 	sts	0x0147, r24
+	
+	// Enable the lines below to measure the time between two ticks on port C2.
+	//PORTC |= (1<<PORTC2);	// Switch on.
+	//PORTC &= ~(1<<PORTC2);	// Switch off.
+    145e:	9f 91       	pop	r25
+    1460:	8f 91       	pop	r24
+    1462:	0f 90       	pop	r0
+    1464:	0f be       	out	0x3f, r0	; 63
+    1466:	0f 90       	pop	r0
+    1468:	1f 90       	pop	r1
+    146a:	18 95       	reti
+
+0000146c <spi_gpio_write>:
+ * Function SPI_GPIO_Write
+ * Contains the procedure to send a key-value pair to the GPIO expander.
+ */
+void spi_gpio_write(uint8_t address, uint8_t data) {
+
+	SPI_PORT &= ~(1<<SPI_CS_GPIO);	// Enable the GPIO module.
+    146c:	29 98       	cbi	0x05, 1	; 5
+	
+	// Send the 2 bytes to the GPIO module.	
+	SPDR = address;					// Start transmission to the slave.
+    146e:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    1470:	0d b4       	in	r0, 0x2d	; 45
+    1472:	07 fe       	sbrs	r0, 7
+    1474:	fd cf       	rjmp	.-6      	; 0x1470 <spi_gpio_write+0x4>
+	
+	SPDR = data;					// Start transmission to the slave.
+    1476:	6e bd       	out	0x2e, r22	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    1478:	0d b4       	in	r0, 0x2d	; 45
+    147a:	07 fe       	sbrs	r0, 7
+    147c:	fd cf       	rjmp	.-6      	; 0x1478 <spi_gpio_write+0xc>
+	
+	
+	SPI_PORT |= (1<<SPI_CS_GPIO);	// Disable the GPIO module.
+    147e:	29 9a       	sbi	0x05, 1	; 5
+    1480:	08 95       	ret
+
+00001482 <spi_adc_read>:
+/**
+ * Read the sample from the adc, and select the next sample channel for the next read.
+ */
+uint16_t spi_adc_read(uint8_t channel) {
+				
+	SPI_PORT &= ~(1<<SPI_CS_ADC);	// Enable the ADC module.
+    1482:	2a 98       	cbi	0x05, 2	; 5
+ * Function SPI_ReadWrite
+ * This function sends dataout to the selected slave and returns data that it has received at the same time.
+ */
+__inline uint8_t spi_readwrite(uint8_t dataout) {
+	
+    SPDR = dataout;	// Start transmission to the slave.
+    1484:	8e bd       	out	0x2e, r24	; 46
+
+    while(!(SPSR & (1<<SPIF)));	// Wait for the transmission to complete.
+    1486:	0d b4       	in	r0, 0x2d	; 45
+    1488:	07 fe       	sbrs	r0, 7
+    148a:	fd cf       	rjmp	.-6      	; 0x1486 <spi_adc_read+0x4>
+	
+    return SPDR;	// Return the incoming data.
+    148c:	2e b5       	in	r18, 0x2e	; 46
+ * Function SPI_ReadWrite
+ * This function sends dataout to the selected slave and returns data that it has received at the same time.
+ */
+__inline uint8_t spi_readwrite(uint8_t dataout) {
+	
+    SPDR = dataout;	// Start transmission to the slave.
+    148e:	1e bc       	out	0x2e, r1	; 46
+
+    while(!(SPSR & (1<<SPIF)));	// Wait for the transmission to complete.
+    1490:	0d b4       	in	r0, 0x2d	; 45
+    1492:	07 fe       	sbrs	r0, 7
+    1494:	fd cf       	rjmp	.-6      	; 0x1490 <spi_adc_read+0xe>
+	
+    return SPDR;	// Return the incoming data.
+    1496:	8e b5       	in	r24, 0x2e	; 46
+	
+	// Send the 2 bytes to the ADC module.
+	uint8_t high = spi_readwrite(channel);
+	uint8_t low  = spi_readwrite(0);
+	
+	SPI_PORT |= (1<<SPI_CS_ADC);	// Disable the ADC module.
+    1498:	2a 9a       	sbi	0x05, 2	; 5
+	
+	return ((high<<8) | (low));
+    149a:	90 e0       	ldi	r25, 0x00	; 0
+}
+    149c:	92 2b       	or	r25, r18
+    149e:	08 95       	ret
+
+000014a0 <spi_gpio_test>:
+ * Function SPI_GPIO_Write
+ * Contains the procedure to send a key-value pair to the GPIO expander.
+ */
+void spi_gpio_write(uint8_t address, uint8_t data) {
+
+	SPI_PORT &= ~(1<<SPI_CS_GPIO);	// Enable the GPIO module.
+    14a0:	29 98       	cbi	0x05, 1	; 5
+	
+	// Send the 2 bytes to the GPIO module.	
+	SPDR = address;					// Start transmission to the slave.
+    14a2:	8c e4       	ldi	r24, 0x4C	; 76
+    14a4:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    14a6:	0d b4       	in	r0, 0x2d	; 45
+    14a8:	07 fe       	sbrs	r0, 7
+    14aa:	fd cf       	rjmp	.-6      	; 0x14a6 <spi_gpio_test+0x6>
+	
+	SPDR = data;					// Start transmission to the slave.
+    14ac:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    14ae:	0d b4       	in	r0, 0x2d	; 45
+    14b0:	07 fe       	sbrs	r0, 7
+    14b2:	fd cf       	rjmp	.-6      	; 0x14ae <spi_gpio_test+0xe>
+	
+	
+	SPI_PORT |= (1<<SPI_CS_GPIO);	// Disable the GPIO module.
+    14b4:	29 9a       	sbi	0x05, 1	; 5
+ * Function SPI_GPIO_Write
+ * Contains the procedure to send a key-value pair to the GPIO expander.
+ */
+void spi_gpio_write(uint8_t address, uint8_t data) {
+
+	SPI_PORT &= ~(1<<SPI_CS_GPIO);	// Enable the GPIO module.
+    14b6:	29 98       	cbi	0x05, 1	; 5
+	
+	// Send the 2 bytes to the GPIO module.	
+	SPDR = address;					// Start transmission to the slave.
+    14b8:	84 e5       	ldi	r24, 0x54	; 84
+    14ba:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    14bc:	0d b4       	in	r0, 0x2d	; 45
+    14be:	07 fe       	sbrs	r0, 7
+    14c0:	fd cf       	rjmp	.-6      	; 0x14bc <spi_gpio_test+0x1c>
+	
+	SPDR = data;					// Start transmission to the slave.
+    14c2:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    14c4:	0d b4       	in	r0, 0x2d	; 45
+    14c6:	07 fe       	sbrs	r0, 7
+    14c8:	fd cf       	rjmp	.-6      	; 0x14c4 <spi_gpio_test+0x24>
+	
+	
+	SPI_PORT |= (1<<SPI_CS_GPIO);	// Disable the GPIO module.
+    14ca:	29 9a       	sbi	0x05, 1	; 5
+ * Function SPI_GPIO_Write
+ * Contains the procedure to send a key-value pair to the GPIO expander.
+ */
+void spi_gpio_write(uint8_t address, uint8_t data) {
+
+	SPI_PORT &= ~(1<<SPI_CS_GPIO);	// Enable the GPIO module.
+    14cc:	29 98       	cbi	0x05, 1	; 5
+	
+	// Send the 2 bytes to the GPIO module.	
+	SPDR = address;					// Start transmission to the slave.
+    14ce:	8c e5       	ldi	r24, 0x5C	; 92
+    14d0:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    14d2:	0d b4       	in	r0, 0x2d	; 45
+    14d4:	07 fe       	sbrs	r0, 7
+    14d6:	fd cf       	rjmp	.-6      	; 0x14d2 <spi_gpio_test+0x32>
+	
+	SPDR = data;					// Start transmission to the slave.
+    14d8:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    14da:	0d b4       	in	r0, 0x2d	; 45
+    14dc:	07 fe       	sbrs	r0, 7
+    14de:	fd cf       	rjmp	.-6      	; 0x14da <spi_gpio_test+0x3a>
+	
+	
+	SPI_PORT |= (1<<SPI_CS_GPIO);	// Disable the GPIO module.
+    14e0:	29 9a       	sbi	0x05, 1	; 5
+ * Function SPI_GPIO_Write
+ * Contains the procedure to send a key-value pair to the GPIO expander.
+ */
+void spi_gpio_write(uint8_t address, uint8_t data) {
+
+	SPI_PORT &= ~(1<<SPI_CS_GPIO);	// Enable the GPIO module.
+    14e2:	29 98       	cbi	0x05, 1	; 5
+	
+	// Send the 2 bytes to the GPIO module.	
+	SPDR = address;					// Start transmission to the slave.
+    14e4:	8c e4       	ldi	r24, 0x4C	; 76
+    14e6:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    14e8:	0d b4       	in	r0, 0x2d	; 45
+    14ea:	07 fe       	sbrs	r0, 7
+    14ec:	fd cf       	rjmp	.-6      	; 0x14e8 <spi_gpio_test+0x48>
+	
+	SPDR = data;					// Start transmission to the slave.
+    14ee:	8f ef       	ldi	r24, 0xFF	; 255
+    14f0:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    14f2:	0d b4       	in	r0, 0x2d	; 45
+    14f4:	07 fe       	sbrs	r0, 7
+    14f6:	fd cf       	rjmp	.-6      	; 0x14f2 <spi_gpio_test+0x52>
+	
+	
+	SPI_PORT |= (1<<SPI_CS_GPIO);	// Disable the GPIO module.
+    14f8:	29 9a       	sbi	0x05, 1	; 5
+ * Function SPI_GPIO_Write
+ * Contains the procedure to send a key-value pair to the GPIO expander.
+ */
+void spi_gpio_write(uint8_t address, uint8_t data) {
+
+	SPI_PORT &= ~(1<<SPI_CS_GPIO);	// Enable the GPIO module.
+    14fa:	29 98       	cbi	0x05, 1	; 5
+	
+	// Send the 2 bytes to the GPIO module.	
+	SPDR = address;					// Start transmission to the slave.
+    14fc:	84 e5       	ldi	r24, 0x54	; 84
+    14fe:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    1500:	0d b4       	in	r0, 0x2d	; 45
+    1502:	07 fe       	sbrs	r0, 7
+    1504:	fd cf       	rjmp	.-6      	; 0x1500 <spi_gpio_test+0x60>
+	
+	SPDR = data;					// Start transmission to the slave.
+    1506:	8f ef       	ldi	r24, 0xFF	; 255
+    1508:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    150a:	0d b4       	in	r0, 0x2d	; 45
+    150c:	07 fe       	sbrs	r0, 7
+    150e:	fd cf       	rjmp	.-6      	; 0x150a <spi_gpio_test+0x6a>
+	
+	
+	SPI_PORT |= (1<<SPI_CS_GPIO);	// Disable the GPIO module.
+    1510:	29 9a       	sbi	0x05, 1	; 5
+ * Function SPI_GPIO_Write
+ * Contains the procedure to send a key-value pair to the GPIO expander.
+ */
+void spi_gpio_write(uint8_t address, uint8_t data) {
+
+	SPI_PORT &= ~(1<<SPI_CS_GPIO);	// Enable the GPIO module.
+    1512:	29 98       	cbi	0x05, 1	; 5
+	
+	// Send the 2 bytes to the GPIO module.	
+	SPDR = address;					// Start transmission to the slave.
+    1514:	8c e5       	ldi	r24, 0x5C	; 92
+    1516:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    1518:	0d b4       	in	r0, 0x2d	; 45
+    151a:	07 fe       	sbrs	r0, 7
+    151c:	fd cf       	rjmp	.-6      	; 0x1518 <spi_gpio_test+0x78>
+	
+	SPDR = data;					// Start transmission to the slave.
+    151e:	8f ef       	ldi	r24, 0xFF	; 255
+    1520:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    1522:	0d b4       	in	r0, 0x2d	; 45
+    1524:	07 fe       	sbrs	r0, 7
+    1526:	fd cf       	rjmp	.-6      	; 0x1522 <spi_gpio_test+0x82>
+	
+	
+	SPI_PORT |= (1<<SPI_CS_GPIO);	// Disable the GPIO module.
+    1528:	29 9a       	sbi	0x05, 1	; 5
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+    152a:	2f ef       	ldi	r18, 0xFF	; 255
+    152c:	81 e1       	ldi	r24, 0x11	; 17
+    152e:	9a e7       	ldi	r25, 0x7A	; 122
+    1530:	21 50       	subi	r18, 0x01	; 1
+    1532:	80 40       	sbci	r24, 0x00	; 0
+    1534:	90 40       	sbci	r25, 0x00	; 0
+    1536:	e1 f7       	brne	.-8      	; 0x1530 <spi_gpio_test+0x90>
+    1538:	00 c0       	rjmp	.+0      	; 0x153a <spi_gpio_test+0x9a>
+    153a:	00 00       	nop
+ * Function SPI_GPIO_Write
+ * Contains the procedure to send a key-value pair to the GPIO expander.
+ */
+void spi_gpio_write(uint8_t address, uint8_t data) {
+
+	SPI_PORT &= ~(1<<SPI_CS_GPIO);	// Enable the GPIO module.
+    153c:	29 98       	cbi	0x05, 1	; 5
+	
+	// Send the 2 bytes to the GPIO module.	
+	SPDR = address;					// Start transmission to the slave.
+    153e:	8c e4       	ldi	r24, 0x4C	; 76
+    1540:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    1542:	0d b4       	in	r0, 0x2d	; 45
+    1544:	07 fe       	sbrs	r0, 7
+    1546:	fd cf       	rjmp	.-6      	; 0x1542 <spi_gpio_test+0xa2>
+	
+	SPDR = data;					// Start transmission to the slave.
+    1548:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    154a:	0d b4       	in	r0, 0x2d	; 45
+    154c:	07 fe       	sbrs	r0, 7
+    154e:	fd cf       	rjmp	.-6      	; 0x154a <spi_gpio_test+0xaa>
+	
+	
+	SPI_PORT |= (1<<SPI_CS_GPIO);	// Disable the GPIO module.
+    1550:	29 9a       	sbi	0x05, 1	; 5
+ * Function SPI_GPIO_Write
+ * Contains the procedure to send a key-value pair to the GPIO expander.
+ */
+void spi_gpio_write(uint8_t address, uint8_t data) {
+
+	SPI_PORT &= ~(1<<SPI_CS_GPIO);	// Enable the GPIO module.
+    1552:	29 98       	cbi	0x05, 1	; 5
+	
+	// Send the 2 bytes to the GPIO module.	
+	SPDR = address;					// Start transmission to the slave.
+    1554:	84 e5       	ldi	r24, 0x54	; 84
+    1556:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    1558:	0d b4       	in	r0, 0x2d	; 45
+    155a:	07 fe       	sbrs	r0, 7
+    155c:	fd cf       	rjmp	.-6      	; 0x1558 <spi_gpio_test+0xb8>
+	
+	SPDR = data;					// Start transmission to the slave.
+    155e:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    1560:	0d b4       	in	r0, 0x2d	; 45
+    1562:	07 fe       	sbrs	r0, 7
+    1564:	fd cf       	rjmp	.-6      	; 0x1560 <spi_gpio_test+0xc0>
+	
+	
+	SPI_PORT |= (1<<SPI_CS_GPIO);	// Disable the GPIO module.
+    1566:	29 9a       	sbi	0x05, 1	; 5
+ * Function SPI_GPIO_Write
+ * Contains the procedure to send a key-value pair to the GPIO expander.
+ */
+void spi_gpio_write(uint8_t address, uint8_t data) {
+
+	SPI_PORT &= ~(1<<SPI_CS_GPIO);	// Enable the GPIO module.
+    1568:	29 98       	cbi	0x05, 1	; 5
+	
+	// Send the 2 bytes to the GPIO module.	
+	SPDR = address;					// Start transmission to the slave.
+    156a:	8c e5       	ldi	r24, 0x5C	; 92
+    156c:	8e bd       	out	0x2e, r24	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    156e:	0d b4       	in	r0, 0x2d	; 45
+    1570:	07 fe       	sbrs	r0, 7
+    1572:	fd cf       	rjmp	.-6      	; 0x156e <spi_gpio_test+0xce>
+	
+	SPDR = data;					// Start transmission to the slave.
+    1574:	1e bc       	out	0x2e, r1	; 46
+	while(!(SPSR & (1<<SPIF)));		// Wait for the transmission to complete.
+    1576:	0d b4       	in	r0, 0x2d	; 45
+    1578:	07 fe       	sbrs	r0, 7
+    157a:	fd cf       	rjmp	.-6      	; 0x1576 <spi_gpio_test+0xd6>
+	
+	
+	SPI_PORT |= (1<<SPI_CS_GPIO);	// Disable the GPIO module.
+    157c:	29 9a       	sbi	0x05, 1	; 5
+    157e:	08 95       	ret
+
+00001580 <transmitter_timertick>:
+ * Process the transmitter state machine at a predefined interval.
+ */
+void transmitter_timertick(void) {
+	TXSTATE TX1nextstate = TXSTATE_DISABLED;
+	
+	switch(TX1state) {
+    1580:	80 91 4a 01 	lds	r24, 0x014A
+    1584:	81 30       	cpi	r24, 0x01	; 1
+    1586:	09 f4       	brne	.+2      	; 0x158a <transmitter_timertick+0xa>
+    1588:	41 c0       	rjmp	.+130    	; 0x160c <transmitter_timertick+0x8c>
+    158a:	90 f1       	brcs	.+100    	; 0x15f0 <transmitter_timertick+0x70>
+    158c:	82 30       	cpi	r24, 0x02	; 2
+    158e:	31 f0       	breq	.+12     	; 0x159c <transmitter_timertick+0x1c>
+    1590:	83 30       	cpi	r24, 0x03	; 3
+    1592:	51 f5       	brne	.+84     	; 0x15e8 <transmitter_timertick+0x68>
+		
+		// Keeping the signal low for one tick.
+		case TXSTATE_SIGNALLOW:
+			// Signals are already low, so do nothing with them.
+			// This state just absorbs one timer tick to signal a low.
+			TX1nextstate = TXSTATE_SIGNALRISE;	// Set the next state.
+    1594:	81 e0       	ldi	r24, 0x01	; 1
+		default:
+			// Invalid state reached.
+			// TODO: handle invalid state.
+		break;
+	}
+	TX1state = TX1nextstate;	// Go to next state.	
+    1596:	80 93 4a 01 	sts	0x014A, r24
+    159a:	08 95       	ret
+			TX1nextstate = TXSTATE_SIGNALFALL;	// Set the next state.
+		break;
+		
+		// Falling edge, ``|_
+		case TXSTATE_SIGNALFALL:
+			spi_gpio_write(GPIO_BANK_LED8_1,	0);	// Set the leds off.
+    159c:	60 e0       	ldi	r22, 0x00	; 0
+    159e:	8c e4       	ldi	r24, 0x4C	; 76
+    15a0:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+			spi_gpio_write(GPIO_BANK_LED16_9,	0);	// Set the leds off.
+    15a4:	60 e0       	ldi	r22, 0x00	; 0
+    15a6:	84 e5       	ldi	r24, 0x54	; 84
+    15a8:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+			spi_gpio_write(GPIO_BANK_LED20_17,	0);	// Set the leds off.
+    15ac:	60 e0       	ldi	r22, 0x00	; 0
+    15ae:	8c e5       	ldi	r24, 0x5C	; 92
+    15b0:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+//DEBUG
+//PORTC &= ~(1<<PORTC2);	// Switch off.
+
+			// Check if we finished transmitting the current byte.
+			if(dataindex < 0) {
+    15b4:	90 91 04 01 	lds	r25, 0x0104
+    15b8:	97 fd       	sbrc	r25, 7
+    15ba:	3d c0       	rjmp	.+122    	; 0x1636 <transmitter_timertick+0xb6>
+    15bc:	80 91 49 01 	lds	r24, 0x0149
+    15c0:	29 2f       	mov	r18, r25
+    15c2:	33 27       	eor	r19, r19
+    15c4:	27 fd       	sbrc	r18, 7
+    15c6:	30 95       	com	r19
+    15c8:	4f ef       	ldi	r20, 0xFF	; 255
+    15ca:	49 0f       	add	r20, r25
+				}
+				
+			}
+		
+			// Check if the data bit is a one or a zero.
+			if((currentbyte >> dataindex) & 0x1) {		
+    15cc:	90 e0       	ldi	r25, 0x00	; 0
+    15ce:	02 c0       	rjmp	.+4      	; 0x15d4 <transmitter_timertick+0x54>
+    15d0:	95 95       	asr	r25
+    15d2:	87 95       	ror	r24
+    15d4:	2a 95       	dec	r18
+    15d6:	e2 f7       	brpl	.-8      	; 0x15d0 <transmitter_timertick+0x50>
+    15d8:	80 fd       	sbrc	r24, 0
+    15da:	2b c0       	rjmp	.+86     	; 0x1632 <transmitter_timertick+0xb2>
+				// A one, we are done, proceed to the next bit.
+				TX1nextstate = TXSTATE_SIGNALRISE;	// Set the next state.
+			}
+			else {
+				// A zero, generate another low period.
+				TX1nextstate = TXSTATE_SIGNALLOW;	// Set the next state.
+    15dc:	83 e0       	ldi	r24, 0x03	; 3
+			}
+			dataindex--;	// Move the bit finger to the next bit.
+    15de:	40 93 04 01 	sts	0x0104, r20
+		default:
+			// Invalid state reached.
+			// TODO: handle invalid state.
+		break;
+	}
+	TX1state = TX1nextstate;	// Go to next state.	
+    15e2:	80 93 4a 01 	sts	0x014A, r24
+    15e6:	08 95       	ret
+
+			// Check if we finished transmitting the current byte.
+			if(dataindex < 0) {
+				// Current byte is transmitted, load the next byte if possible.
+				if(RingBuffer_IsEmpty(&ring_buffer_data)) {		// Check if there is new data available.
+					TX1nextstate = TXSTATE_DISABLED;			// No, go to disabled state.
+    15e8:	80 e0       	ldi	r24, 0x00	; 0
+		default:
+			// Invalid state reached.
+			// TODO: handle invalid state.
+		break;
+	}
+	TX1state = TX1nextstate;	// Go to next state.	
+    15ea:	80 93 4a 01 	sts	0x014A, r24
+    15ee:	08 95       	ret
+*/
+static inline RingBuff_Count_t RingBuffer_GetCount(RingBuff_t* const Buffer)
+{
+	RingBuff_Count_t Count;
+	
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    15f0:	9f b7       	in	r25, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    15f2:	f8 94       	cli
+	{
+		Count = Buffer->Count;
+    15f4:	80 91 51 02 	lds	r24, 0x0251
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    15f8:	9f bf       	out	0x3f, r25	; 63
+	TXSTATE TX1nextstate = TXSTATE_DISABLED;
+	
+	switch(TX1state) {
+		
+		case TXSTATE_DISABLED:
+			if(RingBuffer_IsEmpty(&ring_buffer_data)) {		// Check if there is new data available.
+    15fa:	81 11       	cpse	r24, r1
+    15fc:	3e c0       	rjmp	.+124    	; 0x167a <transmitter_timertick+0xfa>
+				TX1nextstate = TXSTATE_DISABLED;			// No, go to disabled state.
+				receiver_setenabled(1);
+    15fe:	81 e0       	ldi	r24, 0x01	; 1
+    1600:	0e 94 1c 0a 	call	0x1438	; 0x1438 <receiver_setenabled>
+	
+	switch(TX1state) {
+		
+		case TXSTATE_DISABLED:
+			if(RingBuffer_IsEmpty(&ring_buffer_data)) {		// Check if there is new data available.
+				TX1nextstate = TXSTATE_DISABLED;			// No, go to disabled state.
+    1604:	80 e0       	ldi	r24, 0x00	; 0
+		default:
+			// Invalid state reached.
+			// TODO: handle invalid state.
+		break;
+	}
+	TX1state = TX1nextstate;	// Go to next state.	
+    1606:	80 93 4a 01 	sts	0x014A, r24
+    160a:	08 95       	ret
+			}
+		break;
+		
+		// Rising edge, __|``
+		case TXSTATE_SIGNALRISE:
+			spi_gpio_write(GPIO_BANK_LED8_1,	txLed8_1);	// Set the selected leds on.
+    160c:	60 91 05 01 	lds	r22, 0x0105
+    1610:	8c e4       	ldi	r24, 0x4C	; 76
+    1612:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+			spi_gpio_write(GPIO_BANK_LED16_9,	txLed16_9);	// Set the selected leds on.
+    1616:	60 91 4c 01 	lds	r22, 0x014C
+    161a:	84 e5       	ldi	r24, 0x54	; 84
+    161c:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+			spi_gpio_write(GPIO_BANK_LED20_17,	txLed20_17);	// Set the selected leds on.
+    1620:	60 91 4b 01 	lds	r22, 0x014B
+    1624:	8c e5       	ldi	r24, 0x5C	; 92
+    1626:	0e 94 36 0a 	call	0x146c	; 0x146c <spi_gpio_write>
+//DEBUG
+//PORTC |= (1<<PORTC2);	// Switch on.
+			TX1nextstate = TXSTATE_SIGNALFALL;	// Set the next state.
+    162a:	82 e0       	ldi	r24, 0x02	; 2
+		default:
+			// Invalid state reached.
+			// TODO: handle invalid state.
+		break;
+	}
+	TX1state = TX1nextstate;	// Go to next state.	
+    162c:	80 93 4a 01 	sts	0x014A, r24
+    1630:	08 95       	ret
+			}
+		
+			// Check if the data bit is a one or a zero.
+			if((currentbyte >> dataindex) & 0x1) {		
+				// A one, we are done, proceed to the next bit.
+				TX1nextstate = TXSTATE_SIGNALRISE;	// Set the next state.
+    1632:	81 e0       	ldi	r24, 0x01	; 1
+    1634:	d4 cf       	rjmp	.-88     	; 0x15de <transmitter_timertick+0x5e>
+*/
+static inline RingBuff_Count_t RingBuffer_GetCount(RingBuff_t* const Buffer)
+{
+	RingBuff_Count_t Count;
+	
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    1636:	9f b7       	in	r25, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    1638:	f8 94       	cli
+	{
+		Count = Buffer->Count;
+    163a:	80 91 51 02 	lds	r24, 0x0251
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    163e:	9f bf       	out	0x3f, r25	; 63
+//PORTC &= ~(1<<PORTC2);	// Switch off.
+
+			// Check if we finished transmitting the current byte.
+			if(dataindex < 0) {
+				// Current byte is transmitted, load the next byte if possible.
+				if(RingBuffer_IsEmpty(&ring_buffer_data)) {		// Check if there is new data available.
+    1640:	88 23       	and	r24, r24
+    1642:	91 f2       	breq	.-92     	; 0x15e8 <transmitter_timertick+0x68>
+*
+*  \return Next data element stored in the buffer
+*/
+static inline RingBuff_Data_t RingBuffer_Remove(RingBuff_t* const Buffer)
+{
+	RingBuff_Data_t Data = *Buffer->Out;
+    1644:	e0 91 4f 02 	lds	r30, 0x024F
+    1648:	f0 91 50 02 	lds	r31, 0x0250
+    164c:	21 91       	ld	r18, Z+
+	
+	if (++Buffer->Out == &Buffer->Buffer[BUFFER_SIZE])
+    164e:	f0 93 50 02 	sts	0x0250, r31
+    1652:	e0 93 4f 02 	sts	0x024F, r30
+    1656:	ed 54       	subi	r30, 0x4D	; 77
+    1658:	f2 40       	sbci	r31, 0x02	; 2
+    165a:	b1 f1       	breq	.+108    	; 0x16c8 <transmitter_timertick+0x148>
+	Buffer->Out = Buffer->Buffer;
+
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    165c:	8f b7       	in	r24, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    165e:	f8 94       	cli
+	{
+		Buffer->Count--;
+    1660:	90 91 51 02 	lds	r25, 0x0251
+    1664:	91 50       	subi	r25, 0x01	; 1
+    1666:	90 93 51 02 	sts	0x0251, r25
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    166a:	8f bf       	out	0x3f, r24	; 63
+					TX1nextstate = TXSTATE_DISABLED;			// No, go to disabled state.
+					break;
+				}
+				else {
+					// Data available, load a new byte.
+					currentbyte =  RingBuffer_Remove(&ring_buffer_data);
+    166c:	20 93 49 01 	sts	0x0149, r18
+    1670:	82 2f       	mov	r24, r18
+    1672:	46 e0       	ldi	r20, 0x06	; 6
+    1674:	27 e0       	ldi	r18, 0x07	; 7
+    1676:	30 e0       	ldi	r19, 0x00	; 0
+    1678:	a9 cf       	rjmp	.-174    	; 0x15cc <transmitter_timertick+0x4c>
+*
+*  \return Next data element stored in the buffer
+*/
+static inline RingBuff_Data_t RingBuffer_Remove(RingBuff_t* const Buffer)
+{
+	RingBuff_Data_t Data = *Buffer->Out;
+    167a:	e0 91 4f 02 	lds	r30, 0x024F
+    167e:	f0 91 50 02 	lds	r31, 0x0250
+    1682:	21 91       	ld	r18, Z+
+	
+	if (++Buffer->Out == &Buffer->Buffer[BUFFER_SIZE])
+    1684:	f0 93 50 02 	sts	0x0250, r31
+    1688:	e0 93 4f 02 	sts	0x024F, r30
+    168c:	ed 54       	subi	r30, 0x4D	; 77
+    168e:	f2 40       	sbci	r31, 0x02	; 2
+    1690:	a1 f0       	breq	.+40     	; 0x16ba <transmitter_timertick+0x13a>
+	Buffer->Out = Buffer->Buffer;
+
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    1692:	9f b7       	in	r25, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    1694:	f8 94       	cli
+	{
+		Buffer->Count--;
+    1696:	80 91 51 02 	lds	r24, 0x0251
+    169a:	81 50       	subi	r24, 0x01	; 1
+    169c:	80 93 51 02 	sts	0x0251, r24
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    16a0:	9f bf       	out	0x3f, r25	; 63
+			if(RingBuffer_IsEmpty(&ring_buffer_data)) {		// Check if there is new data available.
+				TX1nextstate = TXSTATE_DISABLED;			// No, go to disabled state.
+				receiver_setenabled(1);
+			}
+			else {
+				currentbyte = RingBuffer_Remove(&ring_buffer_data);	// Yes, load a new byte.
+    16a2:	20 93 49 01 	sts	0x0149, r18
+				dataindex = 7;						// Reset the bit finger.
+    16a6:	87 e0       	ldi	r24, 0x07	; 7
+    16a8:	80 93 04 01 	sts	0x0104, r24
+				TX1nextstate = TXSTATE_SIGNALRISE;	// Set the next state.
+				
+				// Disable the receiver.
+				receiver_setenabled(0);
+    16ac:	80 e0       	ldi	r24, 0x00	; 0
+    16ae:	0e 94 1c 0a 	call	0x1438	; 0x1438 <receiver_setenabled>
+				receiver_reset();
+    16b2:	0e 94 13 0a 	call	0x1426	; 0x1426 <receiver_reset>
+				receiver_setenabled(1);
+			}
+			else {
+				currentbyte = RingBuffer_Remove(&ring_buffer_data);	// Yes, load a new byte.
+				dataindex = 7;						// Reset the bit finger.
+				TX1nextstate = TXSTATE_SIGNALRISE;	// Set the next state.
+    16b6:	81 e0       	ldi	r24, 0x01	; 1
+    16b8:	6e cf       	rjmp	.-292    	; 0x1596 <transmitter_timertick+0x16>
+static inline RingBuff_Data_t RingBuffer_Remove(RingBuff_t* const Buffer)
+{
+	RingBuff_Data_t Data = *Buffer->Out;
+	
+	if (++Buffer->Out == &Buffer->Buffer[BUFFER_SIZE])
+	Buffer->Out = Buffer->Buffer;
+    16ba:	8d ec       	ldi	r24, 0xCD	; 205
+    16bc:	91 e0       	ldi	r25, 0x01	; 1
+    16be:	90 93 50 02 	sts	0x0250, r25
+    16c2:	80 93 4f 02 	sts	0x024F, r24
+    16c6:	e5 cf       	rjmp	.-54     	; 0x1692 <transmitter_timertick+0x112>
+    16c8:	8d ec       	ldi	r24, 0xCD	; 205
+    16ca:	91 e0       	ldi	r25, 0x01	; 1
+    16cc:	90 93 50 02 	sts	0x0250, r25
+    16d0:	80 93 4f 02 	sts	0x024F, r24
+    16d4:	c3 cf       	rjmp	.-122    	; 0x165c <transmitter_timertick+0xdc>
+
+000016d6 <transmitter_init>:
+*
+*  \param[out] Buffer  Pointer to a ring buffer structure to initialize
+*/
+static inline void RingBuffer_InitBuffer(RingBuff_t* const Buffer)
+{
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    16d6:	2f b7       	in	r18, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    16d8:	f8 94       	cli
+	{
+		Buffer->In    = Buffer->Buffer;
+    16da:	8d ec       	ldi	r24, 0xCD	; 205
+    16dc:	91 e0       	ldi	r25, 0x01	; 1
+    16de:	90 93 4e 02 	sts	0x024E, r25
+    16e2:	80 93 4d 02 	sts	0x024D, r24
+		Buffer->Out   = Buffer->Buffer;
+    16e6:	90 93 50 02 	sts	0x0250, r25
+    16ea:	80 93 4f 02 	sts	0x024F, r24
+		Buffer->Count = 0;
+    16ee:	10 92 51 02 	sts	0x0251, r1
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    16f2:	2f bf       	out	0x3f, r18	; 63
+    __asm__ volatile ("" ::: "memory");
+    16f4:	08 95       	ret
+
+000016f6 <transmitter_add>:
+*/
+static inline RingBuff_Count_t RingBuffer_GetCount(RingBuff_t* const Buffer)
+{
+	RingBuff_Count_t Count;
+	
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    16f6:	2f b7       	in	r18, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    16f8:	f8 94       	cli
+	{
+		Count = Buffer->Count;
+    16fa:	90 91 51 02 	lds	r25, 0x0251
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    16fe:	2f bf       	out	0x3f, r18	; 63
+/**
+ * Add a byte to the transmitter queue.
+ */
+void transmitter_add(uint8_t data) {
+	
+	if(!RingBuffer_IsFull(&ring_buffer_data)) {
+    1700:	90 38       	cpi	r25, 0x80	; 128
+    1702:	09 f4       	brne	.+2      	; 0x1706 <transmitter_add+0x10>
+    1704:	08 95       	ret
+*  \param[in]     Data    Data element to insert into the buffer
+*/
+static inline void RingBuffer_Insert(RingBuff_t* const Buffer,
+const RingBuff_Data_t Data)
+{
+	*Buffer->In = Data;
+    1706:	e0 91 4d 02 	lds	r30, 0x024D
+    170a:	f0 91 4e 02 	lds	r31, 0x024E
+    170e:	80 83       	st	Z, r24
+	
+	if (++Buffer->In == &Buffer->Buffer[BUFFER_SIZE])
+    1710:	e0 91 4d 02 	lds	r30, 0x024D
+    1714:	f0 91 4e 02 	lds	r31, 0x024E
+    1718:	cf 01       	movw	r24, r30
+    171a:	01 96       	adiw	r24, 0x01	; 1
+    171c:	90 93 4e 02 	sts	0x024E, r25
+    1720:	80 93 4d 02 	sts	0x024D, r24
+    1724:	8d 54       	subi	r24, 0x4D	; 77
+    1726:	92 40       	sbci	r25, 0x02	; 2
+    1728:	49 f0       	breq	.+18     	; 0x173c <transmitter_add+0x46>
+	Buffer->In = Buffer->Buffer;
+
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    172a:	9f b7       	in	r25, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    172c:	f8 94       	cli
+	{
+		Buffer->Count++;
+    172e:	80 91 51 02 	lds	r24, 0x0251
+    1732:	8f 5f       	subi	r24, 0xFF	; 255
+    1734:	80 93 51 02 	sts	0x0251, r24
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    1738:	9f bf       	out	0x3f, r25	; 63
+    __asm__ volatile ("" ::: "memory");
+    173a:	08 95       	ret
+const RingBuff_Data_t Data)
+{
+	*Buffer->In = Data;
+	
+	if (++Buffer->In == &Buffer->Buffer[BUFFER_SIZE])
+	Buffer->In = Buffer->Buffer;
+    173c:	8d ec       	ldi	r24, 0xCD	; 205
+    173e:	91 e0       	ldi	r25, 0x01	; 1
+    1740:	92 83       	std	Z+2, r25	; 0x02
+    1742:	81 83       	std	Z+1, r24	; 0x01
+    1744:	f2 cf       	rjmp	.-28     	; 0x172a <transmitter_add+0x34>
+
+00001746 <transmitter_setdirection>:
+
+/**
+ * Set the direction to transmit to.
+ */
+void transmitter_setdirection(uint8_t led8_1, uint8_t led16_9, uint8_t led20_17) {
+	txLed8_1	= led8_1;
+    1746:	80 93 05 01 	sts	0x0105, r24
+	txLed16_9	= led16_9;
+    174a:	60 93 4c 01 	sts	0x014C, r22
+	txLed20_17	= led20_17;
+    174e:	40 93 4b 01 	sts	0x014B, r20
+    1752:	08 95       	ret
+
+00001754 <uart_read>:
+*
+*  \return Next data element stored in the buffer
+*/
+static inline RingBuff_Data_t RingBuffer_Remove(RingBuff_t* const Buffer)
+{
+	RingBuff_Data_t Data = *Buffer->Out;
+    1754:	e0 91 d4 02 	lds	r30, 0x02D4
+    1758:	f0 91 d5 02 	lds	r31, 0x02D5
+    175c:	81 91       	ld	r24, Z+
+	
+	if (++Buffer->Out == &Buffer->Buffer[BUFFER_SIZE])
+    175e:	f0 93 d5 02 	sts	0x02D5, r31
+    1762:	e0 93 d4 02 	sts	0x02D4, r30
+    1766:	e2 5d       	subi	r30, 0xD2	; 210
+    1768:	f2 40       	sbci	r31, 0x02	; 2
+    176a:	49 f0       	breq	.+18     	; 0x177e <uart_read+0x2a>
+	Buffer->Out = Buffer->Buffer;
+
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    176c:	2f b7       	in	r18, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    176e:	f8 94       	cli
+	{
+		Buffer->Count--;
+    1770:	90 91 d6 02 	lds	r25, 0x02D6
+    1774:	91 50       	subi	r25, 0x01	; 1
+    1776:	90 93 d6 02 	sts	0x02D6, r25
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    177a:	2f bf       	out	0x3f, r18	; 63
+RingBuff_t ring_buffer_out;
+RingBuff_t ring_buffer_in;
+
+uint8_t uart_read() {
+	return RingBuffer_Remove(&ring_buffer_in);
+}
+    177c:	08 95       	ret
+static inline RingBuff_Data_t RingBuffer_Remove(RingBuff_t* const Buffer)
+{
+	RingBuff_Data_t Data = *Buffer->Out;
+	
+	if (++Buffer->Out == &Buffer->Buffer[BUFFER_SIZE])
+	Buffer->Out = Buffer->Buffer;
+    177e:	22 e5       	ldi	r18, 0x52	; 82
+    1780:	32 e0       	ldi	r19, 0x02	; 2
+    1782:	30 93 d5 02 	sts	0x02D5, r19
+    1786:	20 93 d4 02 	sts	0x02D4, r18
+    178a:	f0 cf       	rjmp	.-32     	; 0x176c <uart_read+0x18>
+
+0000178c <uart_write>:
+
+void uart_write(uint8_t data) {
+	// Disable interrupts to get exclusive access to ring_buffer_out.
+	cli();
+    178c:	f8 94       	cli
+*/
+static inline RingBuff_Count_t RingBuffer_GetCount(RingBuff_t* const Buffer)
+{
+	RingBuff_Count_t Count;
+	
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    178e:	2f b7       	in	r18, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    1790:	f8 94       	cli
+	{
+		Count = Buffer->Count;
+    1792:	90 91 5b 03 	lds	r25, 0x035B
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    1796:	2f bf       	out	0x3f, r18	; 63
+	if (RingBuffer_IsEmpty(&ring_buffer_out)) {
+    1798:	91 11       	cpse	r25, r1
+    179a:	05 c0       	rjmp	.+10     	; 0x17a6 <uart_write+0x1a>
+		// First data in buffer, enable data ready interrupt
+		UCSR0B |=  (1 << UDRIE0);
+    179c:	90 91 c1 00 	lds	r25, 0x00C1
+    17a0:	90 62       	ori	r25, 0x20	; 32
+    17a2:	90 93 c1 00 	sts	0x00C1, r25
+*/
+static inline RingBuff_Count_t RingBuffer_GetCount(RingBuff_t* const Buffer)
+{
+	RingBuff_Count_t Count;
+	
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    17a6:	2f b7       	in	r18, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    17a8:	f8 94       	cli
+	{
+		Count = Buffer->Count;
+    17aa:	90 91 5b 03 	lds	r25, 0x035B
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    17ae:	2f bf       	out	0x3f, r18	; 63
+	}
+	
+	if(!RingBuffer_IsFull(&ring_buffer_out)) {
+    17b0:	90 38       	cpi	r25, 0x80	; 128
+    17b2:	11 f4       	brne	.+4      	; 0x17b8 <uart_write+0x2c>
+		// Put data in buffer
+		RingBuffer_Insert(&ring_buffer_out, data);
+	}
+	
+	// Re-enable interrupts
+	sei();
+    17b4:	78 94       	sei
+    17b6:	08 95       	ret
+*  \param[in]     Data    Data element to insert into the buffer
+*/
+static inline void RingBuffer_Insert(RingBuff_t* const Buffer,
+const RingBuff_Data_t Data)
+{
+	*Buffer->In = Data;
+    17b8:	e0 91 57 03 	lds	r30, 0x0357
+    17bc:	f0 91 58 03 	lds	r31, 0x0358
+    17c0:	80 83       	st	Z, r24
+	
+	if (++Buffer->In == &Buffer->Buffer[BUFFER_SIZE])
+    17c2:	e0 91 57 03 	lds	r30, 0x0357
+    17c6:	f0 91 58 03 	lds	r31, 0x0358
+    17ca:	cf 01       	movw	r24, r30
+    17cc:	01 96       	adiw	r24, 0x01	; 1
+    17ce:	90 93 58 03 	sts	0x0358, r25
+    17d2:	80 93 57 03 	sts	0x0357, r24
+    17d6:	87 55       	subi	r24, 0x57	; 87
+    17d8:	93 40       	sbci	r25, 0x03	; 3
+    17da:	49 f0       	breq	.+18     	; 0x17ee <uart_write+0x62>
+	Buffer->In = Buffer->Buffer;
+
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    17dc:	9f b7       	in	r25, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    17de:	f8 94       	cli
+	{
+		Buffer->Count++;
+    17e0:	80 91 5b 03 	lds	r24, 0x035B
+    17e4:	8f 5f       	subi	r24, 0xFF	; 255
+    17e6:	80 93 5b 03 	sts	0x035B, r24
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    17ea:	9f bf       	out	0x3f, r25	; 63
+    __asm__ volatile ("" ::: "memory");
+    17ec:	e3 cf       	rjmp	.-58     	; 0x17b4 <uart_write+0x28>
+const RingBuff_Data_t Data)
+{
+	*Buffer->In = Data;
+	
+	if (++Buffer->In == &Buffer->Buffer[BUFFER_SIZE])
+	Buffer->In = Buffer->Buffer;
+    17ee:	87 ed       	ldi	r24, 0xD7	; 215
+    17f0:	92 e0       	ldi	r25, 0x02	; 2
+    17f2:	92 83       	std	Z+2, r25	; 0x02
+    17f4:	81 83       	std	Z+1, r24	; 0x01
+    17f6:	f2 cf       	rjmp	.-28     	; 0x17dc <uart_write+0x50>
+
+000017f8 <uart_char_waiting>:
+*/
+static inline RingBuff_Count_t RingBuffer_GetCount(RingBuff_t* const Buffer)
+{
+	RingBuff_Count_t Count;
+	
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    17f8:	8f b7       	in	r24, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    17fa:	f8 94       	cli
+	{
+		Count = Buffer->Count;
+    17fc:	90 91 d6 02 	lds	r25, 0x02D6
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    1800:	8f bf       	out	0x3f, r24	; 63
+uint8_t uart_readbuffer_ready () {
+	return !RingBuffer_IsFull(&ring_buffer_in);
+}
+
+uint8_t uart_char_waiting() {
+	return !RingBuffer_IsEmpty(&ring_buffer_in);
+    1802:	81 e0       	ldi	r24, 0x01	; 1
+    1804:	91 11       	cpse	r25, r1
+    1806:	01 c0       	rjmp	.+2      	; 0x180a <uart_char_waiting+0x12>
+    1808:	80 e0       	ldi	r24, 0x00	; 0
+}
+    180a:	08 95       	ret
+
+0000180c <uart_init>:
+
+void uart_init() {
+
+	// Set the baud rate.
+	UBRR0H = (uint8_t) (MYUBRR>>8);
+    180c:	10 92 c5 00 	sts	0x00C5, r1
+	UBRR0L = (uint8_t) MYUBRR;
+    1810:	81 e2       	ldi	r24, 0x21	; 33
+    1812:	80 93 c4 00 	sts	0x00C4, r24
+	
+	// Enable this bit for UART speed doubling.
+	// UCSR0A |= (1 << U2X0);
+	UCSR0A = 0b00000010;
+    1816:	82 e0       	ldi	r24, 0x02	; 2
+    1818:	80 93 c0 00 	sts	0x00C0, r24
+	
+	// enable RX and TX and set interrupts on rx complete
+	// UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0);
+	UCSR0B = 0b10011000;
+    181c:	88 e9       	ldi	r24, 0x98	; 152
+    181e:	80 93 c1 00 	sts	0x00C1, r24
+	
+	// 8-bit, 1 stop bit, no parity, asynchronous UART
+	// UCSR0C = (1 << UCSZ01) | (1 << UCSZ00) | (0 << USBS0) |
+	// (0 << UPM01) | (0 << UPM00) | (0 << UMSEL01) |
+	// (0 << UMSEL00);
+	UCSR0C = 0b00000110;
+    1822:	86 e0       	ldi	r24, 0x06	; 6
+    1824:	80 93 c2 00 	sts	0x00C2, r24
+*
+*  \param[out] Buffer  Pointer to a ring buffer structure to initialize
+*/
+static inline void RingBuffer_InitBuffer(RingBuff_t* const Buffer)
+{
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    1828:	2f b7       	in	r18, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    182a:	f8 94       	cli
+	{
+		Buffer->In    = Buffer->Buffer;
+    182c:	82 e5       	ldi	r24, 0x52	; 82
+    182e:	92 e0       	ldi	r25, 0x02	; 2
+    1830:	90 93 d3 02 	sts	0x02D3, r25
+    1834:	80 93 d2 02 	sts	0x02D2, r24
+		Buffer->Out   = Buffer->Buffer;
+    1838:	90 93 d5 02 	sts	0x02D5, r25
+    183c:	80 93 d4 02 	sts	0x02D4, r24
+		Buffer->Count = 0;
+    1840:	10 92 d6 02 	sts	0x02D6, r1
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    1844:	2f bf       	out	0x3f, r18	; 63
+*
+*  \param[out] Buffer  Pointer to a ring buffer structure to initialize
+*/
+static inline void RingBuffer_InitBuffer(RingBuff_t* const Buffer)
+{
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    1846:	2f b7       	in	r18, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    1848:	f8 94       	cli
+	{
+		Buffer->In    = Buffer->Buffer;
+    184a:	87 ed       	ldi	r24, 0xD7	; 215
+    184c:	92 e0       	ldi	r25, 0x02	; 2
+    184e:	90 93 58 03 	sts	0x0358, r25
+    1852:	80 93 57 03 	sts	0x0357, r24
+		Buffer->Out   = Buffer->Buffer;
+    1856:	90 93 5a 03 	sts	0x035A, r25
+    185a:	80 93 59 03 	sts	0x0359, r24
+		Buffer->Count = 0;
+    185e:	10 92 5b 03 	sts	0x035B, r1
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    1862:	2f bf       	out	0x3f, r18	; 63
+    __asm__ volatile ("" ::: "memory");
+    1864:	08 95       	ret
+
+00001866 <__vector_18>:
+
+void uart_clearreceivedbuffer() {
+	RingBuffer_InitBuffer(&ring_buffer_in);
+}
+
+ISR(USART_RX_vect) {
+    1866:	1f 92       	push	r1
+    1868:	0f 92       	push	r0
+    186a:	0f b6       	in	r0, 0x3f	; 63
+    186c:	0f 92       	push	r0
+    186e:	11 24       	eor	r1, r1
+    1870:	2f 93       	push	r18
+    1872:	8f 93       	push	r24
+    1874:	9f 93       	push	r25
+    1876:	ef 93       	push	r30
+    1878:	ff 93       	push	r31
+	RingBuffer_Insert(&ring_buffer_in, UDR0);
+    187a:	80 91 c6 00 	lds	r24, 0x00C6
+*  \param[in]     Data    Data element to insert into the buffer
+*/
+static inline void RingBuffer_Insert(RingBuff_t* const Buffer,
+const RingBuff_Data_t Data)
+{
+	*Buffer->In = Data;
+    187e:	e0 91 d2 02 	lds	r30, 0x02D2
+    1882:	f0 91 d3 02 	lds	r31, 0x02D3
+    1886:	80 83       	st	Z, r24
+	
+	if (++Buffer->In == &Buffer->Buffer[BUFFER_SIZE])
+    1888:	e0 91 d2 02 	lds	r30, 0x02D2
+    188c:	f0 91 d3 02 	lds	r31, 0x02D3
+    1890:	cf 01       	movw	r24, r30
+    1892:	01 96       	adiw	r24, 0x01	; 1
+    1894:	90 93 d3 02 	sts	0x02D3, r25
+    1898:	80 93 d2 02 	sts	0x02D2, r24
+    189c:	82 5d       	subi	r24, 0xD2	; 210
+    189e:	92 40       	sbci	r25, 0x02	; 2
+    18a0:	91 f0       	breq	.+36     	; 0x18c6 <__vector_18+0x60>
+	Buffer->In = Buffer->Buffer;
+
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    18a2:	9f b7       	in	r25, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    18a4:	f8 94       	cli
+	{
+		Buffer->Count++;
+    18a6:	80 91 d6 02 	lds	r24, 0x02D6
+    18aa:	8f 5f       	subi	r24, 0xFF	; 255
+    18ac:	80 93 d6 02 	sts	0x02D6, r24
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    18b0:	9f bf       	out	0x3f, r25	; 63
+}
+    18b2:	ff 91       	pop	r31
+    18b4:	ef 91       	pop	r30
+    18b6:	9f 91       	pop	r25
+    18b8:	8f 91       	pop	r24
+    18ba:	2f 91       	pop	r18
+    18bc:	0f 90       	pop	r0
+    18be:	0f be       	out	0x3f, r0	; 63
+    18c0:	0f 90       	pop	r0
+    18c2:	1f 90       	pop	r1
+    18c4:	18 95       	reti
+const RingBuff_Data_t Data)
+{
+	*Buffer->In = Data;
+	
+	if (++Buffer->In == &Buffer->Buffer[BUFFER_SIZE])
+	Buffer->In = Buffer->Buffer;
+    18c6:	82 e5       	ldi	r24, 0x52	; 82
+    18c8:	92 e0       	ldi	r25, 0x02	; 2
+    18ca:	92 83       	std	Z+2, r25	; 0x02
+    18cc:	81 83       	std	Z+1, r24	; 0x01
+    18ce:	e9 cf       	rjmp	.-46     	; 0x18a2 <__vector_18+0x3c>
+
+000018d0 <__vector_19>:
+
+ISR(USART_UDRE_vect) {
+    18d0:	1f 92       	push	r1
+    18d2:	0f 92       	push	r0
+    18d4:	0f b6       	in	r0, 0x3f	; 63
+    18d6:	0f 92       	push	r0
+    18d8:	11 24       	eor	r1, r1
+    18da:	2f 93       	push	r18
+    18dc:	8f 93       	push	r24
+    18de:	9f 93       	push	r25
+    18e0:	ef 93       	push	r30
+    18e2:	ff 93       	push	r31
+*/
+static inline RingBuff_Count_t RingBuffer_GetCount(RingBuff_t* const Buffer)
+{
+	RingBuff_Count_t Count;
+	
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    18e4:	9f b7       	in	r25, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    18e6:	f8 94       	cli
+	{
+		Count = Buffer->Count;
+    18e8:	80 91 5b 03 	lds	r24, 0x035B
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    18ec:	9f bf       	out	0x3f, r25	; 63
+	// if there is data in the ring buffer, fetch it and send it
+	if (!RingBuffer_IsEmpty(&ring_buffer_out)) {
+    18ee:	81 11       	cpse	r24, r1
+    18f0:	0f c0       	rjmp	.+30     	; 0x1910 <__vector_19+0x40>
+		UDR0 = RingBuffer_Remove(&ring_buffer_out);
+	}
+	else {
+		// no more data to send, turn off data ready interrupt
+		UCSR0B &= ~(1 << UDRIE0);
+    18f2:	80 91 c1 00 	lds	r24, 0x00C1
+    18f6:	8f 7d       	andi	r24, 0xDF	; 223
+    18f8:	80 93 c1 00 	sts	0x00C1, r24
+	}
+}
+    18fc:	ff 91       	pop	r31
+    18fe:	ef 91       	pop	r30
+    1900:	9f 91       	pop	r25
+    1902:	8f 91       	pop	r24
+    1904:	2f 91       	pop	r18
+    1906:	0f 90       	pop	r0
+    1908:	0f be       	out	0x3f, r0	; 63
+    190a:	0f 90       	pop	r0
+    190c:	1f 90       	pop	r1
+    190e:	18 95       	reti
+*
+*  \return Next data element stored in the buffer
+*/
+static inline RingBuff_Data_t RingBuffer_Remove(RingBuff_t* const Buffer)
+{
+	RingBuff_Data_t Data = *Buffer->Out;
+    1910:	e0 91 59 03 	lds	r30, 0x0359
+    1914:	f0 91 5a 03 	lds	r31, 0x035A
+    1918:	21 91       	ld	r18, Z+
+	
+	if (++Buffer->Out == &Buffer->Buffer[BUFFER_SIZE])
+    191a:	f0 93 5a 03 	sts	0x035A, r31
+    191e:	e0 93 59 03 	sts	0x0359, r30
+    1922:	e7 55       	subi	r30, 0x57	; 87
+    1924:	f3 40       	sbci	r31, 0x03	; 3
+    1926:	59 f0       	breq	.+22     	; 0x193e <__vector_19+0x6e>
+	Buffer->Out = Buffer->Buffer;
+
+	ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    1928:	9f b7       	in	r25, 0x3f	; 63
+    return 1;
+}
+
+static __inline__ uint8_t __iCliRetVal(void)
+{
+    cli();
+    192a:	f8 94       	cli
+	{
+		Buffer->Count--;
+    192c:	80 91 5b 03 	lds	r24, 0x035B
+    1930:	81 50       	subi	r24, 0x01	; 1
+    1932:	80 93 5b 03 	sts	0x035B, r24
+    (void)__s;
+}
+
+static __inline__ void __iRestore(const  uint8_t *__s)
+{
+    SREG = *__s;
+    1936:	9f bf       	out	0x3f, r25	; 63
+}
+
+ISR(USART_UDRE_vect) {
+	// if there is data in the ring buffer, fetch it and send it
+	if (!RingBuffer_IsEmpty(&ring_buffer_out)) {
+		UDR0 = RingBuffer_Remove(&ring_buffer_out);
+    1938:	20 93 c6 00 	sts	0x00C6, r18
+    193c:	df cf       	rjmp	.-66     	; 0x18fc <__vector_19+0x2c>
+static inline RingBuff_Data_t RingBuffer_Remove(RingBuff_t* const Buffer)
+{
+	RingBuff_Data_t Data = *Buffer->Out;
+	
+	if (++Buffer->Out == &Buffer->Buffer[BUFFER_SIZE])
+	Buffer->Out = Buffer->Buffer;
+    193e:	87 ed       	ldi	r24, 0xD7	; 215
+    1940:	92 e0       	ldi	r25, 0x02	; 2
+    1942:	90 93 5a 03 	sts	0x035A, r25
+    1946:	80 93 59 03 	sts	0x0359, r24
+    194a:	ee cf       	rjmp	.-36     	; 0x1928 <__vector_19+0x58>
+
+0000194c <_exit>:
+    194c:	f8 94       	cli
+
+0000194e <__stop_program>:
+    194e:	ff cf       	rjmp	.-2      	; 0x194e <__stop_program>

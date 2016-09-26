@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="datatypes">
+      <UniqueIdentifier>{a6ad839d-ea5f-44cf-939e-ae7aa6ce12a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatalinkLayer">
+      <UniqueIdentifier>{8d29ccbf-9713-4ac9-97ac-b66228e9f48e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkLayer">
+      <UniqueIdentifier>{e177ff70-99ff-450d-86bf-56f7bd072eab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicalLayer">
+      <UniqueIdentifier>{f3cdd888-4441-47c8-a241-c2d2a56e00db}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="datatypes\Angle.h">
+      <Filter>datatypes</Filter>
+    </ClInclude>
+    <ClInclude Include="datatypes\Channel.h">
+      <Filter>datatypes</Filter>
+    </ClInclude>
+    <ClInclude Include="datatypes\Message.h">
+      <Filter>datatypes</Filter>
+    </ClInclude>
+    <ClInclude Include="datatypes\WriteResult.h">
+      <Filter>datatypes</Filter>
+    </ClInclude>
+    <ClInclude Include="physicallayer\PhysicalLayer.h">
+      <Filter>PhysicalLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="physicallayer\Queue.h">
+      <Filter>PhysicalLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="physicallayer\Serial.h">
+      <Filter>PhysicalLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="datalinklayer\DatalinkLayer.h">
+      <Filter>DatalinkLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="networklayer\NetworkLayer.h">
+      <Filter>NetworkLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="datatypes\Address.h">
+      <Filter>DatalinkLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="datatypes\Neighbor.h">
+      <Filter>datatypes</Filter>
+    </ClInclude>
+    <ClInclude Include="datatypes\MediumState.h">
+      <Filter>datatypes</Filter>
+    </ClInclude>
+    <ClInclude Include="datatypes\MessageType.h">
+      <Filter>datatypes</Filter>
+    </ClInclude>
+    <ClInclude Include="datatypes\NetworkMessage.h">
+      <Filter>datatypes</Filter>
+    </ClInclude>
+    <ClInclude Include="networklayer\Router.h">
+      <Filter>NetworkLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="networklayer\Dijkstra.h">
+      <Filter>NetworkLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="networklayer\DijkstraGraph.h">
+      <Filter>NetworkLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="networklayer\Vertex.h">
+      <Filter>NetworkLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="networklayer\Weight.h">
+      <Filter>NetworkLayer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="datalinklayer\DatalinkLayer.cpp">
+      <Filter>DatalinkLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="networklayer\NetworkLayer.cpp">
+      <Filter>NetworkLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="physicallayer\PhysicalLayer.cpp">
+      <Filter>PhysicalLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="physicallayer\Serial.cpp">
+      <Filter>PhysicalLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="networklayer\Router.cpp">
+      <Filter>NetworkLayer</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

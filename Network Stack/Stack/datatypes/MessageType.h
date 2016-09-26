@@ -1,0 +1,13 @@
+#pragma once
+
+#include <stdint.h>
+
+typedef enum MessageType {
+	MESSAGEDATA,
+	MESSAGEREQPING,
+	MESSAGEANSPING,
+	MESSAGENETWORKINFOEXCHANGE,
+	MESSAGENETWORKINFOREQ,
+	NETWORK_NUMTYPES
+} MessageType;
+
